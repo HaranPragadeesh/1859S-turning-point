@@ -60,16 +60,16 @@ void opcontrol() {
 		// -------------------------------------------------------------------LIFT---------------------
 		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
 		{
-			lift.move(LIFT_UP_SPEED);
+			combines.move(LIFT_UP_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
 		{
-			lift.move(LIFT_CLR_SPEED);
+			combines.move(LIFT_CLR_SPEED);
 		}
 		else if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
 		{
-			lift.move(0);
+			combines.move(0);
 		}
 
 	// save brain cells
