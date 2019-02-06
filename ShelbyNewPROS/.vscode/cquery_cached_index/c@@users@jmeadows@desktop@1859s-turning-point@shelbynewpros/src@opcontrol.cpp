@@ -3,7 +3,6 @@
 #include "../include/v5setup.cpp"
 
 
-
 #include "../functions/dzCorrect.cpp"
 
 void opcontrol() {
@@ -27,13 +26,13 @@ void opcontrol() {
 			// flip these 2 if flywheel spins backwards
 			flyWheel1.move(TOP_FLAG_SPEED);
 			flyWheel2.move(TOP_FLAG_SPEED);
-			intake.move(COMBINE_INTAKE_SPEED);
+			combine.move(COMBINE_INTAKE_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
 		{
 			flyWheel1.move(TOP_FLAG_SPEED);
 			flyWheel2.move(TOP_FLAG_SPEED);
-			intake.move(REVERSE_FLIP_SPEED);
+			combine.move(REVERSE_FLIP_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
@@ -53,23 +52,23 @@ void opcontrol() {
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
-				intake.move(0);
+				combine.move(0);
 		}
 
 
 		// -------------------------------------------------------------------LIFT---------------------
 		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
 		{
-			combines.move(LIFT_UP_SPEED);
+			lift.move(LIFT_UP_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
 		{
-			combines.move(LIFT_CLR_SPEED);
+			lift.move(LIFT_CLR_SPEED);
 		}
 		else if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
 		{
-			combines.move(0);
+			lift.move(0);
 		}
 
 	// save brain cells

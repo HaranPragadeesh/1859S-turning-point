@@ -1,6 +1,23 @@
 #include "main.h"
 
 
+extern pros::Controller master;
+
+extern pros::ADIGyro yawGyro;
+extern pros::ADIGyro rollGyro;
+
+extern pros::Motor leftFront;
+extern pros::Motor leftRear;
+extern pros::Motor rightFront;
+extern pros::Motor rightRear;
+
+extern pros::Motor flyWheel1;
+extern pros::Motor flyWheel2;
+
+extern pros::Motor intake;
+extern pros::Motor lift;
+
+
 //preset speeds
 #define GYRO_CLIMB_SPEED -127
 

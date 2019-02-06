@@ -1,7 +1,9 @@
 #include "../include/main.h"
 #include "../include/v5setup.hpp"
+#include "../include/v5setup.cpp"
 
 //include test autos
+/*
 #include "../autos/test/test001.cpp"
 
 //include blue autos
@@ -17,11 +19,11 @@
 #include "../autos/red/red_far001_np.cpp"
 
 //include skills autos
-#include "../autos/skills/skills001.cpp"
+#include "../autos/skills/skills001.cpp"*/
 
 int selectedAuto = 0;
 
 void autonomous()
 {
-  test001();
+  //test001();
 }

@@ -1,7 +1,5 @@
 #include "../include/main.h"
 #include "../include/v5setup.hpp"
-#include "../include/v5setup.cpp"
-
 
 
 #include "../functions/dzCorrect.cpp"
@@ -60,16 +58,16 @@ void opcontrol() {
 		// -------------------------------------------------------------------LIFT---------------------
 		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
 		{
-			combines.move(LIFT_UP_SPEED);
+			lift.move(LIFT_UP_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
 		{
-			combines.move(LIFT_CLR_SPEED);
+			lift.move(LIFT_CLR_SPEED);
 		}
 		else if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
 		{
-			combines.move(0);
+			lift.move(0);
 		}
 
 	// save brain cells

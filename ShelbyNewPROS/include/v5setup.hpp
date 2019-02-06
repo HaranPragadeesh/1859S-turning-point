@@ -1,3 +1,4 @@
+#pragma once
 #include "main.h"
 
 
@@ -19,34 +20,34 @@
 #define REVERSE -1
 
 
-/* brake defintions */
+// brake defintions
 #define COAST pros::E_MOTOR_BRAKE_COAST
 #define HOLD pros::E_MOTOR_BRAKE_HOLD
 #define BRAKE pros::E_MOTOR_BRAKE_BRAKE
 
-/* encoders macros */
+// encoders macros
 #define LENCO leftRear.get_position()
 #define RENCO rightRear.get_position()
 
-/* misc macros */
+// misc macros
 
 
-/* setup drive */
+// setup drive
 #define PORT_DRIVE_LEFT_FRONT 11
 #define PORT_DRIVE_LEFT_REAR 1
 #define PORT_DRIVE_RIGHT_FRONT 20
 #define PORT_DRIVE_RIGHT_REAR 14
 
 
-/* setup flywheel */
+// setup flywheel
 #define PORT_FLYWHEEL1 15
 #define PORT_FLYWHEEL2 4
 
 
-/* setup intake */
+// setup intake
 #define PORT_INTAKE 6
 #define PORT_LIFT 10
 
-/* setup gyros  |- 1 through 8 -| */
+// setup gyros  |- 1 through 8 -|
 #define PORT_GYRO_YAW 1 // A
 #define PORT_GYRO_PITCH 8 // H
