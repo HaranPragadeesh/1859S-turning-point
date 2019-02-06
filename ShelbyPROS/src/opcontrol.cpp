@@ -1,31 +1,71 @@
-#include "main.h"
+#include "../include/main.h"
+#include "../include/v5setup.hpp"
+#include "../include/v5setup.cpp"
 
-/**
- * Runs the operator control code. This function will be started in its own task
- * with the default priority and stack size whenever the robot is enabled via
- * the Field Management System or the VEX Competition Switch in the operator
- * control mode.
- *
- * If no competition control is connected, this function will run immediately
- * following initialize().
- *
- * If the robot is disabled or communications is lost, the
- * operator control task will be stopped. Re-enabling the robot will restart the
- * task, not resume it from where it left off.
- */
+
+
+#include "../functions/dzCorrect.cpp"
+
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
-	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
 
-		left_mtr = left;
-		right_mtr = right;
-		pros::delay(20);
+	while (true)
+	{//sets ints for right and left motor based on dead zone correction function
+		int left = dzCorrect(15, -1);
+		int right = dzCorrect(15, 1);
+		leftFront.move(left);
+		leftRear.move(left);
+		rightFront.move(right);
+		rightRear.move(right);
+
+
+		/* ----------------------------------------------------------------------FLYWHEEL------------- */
+		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)
+				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+		{
+			// flip these 2 if flywheel spins backwards
+			flyWheel1.move(TOP_FLAG_SPEED);
+			flyWheel2.move(-TOP_FLAG_SPEED);
+			combine.move(COMBINE_INTAKE_SPEED);
+		}
+		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
+		{
+			flyWheel1.move(TOP_FLAG_SPEED);
+			flyWheel2.move(-TOP_FLAG_SPEED);
+			combine.move(REVERSE_FLIP_SPEED);
+		}
+		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+		{
+				flyWheel1.move(MIDDLE_FLAG_SPEED);
+				flyWheel2.move(-MIDDLE_FLAG_SPEED);
+		}
+
+
+
+		/* ---------------------------------------------------------------------COMBINE----------------*/
+		if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)
+				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)
+				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+		{
+				combine.move(0);
+		}
+
+
+		/* -------------------------------------------------------------------LIFT---------------------*/
+		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
+		{
+			lift.move(LIFT_UP_SPEED);
+		}
+		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
+		{
+			lift.move(LIFT_CLR_SPEED);
+		}
+		else if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)
+				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
+		{
+			lift.move(0);
+		}
+
+	// save brain cells
+ 	pros::delay(20);
 	}
 }
