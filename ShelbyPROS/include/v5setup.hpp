@@ -44,8 +44,8 @@
 
 
 /* setup intake */
-#define PORT_COMBINE_FRONT 10
-#define PORT_COMBINE_REAR 6
+#define PORT_INTAKE 6
+#define PORT_LIFT 10
 
 /* setup gyros  |- 1 through 8 -| */
 #define PORT_GYRO_YAW 1 // A

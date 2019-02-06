@@ -27,13 +27,13 @@ void opcontrol() {
 			// flip these 2 if flywheel spins backwards
 			flyWheel1.move(TOP_FLAG_SPEED);
 			flyWheel2.move(TOP_FLAG_SPEED);
-			combine.move(COMBINE_INTAKE_SPEED);
+			intake.move(COMBINE_INTAKE_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
 		{
 			flyWheel1.move(TOP_FLAG_SPEED);
 			flyWheel2.move(TOP_FLAG_SPEED);
-			combine.move(REVERSE_FLIP_SPEED);
+			intake.move(REVERSE_FLIP_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
@@ -53,7 +53,7 @@ void opcontrol() {
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
-				combine.move(0);
+				intake.move(0);
 		}
 
 
