@@ -1,5 +1,6 @@
 #include "../include/main.h"
 #include "../include/v5setup.hpp"
+//#include "../include/v5setup.cpp"
 
 
 #include "../functions/dzCorrect.cpp"
@@ -23,33 +24,33 @@ void opcontrol() {
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
 			// flip these 2 if flywheel spins backwards
-			flyWheel1.move(TOP_FLAG_SPEED);
-			flyWheel2.move(TOP_FLAG_SPEED);
+			flyWheel1.move(FLYWHEEL_TOP_FLAG);
+			flyWheel2.move(FLYWHEEL_TOP_FLAG);
 			intake.move(COMBINE_INTAKE_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
 		{
-			flyWheel1.move(TOP_FLAG_SPEED);
-			flyWheel2.move(TOP_FLAG_SPEED);
+			//flyWheel1.move(FLYWHEEL_TOP_FLAG);
+			//flyWheel2.move(FLYWHEEL_TOP_FLAG);
 			intake.move(REVERSE_FLIP_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
-				flyWheel1.move(MIDDLE_FLAG_SPEED);
-				flyWheel2.move(MIDDLE_FLAG_SPEED);
+				flyWheel1.move(FLYWHEEL_BOOST_SPEED);
+				flyWheel2.move(FLYWHEEL_BOOST_SPEED);
+				intake.move(COMBINE_INTAKE_SPEED);
 		}
 		else if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) && !master.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
 		{
-			flyWheel1.move(0);
-			flyWheel2.move(0);
-
+			flyWheel1.move(FLYWHEEL_IDLE);
+			flyWheel2.move(FLYWHEEL_IDLE);
 		}
 
 
 		// ---------------------------------------------------------------------COMBINE----------------
-		if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)
-				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)
-				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+		if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)
+				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)
+					&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_L1))
 		{
 				intake.move(0);
 		}

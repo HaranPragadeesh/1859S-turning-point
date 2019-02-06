@@ -1,5 +1,6 @@
 #include "../include/main.h"
 #include "../include/v5setup.hpp"
+#include "../include/v5setup.cpp"
 
 void on_center_button() {
 	static bool pressed = false;

@@ -21,8 +21,9 @@ extern pros::Motor lift;
 //preset speeds
 #define GYRO_CLIMB_SPEED -127
 
-#define TOP_FLAG_SPEED 127
-#define MIDDLE_FLAG_SPEED 80
+#define FLYWHEEL_TOP_FLAG 105
+#define FLYWHEEL_BOOST_SPEED 127
+#define FLYWHEEL_IDLE 85 // idling speed
 
 #define COMBINE_INTAKE_SPEED 80
 #define REVERSE_FLIP_SPEED -60
@@ -61,8 +62,8 @@ extern pros::Motor lift;
 
 
 /* setup intake */
-#define PORT_INTAKE 6
-#define PORT_LIFT 10
+#define PORT_INTAKE 10
+#define PORT_LIFT 6
 
 /* setup gyros  |- 1 through 8 -| */
 #define PORT_GYRO_YAW 1 // A
