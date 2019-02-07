@@ -1,7 +1,7 @@
 #include "main.h"
 #include "v5setup.hpp"
 
-void gyro_climb(int speed, int ang, int delay, int calibrateDelay = 0)
+void gyroClimb(int speed, int ang, int delay, int calibrateDelay = 0)
 {
 
   // set motors to coast in case was left on brake or hold last

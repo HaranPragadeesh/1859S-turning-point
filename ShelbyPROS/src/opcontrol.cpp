@@ -3,6 +3,11 @@
 
 
 #include "../functions/dzCorrect.cpp"
+#include "../functions/climb_gyro.cpp"
+#include "../functions/drive_encoder.cpp"
+#include "../functions/flywheel.cpp"
+#include "../functions/turn_encoder.cpp"
+#include "../functions/waitdrive.cpp"
 
 void opcontrol() {
 

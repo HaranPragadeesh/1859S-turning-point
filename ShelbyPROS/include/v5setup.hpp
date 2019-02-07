@@ -1,6 +1,8 @@
 #include "main.h"
 #include <string>
 
+
+
 //global variables
 extern std::string nameList[];
 extern int selectedAuto;
