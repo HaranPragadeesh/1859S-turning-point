@@ -1,9 +1,5 @@
 #include "../include/main.h"
 #include "../include/v5setup.hpp"
-//#include "../functions/dzCorrect.cpp"
-//#include "../functions/set_brakes.cpp"
-
-// if not uploading right put declarations back in cpp file and include it here thats what used to work
 
 
 pros::Controller master(pros::E_CONTROLLER_MASTER);
@@ -27,6 +23,7 @@ pros::Motor flyWheel2(PORT_FLYWHEEL2, pros::E_MOTOR_GEARSET_18, false, pros::E_M
 pros::Motor intake(PORT_INTAKE, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_DEGREES);
 pros::Motor lift(PORT_LIFT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
 
+
 int selectedAuto = 0;
 bool autoShouldPark = true;
 std::string nameList[9] = { "NOTHING SELECTED",
@@ -36,7 +33,7 @@ std::string nameList[9] = { "NOTHING SELECTED",
 				      		"Blue Far", "Blue Far No Park"
 						    "Skills"};
 
-std::string selectedAutoText = NULL;
+std::string selectedAutoText = "";
 
 void on_center_button() {
 	static bool pressed = false;

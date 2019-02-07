@@ -1,29 +1,7 @@
 #include "../include/main.h"
 #include "../include/v5setup.hpp"
+#include "../functions/dzCorrect.cpp"
 
-int dzCorrect(int dz, int side)  // USER CONTROL
-{
-	int joyVal;
-
-	// should be for left side
-	if(side == -1){
-		if(std::abs(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y)) > dz){
-			joyVal = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-			return joyVal;
-		}
-		else{ return 0;}
-	}
-
-	// should be for right side
-	if(side == 1){
-		if(std::abs(master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y)) > dz){
-			joyVal = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
-			return joyVal;
-		}
-		else{ return 0;}
-	}
-	return 0;
-}
 
 void opcontrol() {
 
@@ -34,9 +12,19 @@ bool holding = false;
 
 		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
 		{ holding = !holding; }
-		// if(holding)
-		// { setDriveBrakes(HOLD); }
-		// else { setDriveBrakes(COAST); }
+		 if(holding)
+		 {
+			 leftFront.set_brake_mode(HOLD);
+			 leftRear.set_brake_mode(HOLD);
+			 rightFront.set_brake_mode(HOLD);
+			 rightRear.set_brake_mode(HOLD);
+		 }
+		 else {
+			 leftFront.set_brake_mode(COAST);
+			 leftRear.set_brake_mode(COAST);
+			 rightFront.set_brake_mode(COAST);
+			 rightRear.set_brake_mode(COAST);
+	 	 }
 
 
 

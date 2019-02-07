@@ -1,18 +1,5 @@
 #include "main.h"
 
-void testauto();
-void line(int dir, int target, float factor = 1);
-
-//extern int dzCorrect(int dz, int side);
-//extern void forward(int dir, int target, float factor);
-
-
-//#extern int dzCorrect(int dz, int side);
-//#extern void setDriveBrakes(pros::brake_mode_e_t);
-
-
-
-
 //global variables
 extern std::string nameList[];
 extern int selectedAuto;
