@@ -1,61 +1,53 @@
 #include "main.h"
 #include "v5setup.hpp"
 
-
 void line(int dir, int target, float factor)
 {
-  leftFront.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-  rightFront.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-  leftRear.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-  rightRear.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
+    float kP = .25;
+    float kI = .0005;
+    float kD = 1;
+
+    float errorZone = target * 1;
+    float error, errorTot, errorLast;
+    float pTerm, iTerm, dTerm;
+    float power;
+
+    // zero motors fix if this is not correct method
+    leftFront.tare_position();
+    leftRear.tare_position();
+    rightFront.tare_position();
+    rightRear.tare_position();
 
 
 
-  float kP = .25;
-  float kI = .0005;
-  float kD = 1;
+    while(std::abs(LENCO) < target) // left encoder  < target
+    {
+        error = target - std::abs(LENCO);
+        // errorTot += error;
 
-  float errorZone = target * 1;
-
-  float error, errorTot, errorLast;
-  float pTerm, iTerm, dTerm;
-  float power;
-
-// zero motors fix if this is not correct method
-  leftFront.tare_position();
-  leftRear.tare_position();
-  rightFront.tare_position();
-  rightRear.tare_position();
+        if (error < errorZone) {
+            errorTot += error;
+        } else {
+            errorTot = 0;
+        }
 
 
-
-  while(std::abs(LENCO) < target) // left encoder  < target
-  {
-    error = target - std::abs(LENCO);
-   // errorTot += error;
-
-    if (error < errorZone) {
-     errorTot += error;
-    } else {
-     errorTot = 0;
-    }
+        pTerm = error * kP;
 
 
-    pTerm = error * kP;
+        iTerm = kI * errorTot;
+        dTerm = kD * (error - errorLast);
+        errorLast = error;
 
+        power = ((pTerm + iTerm + dTerm) * factor) * dir;
 
-    iTerm = kI * errorTot;
-    dTerm = kD * (error - errorLast);
-    errorLast = error;
+        leftFront.move(power);
+        leftRear.move(power);
+        rightFront.move(power);
+        leftRear.move(power);
 
-    power = ((pTerm + iTerm + dTerm) * factor) * dir;
-
-    leftFront.move(power);
-    leftRear.move(power);
-    rightFront.move(power);
-    leftRear.move(power);
-
-    pros::Task::delay(20);
+        pros::Task::delay(20);
     }
 
     leftFront.move(0);

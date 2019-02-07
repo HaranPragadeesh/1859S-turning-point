@@ -1,7 +1,0 @@
-
-forward(2000);
-left(2000);
-reverse(200);
-right(2000);
-forward(200);
-reverse(2000);

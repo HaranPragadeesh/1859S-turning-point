@@ -1,20 +1,48 @@
 #include "../include/main.h"
 #include "../include/v5setup.hpp"
 
+int dzCorrect(int dz, int side)  // USER CONTROL
+{
+	int joyVal;
 
-#include "../functions/dzCorrect.cpp"
-#include "../functions/climb_gyro.cpp"
-#include "../functions/drive_encoder.cpp"
-#include "../functions/flywheel.cpp"
-#include "../functions/turn_encoder.cpp"
-#include "../functions/waitdrive.cpp"
+	// should be for left side
+	if(side == -1){
+		if(std::abs(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y)) > dz){
+			joyVal = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+			return joyVal;
+		}
+		else{ return 0;}
+	}
+
+	// should be for right side
+	if(side == 1){
+		if(std::abs(master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y)) > dz){
+			joyVal = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+			return joyVal;
+		}
+		else{ return 0;}
+	}
+	return 0;
+}
 
 void opcontrol() {
 
+bool holding = false;
+
 	while (true)
-	{//sets ints for right and left motor based on dead zone correction function
-		int left = dzCorrect(15, -1);
-		int right = dzCorrect(15, 1);
+	{
+
+		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
+		{ holding = !holding; }
+		// if(holding)
+		// { setDriveBrakes(HOLD); }
+		// else { setDriveBrakes(COAST); }
+
+
+
+		//sets ints for right and left motor based on dead zone correction function
+		int left = dzCorrect(JOYSTICK_DEADZONE, LEFT);
+		int right = dzCorrect(JOYSTICK_DEADZONE, RIGHT);
 		leftFront.move(left);
 		leftRear.move(left);
 		rightFront.move(right);
@@ -76,6 +104,6 @@ void opcontrol() {
 		}
 
 	// save brain cells
- 	pros::delay(20);
+ 	pros::delay(1);
 	}
 }

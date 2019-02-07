@@ -1,5 +1,15 @@
 #include "main.h"
-#include <string>
+
+void testauto();
+void line(int dir, int target, float factor = 1);
+
+//extern int dzCorrect(int dz, int side);
+//extern void forward(int dir, int target, float factor);
+
+
+//#extern int dzCorrect(int dz, int side);
+//#extern void setDriveBrakes(pros::brake_mode_e_t);
+
 
 
 
@@ -32,15 +42,17 @@ extern pros::Motor intake;
 extern pros::Motor lift;
 
 
-//preset speeds
+//joystick deadzone
+#define JOYSTICK_DEADZONE 15
+//preset GYRO CLIMB speeds
 #define GYRO_CLIMB_SPEED -127
 
 //preset fly wheel speeds
 #define FLYWHEEL_TOP_FLAG 105
 #define FLYWHEEL_BOOST_SPEED 127
-#define FLYWHEEL_IDLE 85 // idling speed
+#define FLYWHEEL_IDLE 90 // idling speed
 
-//
+//intake speeds
 #define COMBINE_INTAKE_SPEED 80
 #define REVERSE_FLIP_SPEED -60
 
@@ -84,5 +96,5 @@ extern pros::Motor lift;
 #define PORT_LIFT 6
 
 /* setup gyros  |- 1 through 8 -| */
-#define PORT_GYRO_YAW 1 // A
-#define PORT_GYRO_PITCH 8 // H
+#define PORT_GYRO_YAW 1 // A // turn
+#define PORT_GYRO_PITCH 8 // H // climb

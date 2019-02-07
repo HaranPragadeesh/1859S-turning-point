@@ -1,5 +1,8 @@
 #include "../include/main.h"
 #include "../include/v5setup.hpp"
+//#include "../functions/dzCorrect.cpp"
+//#include "../functions/set_brakes.cpp"
+
 // if not uploading right put declarations back in cpp file and include it here thats what used to work
 
 
@@ -33,15 +36,16 @@ std::string nameList[9] = { "NOTHING SELECTED",
 				      		"Blue Far", "Blue Far No Park"
 						    "Skills"};
 
+std::string selectedAutoText = NULL;
 
 void on_center_button() {
 	static bool pressed = false;
 	pressed = !pressed;
 	if (pressed) {
-		pros::lcd::set_text(2, "PRESSED MIDDLE");
 		autoShouldPark = !autoShouldPark;
+
 	} else {
-		pros::lcd::clear_line(2);
+		//pros::lcd::clear_line(2);
 	}
 }
 
@@ -49,11 +53,11 @@ void on_left_button() {
 	static bool pressed = false;
 	pressed = !pressed;
 	if (pressed) {
-		//pros::lcd::set_text(3, "Left button pressed!");
-		pros::lcd::set_text(3, nameList[selectedAuto]);
-		selectedAuto++;
+		selectedAuto--;
+		selectedAutoText = std::to_string(selectedAuto);
+		pros::lcd::set_text(2, selectedAutoText);
 	} else {
-		pros::lcd::clear_line(2);
+		//pros::lcd::clear_line(2);
 	}
 }
 
@@ -61,12 +65,14 @@ void on_right_button() {
 	static bool pressed = false;
 	pressed = !pressed;
 	if (pressed) {
-		pros::lcd::set_text(4, "Right button pressed!");
+		selectedAuto++;
+		selectedAutoText = std::to_string(selectedAuto);
+		pros::lcd::set_text(2, selectedAutoText);
 		if(selectedAuto > 0){
 			selectedAuto--;
 		}
 	} else {
-		pros::lcd::clear_line(2);
+		//pros::lcd::clear_line(2);
 	}
 }
 
@@ -80,8 +86,8 @@ void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
 
-	pros::lcd::register_btn1_cb(on_center_button);
 	pros::lcd::register_btn0_cb(on_left_button);
+	pros::lcd::register_btn1_cb(on_center_button);
 	pros::lcd::register_btn2_cb(on_right_button);
 }
 

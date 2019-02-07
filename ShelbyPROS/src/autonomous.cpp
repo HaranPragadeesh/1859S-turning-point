@@ -1,5 +1,5 @@
-#include "../include/main.h"
-#include "../include/v5setup.hpp"
+ #include"../include/main.h"
+ #include"../include/v5setup.hpp"
 
 
 // index-
@@ -8,6 +8,8 @@
 // 3- red close
 // 4- red far
 // 5- skills
+
+
 
 void autonomous()
 {
@@ -18,10 +20,10 @@ void autonomous()
         case 1:
             // do auto 1
             if(autoShouldPark){
-                #include "../autos/blue/blue_close.shelby"
+                // #include"../autos/blue/blue_close.cpp"
             }
             else {
-                #include "../autos/blue/blue_close_np.shelby"
+                // #include"../autos/blue/blue_close_np.shelby"
             }
             break;
 /////////////////////////////////////////////////////////////////////////////////// BLUE CLOSE
@@ -30,10 +32,10 @@ void autonomous()
         case 2:
             // do auto 1
             if(autoShouldPark){
-                #include "../autos/blue/blue_far.shelby"
+                // #include"../autos/blue/blue_far.shelby"
             }
             else {
-                #include "../autos/blue/blue_far_np.shelby"
+                // #include"../autos/blue/blue_far_np.shelby"
             }
             break;
 /////////////////////////////////////////////////////////////////////////////////// BLUE FAR
@@ -42,10 +44,10 @@ void autonomous()
         case 3:
             // do auto 1
             if(autoShouldPark){
-                #include "../autos/red/red_close.shelby"
+                // #include"../autos/red/red_close.shelby"
             }
             else {
-                #include "../autos/red/red_close_np.shelby"
+                // #include"../autos/red/red_close_np.shelby"
             }
             break;
 /////////////////////////////////////////////////////////////////////////////////// RED CLOSE
@@ -54,10 +56,10 @@ void autonomous()
         case 4:
             // do auto 1
             if(autoShouldPark){
-                #include "../autos/red/red_far.shelby"
+                // #include"../autos/red/red_far.shelby"
             }
             else {
-                #include "../autos/red/red_far_np.shelby"
+                // #include"../autos/red/red_far_np.shelby"
             }
             break;
 /////////////////////////////////////////////////////////////////////////////////// RED FAR
@@ -65,13 +67,15 @@ void autonomous()
 /////////////////////////////////////////////////////////////////////////////////// SKILLS
         case 5:
             // do auto 1
-            #include "../autos/skills/skills.shelby"
+            // #include"../autos/skills/skills.shelby"
             break;
 /////////////////////////////////////////////////////////////////////////////////// SKILLS
 
         default:
             // NO AUTO IS SELECTED
-
+            // #include"../autos/test/testauto.shelby"
+            //testauto();
+            //line(2000);
             break;
 
     }
