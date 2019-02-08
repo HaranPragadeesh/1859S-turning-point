@@ -1,5 +1,6 @@
  #include"../include/main.h"
  #include"../include/v5setup.hpp"
+ #include"../autos/autos.hpp"
 
 
 // index-
@@ -74,7 +75,7 @@ void autonomous()
         default:
             // NO AUTO IS SELECTED
             // #include"../autos/test/testauto.shelby"
-            //testauto();
+            testauto();
             //line(2000);
             break;
 

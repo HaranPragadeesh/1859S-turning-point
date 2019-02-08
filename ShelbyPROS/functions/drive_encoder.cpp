@@ -1,5 +1,7 @@
+#pragma once
 #include "main.h"
 #include "v5setup.hpp"
+
 
 void line(int dir, int target, float factor)
 {
@@ -32,7 +34,6 @@ void line(int dir, int target, float factor)
             errorTot = 0;
         }
 
-
         pTerm = error * kP;
 
 
@@ -51,39 +52,13 @@ void line(int dir, int target, float factor)
     }
 
     leftFront.move(0);
-    rightFront.move(0);
-    // SET STOPPING TO BRAKE
-    leftFront.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    rightFront.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-
     leftRear.move(0);
+    rightFront.move(0);
     rightRear.move(0);
-    // SET STOPPING TO BRAKE
-    leftRear.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    rightRear.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-
-    pros::Task::delay(100);
-
-    // SET STOPPING TO COAST FOR ALL
-    leftFront.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    rightFront.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    leftRear.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    rightRear.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-
 
     leftFront.tare_position();
     leftRear.tare_position();
     rightFront.tare_position();
     rightRear.tare_position();
 
-}
-
-void forward(int target, float factor = 1)
-{
-  line(FORWARD, target, factor);
-}
-
-void reverse(int target, float factor = 1)
-{
-  line(REVERSE, target, factor);
 }
