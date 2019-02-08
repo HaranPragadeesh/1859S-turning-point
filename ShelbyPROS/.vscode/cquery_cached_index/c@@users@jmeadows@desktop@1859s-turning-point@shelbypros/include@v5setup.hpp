@@ -1,9 +1,11 @@
+#include <iostream>
 #include "main.h"
 
 
-void line(int dir, int target, float factor);
-void setDriveBrakes(pros::motor_brake_mode_e_t mode);
-int dzCorrect(int dz, int side);
+
+extern void line(int dir, int target, float factor);
+extern void setDriveBrakes(pros::motor_brake_mode_e_t mode);
+extern int dzCorrect(int dz, int side);
 
 
 //global variables
