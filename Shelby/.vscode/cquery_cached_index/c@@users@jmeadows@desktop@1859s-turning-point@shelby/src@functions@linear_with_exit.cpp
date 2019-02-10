@@ -59,7 +59,7 @@ void lineExt(int dir, int target, float factor)
 
         //timeLast = pros::millis();
 
-        if(pros::millis() < pTime + exitDelay)
+        if(pros::millis() > pTime + exitDelay)
         {
             // if not in zone reset timer
             if(std::abs(LENCO) < targetMin || std::abs(LENCO) > targetMax)
