@@ -5,4 +5,5 @@ void testauto()
 {
     turn(1, 1000, 1);
     turn(-1, 1000, 1);
+    lineExt(FORWARD, 1000, 1);
 }

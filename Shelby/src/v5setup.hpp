@@ -1,6 +1,13 @@
 #include "main.h"
 
-extern void testauto();
+
+//experimental
+extern void lineExt(int dir, int target, float factor);
+extern void forwardExt(int target, float factor = 1);
+extern void reverseExt(int target, float factor = 1);
+
+//extern void testauto();
+
 
 extern void line(int dir, int target, float factor);
 extern void turn(int dir, int target, float factor);
