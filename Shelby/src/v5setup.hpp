@@ -6,13 +6,25 @@ extern void lineExt(int dir, int target, float factor);
 extern void forwardExt(int target, float factor = 1);
 extern void reverseExt(int target, float factor = 1);
 
+
+
+//gyro turn
+extern void g_turn(int dir, int target, float factor);
+extern void g_left(int target, float factor = 1);
+extern void g_right(int target, float factor = 1)
+
 //extern void testauto();
 
-
+// linear pid
 extern void line(int dir, int target, float factor);
-extern void turn(int dir, int target, float factor);
 extern void forward(int target, float factor = 1);
 extern void reverse(int target, float factor = 1);
+
+// encoder turn
+extern void turn(int dir, int target, float factor);
+extern void left(int target, float factor = 1)
+extern void right(int target, float factor = 1)
+
 
 extern void setDriveBrakes(pros::motor_brake_mode_e_t mode);
 extern int dzCorrect(int dz, int side);
