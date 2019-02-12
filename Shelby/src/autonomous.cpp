@@ -3,78 +3,81 @@
 #include "autos/autos.hpp"
 
 // index-
-// 1- blue close
-// 2- blue far
-// 3- red close
-// 4- red far
+// 1- red close
+// 2- red far
+// 3- blue close
+// 4- blue far
 // 5- skills
 
 
 
 void autonomous()
 {
+    //left(560);
+    redfar();
+
     switch(selectedAuto){
 
 
 /////////////////////////////////////////////////////////////////////////////////// BLUE CLOSE
         case 1:
-            // do auto 1
+            // do auto 1 red close
             if(autoShouldPark){
-                // #include"../autos/blue/blue_close.cpp"
+                //redclose();
             }
             else {
-                // #include"../autos/blue/blue_close_np.shelby"
+                //redcloseNP();
             }
             break;
 /////////////////////////////////////////////////////////////////////////////////// BLUE CLOSE
 
 /////////////////////////////////////////////////////////////////////////////////// BLUE FAR
         case 2:
-            // do auto 1
+            // do auto 2 red far
             if(autoShouldPark){
-                // #include"../autos/blue/blue_far.shelby"
+                redfar();
             }
             else {
-                // #include"../autos/blue/blue_far_np.shelby"
+                redfarNP();
             }
             break;
 /////////////////////////////////////////////////////////////////////////////////// BLUE FAR
 
 /////////////////////////////////////////////////////////////////////////////////// RED CLOSE
         case 3:
-            // do auto 1
+            // do auto 3 blue close
             if(autoShouldPark){
-                // #include"../autos/red/red_close.shelby"
+                //blueclose();
             }
             else {
-                // #include"../autos/red/red_close_np.shelby"
+                //bluecloseNP();
             }
             break;
 /////////////////////////////////////////////////////////////////////////////////// RED CLOSE
 
 /////////////////////////////////////////////////////////////////////////////////// RED FAR
         case 4:
-            // do auto 1
+            // do auto 4 blue far
             if(autoShouldPark){
-                // #include"../autos/red/red_far.shelby"
+                bluefar();
             }
             else {
-                // #include"../autos/red/red_far_np.shelby"
+                bluefarNP();
             }
             break;
 /////////////////////////////////////////////////////////////////////////////////// RED FAR
 
 /////////////////////////////////////////////////////////////////////////////////// SKILLS
         case 5:
-            // do auto 1
-            // #include"../autos/skills/skills.shelby"
+            // do auto 5  skills
+            //skills();
             break;
 /////////////////////////////////////////////////////////////////////////////////// SKILLS
 
         default:
             // NO AUTO IS SELECTED
             // #include"../autos/test/testauto.shelby"
-            testauto();
+            //testauto();
             //line(2000);
             break;
 

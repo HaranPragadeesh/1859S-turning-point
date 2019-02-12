@@ -6,8 +6,8 @@
 
 void opcontrol() {
 
-	testauto();
-
+	
+	//testauto();
 bool holding = false;
 
 	while (true)

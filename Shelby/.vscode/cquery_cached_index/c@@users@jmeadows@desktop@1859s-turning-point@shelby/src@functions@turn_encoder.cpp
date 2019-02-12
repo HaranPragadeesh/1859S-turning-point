@@ -5,12 +5,12 @@
 
 void turn(int dir, int target, float factor)
 {
-    setDriveBrakes(BRAKE);
-    float kP = .4;
+    //setDriveBrakes(BRAKE);
+    float kP = .35;
     float kI = .0005;
     float kD = .5;
 
-    float errorZone = target * .1;
+    float errorZone = target * 1;
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;
@@ -23,7 +23,7 @@ void turn(int dir, int target, float factor)
 
 
 
-    while((std::abs(LENCO) + std::abs(RENCO) / 2) < target) // left encoder  < target
+    while((std::abs(LENCO) + std::abs(RENCO) / 2) < target * .98) // left encoder  < target
     {
         error = target - (std::abs(LENCO) + std::abs(RENCO) / 2);
         // errorTot += error;
@@ -64,12 +64,12 @@ void turn(int dir, int target, float factor)
 
 }
 
-void left(int target, float factor = 1)
+void left(int target, float factor)
 {
   turn(LEFT, target, factor);
 }
 
-void right(int target, float factor = 1)
+void right(int target, float factor)
 {
   turn(RIGHT, target, factor);
 }

@@ -1,18 +1,36 @@
 #include "main.h"
 
+#define REST(x) pros::Task::delay(x)
+
+extern void fly(int voltage);
+
+
+extern void gyroClimb(int speed, int ang, int delay, int calibrateDelay = 0);
 
 //experimental
 extern void lineExt(int dir, int target, float factor);
 extern void forwardExt(int target, float factor = 1);
 extern void reverseExt(int target, float factor = 1);
 
+
+
+//gyro turn
+extern void g_turn(int dir, int target, float factor);
+extern void g_left(int target, float factor = 1);
+extern void g_right(int target, float factor = 1);
+
 //extern void testauto();
 
-
+// linear pid
 extern void line(int dir, int target, float factor);
-extern void turn(int dir, int target, float factor);
 extern void forward(int target, float factor = 1);
 extern void reverse(int target, float factor = 1);
+
+// encoder turn
+extern void turn(int dir, int target, float factor);
+extern void left(int target, float factor = 1);
+extern void right(int target, float factor = 1);
+
 
 extern void setDriveBrakes(pros::motor_brake_mode_e_t mode);
 extern int dzCorrect(int dz, int side);
@@ -45,6 +63,9 @@ extern pros::Motor flyWheel2;
 //ball manipulator motors
 extern pros::Motor intake;
 extern pros::Motor lift;
+
+
+//gyro
 
 
 //joystick deadzone

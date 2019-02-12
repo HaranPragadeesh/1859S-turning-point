@@ -3,7 +3,6 @@
 
 void testauto()
 {
-    turn(1, 1000, 1);
-    turn(-1, 1000, 1);
-    lineExt(FORWARD, 1000, 1);
+    pros::Task::delay(1500);
+    g_left(900);
 }

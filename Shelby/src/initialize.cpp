@@ -4,24 +4,24 @@
 
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
-//gyro
-pros::ADIGyro yawGyro (PORT_GYRO_YAW, 0); /* tune variable for accurate 360 turn */ // for turning
-pros::ADIGyro rollGyro (PORT_GYRO_PITCH); // for climbing
+
+ pros::ADIGyro yawGyro (PORT_GYRO_YAW, .7); /* tune variable for accurate 360 turn */ // for turning
+ pros::ADIGyro rollGyro (PORT_GYRO_PITCH); // for climbing
 
 // drive motors
-pros::Motor leftFront (PORT_DRIVE_LEFT_FRONT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
-pros::Motor leftRear (PORT_DRIVE_LEFT_REAR, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
-pros::Motor rightFront (PORT_DRIVE_RIGHT_FRONT, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
-pros::Motor rightRear (PORT_DRIVE_RIGHT_REAR, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
+ pros::Motor leftFront (PORT_DRIVE_LEFT_FRONT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
+ pros::Motor leftRear (PORT_DRIVE_LEFT_REAR, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
+ pros::Motor rightFront (PORT_DRIVE_RIGHT_FRONT, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
+ pros::Motor rightRear (PORT_DRIVE_RIGHT_REAR, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
 
 
 // flywheel motors
-pros::Motor flyWheel1(PORT_FLYWHEEL1, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
-pros::Motor flyWheel2(PORT_FLYWHEEL2, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
+ pros::Motor flyWheel1(PORT_FLYWHEEL1, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
+ pros::Motor flyWheel2(PORT_FLYWHEEL2, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
 
 //ball manipulator motors
-pros::Motor intake(PORT_INTAKE, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_DEGREES);
-pros::Motor lift(PORT_LIFT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
+ pros::Motor intake(PORT_INTAKE, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_DEGREES);
+ pros::Motor lift(PORT_LIFT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
 
 
 int selectedAuto = 0;
@@ -40,6 +40,17 @@ void on_center_button() {
 	pressed = !pressed;
 	if (pressed) {
 		autoShouldPark = !autoShouldPark;
+        if(autoShouldPark){
+            pros::lcd::clear_line(4);
+            pros::lcd::set_text(4, "park");
+        }
+        else{
+            pros::lcd::clear_line(4);
+            pros::lcd::set_text(4, "dont park");
+        }
+
+
+
 
 	} else {
 		//pros::lcd::clear_line(2);
@@ -50,7 +61,7 @@ void on_left_button() {
 	static bool pressed = false;
 	pressed = !pressed;
 	if (pressed) {
-		selectedAuto--;
+		selectedAuto = selectedAuto - 1;
 		selectedAutoText = std::to_string(selectedAuto);
 		pros::lcd::set_text(2, selectedAutoText);
 	} else {
@@ -62,7 +73,7 @@ void on_right_button() {
 	static bool pressed = false;
 	pressed = !pressed;
 	if (pressed) {
-		selectedAuto++;
+		selectedAuto = selectedAuto +1;
 		selectedAutoText = std::to_string(selectedAuto);
 		pros::lcd::set_text(2, selectedAutoText);
 		if(selectedAuto > 0){
@@ -86,6 +97,8 @@ void initialize() {
 	pros::lcd::register_btn0_cb(on_left_button);
 	pros::lcd::register_btn1_cb(on_center_button);
 	pros::lcd::register_btn2_cb(on_right_button);
+
+    rollGyro.reset();
 }
 
 /**

@@ -5,8 +5,10 @@
 
 void line(int dir, int target, float factor)
 {
-    setDriveBrakes(BRAKE);
-    float kP = .25;
+
+
+    //setDriveBrakes(COAST);
+    float kP = .3; // .25
     float kI = .0005;
     float kD = 1;
 
@@ -14,6 +16,14 @@ void line(int dir, int target, float factor)
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;
+
+    float targetMin = target * .99;
+    float targetMax = target * 1.01;
+    bool ft = true;
+    bool ogPass = false;
+    float pTime; // pause time
+    int exitDelay = 350; // millis to check exit
+    bool settled = false;
 
     // zero motors fix if this is not correct method
     leftFront.tare_position();
@@ -23,7 +33,8 @@ void line(int dir, int target, float factor)
 
 
 
-    while(std::abs(LENCO) < target) // left encoder  < target
+    while(!settled)
+    //while(std::abs(LENCO) < target * .98) // left encoder  < target
     {
         error = target - std::abs(LENCO);
         // errorTot += error;
@@ -48,6 +59,23 @@ void line(int dir, int target, float factor)
         leftRear.move(power);
         rightRear.move(power);
 
+        if(std::abs(LENCO) > targetMin && ft)
+        {
+            pTime = pros::millis();
+            ft = false;
+            ogPass = true;
+        }
+        if(pros::millis() > pTime + exitDelay && ogPass)
+        {
+            if(std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax)
+            {
+                settled = true;
+            }
+            else
+            {
+                pTime = pros::millis();
+            }
+        }
         pros::Task::delay(20);
     }
 

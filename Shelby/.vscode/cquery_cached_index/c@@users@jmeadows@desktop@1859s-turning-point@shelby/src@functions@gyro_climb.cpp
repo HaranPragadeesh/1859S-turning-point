@@ -1,7 +1,7 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
-void gyroClimb(int speed, int ang, int delay, int calibrateDelay = 0)
+void gyroClimb(int speed, int ang, int delay, int calibrateDelay)
 {
 
   // set motors to coast in case was left on brake or hold last
@@ -18,7 +18,7 @@ void gyroClimb(int speed, int ang, int delay, int calibrateDelay = 0)
 
     // calibrate - add -
     pros::delay(calibrateDelay);
-
+    rollGyro.reset();
 
     // do until finished climbing
     while(!climbed)
@@ -52,6 +52,7 @@ void gyroClimb(int speed, int ang, int delay, int calibrateDelay = 0)
             pros::delay(delay);
 
             climbed = true;
+            rollGyro.reset();
 
 
             // stop motors and set to hold
