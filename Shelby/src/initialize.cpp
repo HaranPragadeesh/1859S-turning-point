@@ -24,7 +24,6 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
  pros::Motor lift(PORT_LIFT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
 
 
-int selectedAuto = 0;
 bool autoShouldPark = true;
 std::string nameList[9] = { "NOTHING SELECTED",
 							"Red Close", "Red Close No Park"
@@ -36,9 +35,9 @@ std::string nameList[9] = { "NOTHING SELECTED",
 std::string selectedAutoText = "";
 
 void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
+	//static bool pressed = false;
+	//pressed = !pressed;
+	//if (pressed) {
 		autoShouldPark = !autoShouldPark;
         if(autoShouldPark){
             pros::lcd::clear_line(4);
@@ -52,36 +51,43 @@ void on_center_button() {
 
 
 
-	} else {
+	//} else {
 		//pros::lcd::clear_line(2);
-	}
+	//}
 }
 
 void on_left_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		selectedAuto = selectedAuto - 1;
-		selectedAutoText = std::to_string(selectedAuto);
-		pros::lcd::set_text(2, selectedAutoText);
-	} else {
+	//static bool pressed = false;
+	//pressed = !pressed;
+	//if (pressed) {
+        if(selectedAuto > 0)
+        {
+            selectedAuto = selectedAuto - 1;
+    		selectedAutoText = std::to_string(selectedAuto);
+            pros::lcd::clear_line(2);
+    		pros::lcd::set_text(2, nameList[selectedAuto]);// selectedAutoText);
+        }
+
+	//} else {
 		//pros::lcd::clear_line(2);
-	}
+	//}
 }
 
 void on_right_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
+	//static bool pressed = false;
+	//pressed = !pressed;
+	//if (pressed) {
 		selectedAuto = selectedAuto +1;
 		selectedAutoText = std::to_string(selectedAuto);
-		pros::lcd::set_text(2, selectedAutoText);
+        pros::lcd::clear_line(2);
+
+		pros::lcd::set_text(2,  nameList[selectedAuto]);
 		if(selectedAuto > 0){
 			selectedAuto--;
 		}
-	} else {
+	//} else {
 		//pros::lcd::clear_line(2);
-	}
+	//}
 }
 
 /**

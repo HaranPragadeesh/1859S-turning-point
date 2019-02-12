@@ -3,6 +3,6 @@
 
 void testauto()
 {
-    pros::Task::delay(1500);
-    g_left(900);
+    left(300);
+    right(300);
 }

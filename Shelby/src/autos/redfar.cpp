@@ -32,7 +32,7 @@ void redfar()
     ////////////////////////////////////////////////////////////////////////
 
 
-        fly(115);
+        fly(115); // double shot speed
 
     reverse(700);
 
@@ -58,7 +58,7 @@ void redfar()
 
 
     left(650);
-    reverse(520, 1.25);
+    reverse(520);
     left(560);
 
     setDriveBrakes(BRAKE);
@@ -66,7 +66,7 @@ void redfar()
 
     //gyroClimb(127, 25, 50, 0);
     //reverse(1200);
-    gyroClimb(100, 25, 100, 0);
+    gyroClimb(100, 25, 50, 0);
 }
 
 void redfarNP()
@@ -100,7 +100,7 @@ void redfarNP()
     ////////////////////////////////////////////////////////////////////////
 
 
-        fly(115);
+        fly(115); // double shot speed
 
     reverse(700);
 
@@ -112,7 +112,7 @@ void redfarNP()
 
 
     //startMotor(combineBack, 100);
-    lift.move(127);
+    lift.move(100);
     //combineBack.spin(FORWARD, 100, PCT);
     //REST(100);
     //flyWheel1.move(0);
@@ -125,14 +125,5 @@ void redfarNP()
     //combineBack.stop();
 
 
-    // left(650);
-    // reverse(520, 1.25);
-    // left(560);
-    //
-    // setDriveBrakes(BRAKE);
-    //
 
-    //gyroClimb(127, 25, 50, 0);
-    //reverse(1200);
-    //gyroClimb(100, 25, 100, 0);
 }

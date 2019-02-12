@@ -32,7 +32,7 @@ void bluefar()
     ////////////////////////////////////////////////////////////////////////
 
 
-        fly(115);
+        fly(115); // double shot speed
 
     reverse(700);
 
@@ -57,8 +57,8 @@ void bluefar()
     //combineBack.stop();
 
 
-    left(650);
-    reverse(520, 1.25);
+    right(650);
+    reverse(520);
     right(560);
 
     setDriveBrakes(BRAKE);
@@ -66,10 +66,8 @@ void bluefar()
 
     //gyroClimb(127, 25, 50, 0);
     //reverse(1200);
-    gyroClimb(100, 25, 100, 0);
+    gyroClimb(100, 25, 50, 0);
 }
-
-
 
 void bluefarNP()
 {
@@ -102,7 +100,7 @@ void bluefarNP()
     ////////////////////////////////////////////////////////////////////////
 
 
-        fly(115);
+        fly(115); // double shot speed
 
     reverse(700);
 
@@ -127,14 +125,5 @@ void bluefarNP()
     //combineBack.stop();
 
 
-    //left(650);
-    //reverse(520, 1.25);
-    //right(560);
 
-    //setDriveBrakes(BRAKE);
-
-
-    //gyroClimb(127, 25, 50, 0);
-    //reverse(1200);
-    //gyroClimb(100, 25, 100, 0);
 }

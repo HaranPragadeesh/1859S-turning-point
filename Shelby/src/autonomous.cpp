@@ -9,13 +9,14 @@
 // 4- blue far
 // 5- skills
 
+int selectedAuto = 0;
 
 
 void autonomous()
 {
     //left(560);
-    redfar();
-
+    //redfar();
+    //testauto();
     switch(selectedAuto){
 
 

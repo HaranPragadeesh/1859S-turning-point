@@ -7,18 +7,18 @@ void line(int dir, int target, float factor)
 {
 
 
-    //setDriveBrakes(COAST);
-    float kP = .3; // .25
-    float kI = .0005;
-    float kD = 1;
+    setDriveBrakes(COAST);
+    float kP = .5;//.3; // .25
+    float kI = .005;//.0005;
+    float kD = 1;//1;
 
-    float errorZone = target * 1;
+    float errorZone = target * .1;
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;
 
-    float targetMin = target * .99;
-    float targetMax = target * 1.01;
+    float targetMin = target - 15;
+    float targetMax = target + 15;
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
