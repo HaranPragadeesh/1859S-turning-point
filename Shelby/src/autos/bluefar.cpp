@@ -57,8 +57,6 @@ void bluefar()
 
     if(autoShouldPark)
     {
-
-
     right(650);
     reverse(520);
     right(560);
