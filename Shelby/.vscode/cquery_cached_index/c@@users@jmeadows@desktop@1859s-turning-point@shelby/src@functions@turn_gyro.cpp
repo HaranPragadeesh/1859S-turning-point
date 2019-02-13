@@ -15,12 +15,20 @@ void g_turn(int dir, int target, float factor)
     float pTerm, iTerm, dTerm;
     float power;
 
+    float targetMin = target - 15;
+    float targetMax = target + 15;
+    bool ft = true;
+    bool ogPass = false;
+    float pTime; // pause time
+    int exitDelay = 350; // millis to check exit
+    bool settled = false;
+
     // zero motors fix if this is not correct method
 	rollGyro.reset();
 
 
-
-    while(rollGyro.get_value() < target) // left encoder  < target
+     while(!settled)
+    //while(rollGyro.get_value() < target) // left encoder  < target
     {
         error = target - rollGyro.get_value();
         // errorTot += error;
@@ -45,6 +53,24 @@ void g_turn(int dir, int target, float factor)
 
         rightFront.move(power);
         rightRear.move(power);
+
+        if(yawGyro.get_value() > targetMin && ft)
+        {
+            pTime = pros::millis();
+            ft = false;
+            ogPass = true;
+        }
+        if(pros::millis() > pTime + exitDelay && ogPass)
+        {
+            if(yawGyro.get_value() > targetMin && yawGyro.get_value() < targetMax)
+            {
+                settled = true;
+            }
+            else
+            {
+                pTime = pros::millis();
+            }
+        }
 
         pros::Task::delay(20);
     }

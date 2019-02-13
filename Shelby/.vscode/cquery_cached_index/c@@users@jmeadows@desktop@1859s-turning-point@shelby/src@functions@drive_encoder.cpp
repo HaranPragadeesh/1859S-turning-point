@@ -76,6 +76,13 @@ void line(int dir, int target, float factor)
                 pTime = pros::millis();
             }
         }
+
+        pros::lcd::set_text(2, "LENCO:" + std::to_string(std::abs(LENCO)));
+        pros::lcd::set_text(3, "target:" + std::to_string(target));
+        pros::lcd::set_text(4, "error:" + std::to_string(error));
+        pros::lcd::set_text(5, "ptime:" + std::to_string(pTime));
+        pros::lcd::set_text(6, "timer:" + std::to_string(pros::millis()));
+
         pros::Task::delay(20);
     }
 

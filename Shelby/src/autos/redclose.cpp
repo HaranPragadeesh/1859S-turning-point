@@ -8,7 +8,7 @@ void redclose()
 
      forward(1250); // hit bottom flag
 
-     reverse(1330); // reverse from bottom flag
+     reverse(1400); // reverse from bottom flag
 
      right(560); // turn back towards tilt cap with ball under
 
@@ -27,7 +27,7 @@ void redclose()
 
      ////////////////////////////////////////////////////////////////////////
 
-     reverse(1050); // reverse to line with flags
+     reverse(1200); // reverse to line with flags
 
      lift.move(LIFT_CLR_SPEED);
 
@@ -35,13 +35,13 @@ void redclose()
 
      lift.move(0);
      ////////////////////////////////////////////////////////////////////////
-     fly(127); // start flywheel at full speed
+     fly(115); // start flywheel at full speed
 
      left(560); // turn to line with flags
 
      reverse(800); //650 // *tune* reverse to line with platform to double shot
 
-
+     fly(0);
      REST(0); // delay inbetween cutoff and feed
      lift.move(LIFT_UP_SPEED);
      REST(700); // wait time for shoot
@@ -52,12 +52,10 @@ void redclose()
 
      left(560); // turn to climb plat
 
+     if(autoShouldPark)
+     {
+         gyroClimb(100, 25, 50, 0);
 
-     gyroClimb(100, 25, 50, 0);
-
-}
-
-void redcloseNP()
-{
+     }
 
 }

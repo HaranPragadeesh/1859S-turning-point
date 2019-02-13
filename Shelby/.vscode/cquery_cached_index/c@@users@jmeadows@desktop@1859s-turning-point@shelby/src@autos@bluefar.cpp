@@ -4,7 +4,6 @@
 void bluefar()
 {
 
-
     fly(-25);
 
     intake.move(COMBINE_INTAKE_SPEED);
@@ -56,6 +55,9 @@ void bluefar()
     lift.move(0);
     //combineBack.stop();
 
+    if(autoShouldPark)
+    {
+
 
     right(650);
     reverse(520);
@@ -67,8 +69,12 @@ void bluefar()
     //gyroClimb(127, 25, 50, 0);
     //reverse(1200);
     gyroClimb(100, 25, 50, 0);
+    }
+
+    fly(0);
 }
 
+/*
 void bluefarNP()
 {
 
@@ -127,3 +133,4 @@ void bluefarNP()
 
 
 }
+*/

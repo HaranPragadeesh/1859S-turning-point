@@ -33,6 +33,8 @@ void gyroClimb(int speed, int ang, int delay, int calibrateDelay)
               leftRear.move(GYRO_CLIMB_SPEED);
               rightFront.move(GYRO_CLIMB_SPEED);
               rightRear.move(GYRO_CLIMB_SPEED);
+              pros::lcd::set_text(2, "GYRO:" + std::to_string(std::abs(rollGyro.get_value())));
+              pros::lcd::set_text(3, "NOT CLIMBED");
 
             }
             // got over initial so it 'overcame'
@@ -44,6 +46,8 @@ void gyroClimb(int speed, int ang, int delay, int calibrateDelay)
               leftRear.move(GYRO_CLIMB_SPEED);
               rightFront.move(GYRO_CLIMB_SPEED);
               rightRear.move(GYRO_CLIMB_SPEED);
+              pros::lcd::set_text(2, "GYRO:" + std::to_string(std::abs(rollGyro.get_value())));
+              pros::lcd::set_text(3, "NOT CLIMBED");
             }
 
             // dropped below 'zero angle' so its finished climbing
@@ -51,6 +55,7 @@ void gyroClimb(int speed, int ang, int delay, int calibrateDelay)
             // delay in order to stop near the center of the platform
             pros::delay(delay);
 
+            pros::lcd::set_text(3, "CLIMBED");
             climbed = true;
             rollGyro.reset();
 

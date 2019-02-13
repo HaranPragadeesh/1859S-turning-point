@@ -20,48 +20,52 @@ void autonomous()
 /////////////////////////////////////////////////////////////////////////////////// BLUE CLOSE
         case 1:
             // do auto 1 red close
-            if(autoShouldPark){
-                redclose();
-            }
-            else {
-                redcloseNP();
-            }
+            redclose();
+            // if(autoShouldPark){
+            //     redclose();
+            // }
+            // else {
+            //     redcloseNP();
+            // }
             break;
 /////////////////////////////////////////////////////////////////////////////////// BLUE CLOSE
 
 /////////////////////////////////////////////////////////////////////////////////// BLUE FAR
         case 2:
             // do auto 2 red far
-            if(autoShouldPark){
-                redfar();
-            }
-            else {
-                redfarNP();
-            }
+            redfar();
+            // if(autoShouldPark){
+            //     redfar();
+            // }
+            // else {
+            //     redfarNP();
+            // }
             break;
 /////////////////////////////////////////////////////////////////////////////////// BLUE FAR
 
 /////////////////////////////////////////////////////////////////////////////////// RED CLOSE
         case 3:
             // do auto 3 blue close
-            if(autoShouldPark){
-                blueclose();
-            }
-            else {
-                bluecloseNP();
-            }
+            blueclose();
+            // if(autoShouldPark){
+            //     blueclose();
+            // }
+            // else {
+            //     bluecloseNP();
+            // }
             break;
 /////////////////////////////////////////////////////////////////////////////////// RED CLOSE
 
 /////////////////////////////////////////////////////////////////////////////////// RED FAR
         case 4:
             // do auto 4 blue far
-            if(autoShouldPark){
-                bluefar();
-            }
-            else {
-                bluefarNP();
-            }
+            bluefar();
+            // if(autoShouldPark){
+            //     bluefar();
+            // }
+            // else {
+            //     bluefarNP();
+            // }
             break;
 /////////////////////////////////////////////////////////////////////////////////// RED FAR
 

@@ -27,10 +27,8 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 bool autoShouldPark = true;
 int selectedAuto = 0;
 std::string nameList[9] = { "NOTHING SELECTED",
-							"Red Close", "Red Close No Park"
-					   		"Red Far", "Red Far No Park",
-						    "Blue Close", "Blue Close No Park"
-				      		"Blue Far", "Blue Far No Park"
+							"Red Close", "Red Far",
+					   		"Blue Close", "Blue Far",
 						    "Skills"};
 
 void updateAutoText()

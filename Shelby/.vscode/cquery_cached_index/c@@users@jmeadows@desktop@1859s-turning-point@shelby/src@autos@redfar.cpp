@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../../include/main.h"
 #include "../v5setup.hpp"
 
 void redfar()
@@ -56,6 +56,9 @@ void redfar()
     lift.move(0);
     //combineBack.stop();
 
+    if(autoShouldPark)
+    {
+
 
     left(650);
     reverse(520);
@@ -67,8 +70,13 @@ void redfar()
     //gyroClimb(127, 25, 50, 0);
     //reverse(1200);
     gyroClimb(100, 25, 50, 0);
+    }
+
+    fly(0);
 }
 
+
+/*
 void redfarNP()
 {
 
@@ -127,3 +135,4 @@ void redfarNP()
 
 
 }
+*/

@@ -3,10 +3,7 @@
 
 void waitDrive(int dir, int speed, int waitTime)
 {
-  rightFront.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-  rightRear.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-  leftFront.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-  leftRear.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+  setDriveBrakes(COAST);
 
   rightFront.move(speed);
   rightRear.move(speed);
@@ -19,5 +16,4 @@ void waitDrive(int dir, int speed, int waitTime)
   rightRear.move(0);
   leftFront.move(0);
   leftRear.move(0);
-
 }

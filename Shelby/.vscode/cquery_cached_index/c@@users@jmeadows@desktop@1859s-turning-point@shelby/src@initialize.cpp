@@ -25,70 +25,47 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
 bool autoShouldPark = true;
+int selectedAuto = 0;
 std::string nameList[9] = { "NOTHING SELECTED",
-							"Red Close", "Red Close No Park"
-					   		"Red Far", "Red Far No Park",
-						    "Blue Close", "Blue Close No Park"
-				      		"Blue Far", "Blue Far No Park"
+							"Red Close", "Red Far",
+					   		"Blue Close", "Blue Far",
 						    "Skills"};
 
-std::string selectedAutoText = "";
+void updateAutoText()
+{
+     pros::lcd::set_text(2, nameList[selectedAuto]);
 
-void on_center_button() {
-	//static bool pressed = false;
-	//pressed = !pressed;
-	//if (pressed) {
-		autoShouldPark = !autoShouldPark;
-        if(autoShouldPark){
-            pros::lcd::clear_line(4);
-            pros::lcd::set_text(4, "park");
-        }
-        else{
-            pros::lcd::clear_line(4);
-            pros::lcd::set_text(4, "dont park");
-        }
-
-
-
-
-	//} else {
-		//pros::lcd::clear_line(2);
-	//}
+     if(autoShouldPark){
+         pros::lcd::set_text(4, "park");
+     }
+     else{
+         pros::lcd::set_text(4, "dont park");
+     }
 }
 
-void on_left_button() {
-	//static bool pressed = false;
-	//pressed = !pressed;
-	//if (pressed) {
-        if(selectedAuto > 0)
-        {
-            selectedAuto = selectedAuto - 1;
-    		selectedAutoText = std::to_string(selectedAuto);
-            pros::lcd::clear_line(2);
-    		pros::lcd::set_text(2, nameList[selectedAuto]);// selectedAutoText);
-        }
-
-	//} else {
-		//pros::lcd::clear_line(2);
-	//}
+void on_center_button()
+{
+     autoShouldPark = !autoShouldPark;
+     updateAutoText();
 }
 
-void on_right_button() {
-	//static bool pressed = false;
-	//pressed = !pressed;
-	//if (pressed) {
-		selectedAuto = selectedAuto +1;
-		selectedAutoText = std::to_string(selectedAuto);
-        pros::lcd::clear_line(2);
-
-		pros::lcd::set_text(2,  nameList[selectedAuto]);
-		if(selectedAuto > 0){
-			selectedAuto--;
-		}
-	//} else {
-		//pros::lcd::clear_line(2);
-	//}
+void on_left_button()
+{
+     if(selectedAuto > 0)
+     {
+       selectedAuto--;
+     }
+     updateAutoText();
 }
+
+void on_right_button()
+{
+     selectedAuto++;
+     updateAutoText();
+}
+
+
+
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -105,6 +82,7 @@ void initialize() {
 	pros::lcd::register_btn2_cb(on_right_button);
 
     rollGyro.reset();
+    yawGyro.reset();
 }
 
 /**
