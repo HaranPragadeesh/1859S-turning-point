@@ -14,4 +14,5 @@ void redfarNP();
 void bluefar();
 void bluefarNP();
 
-void skills();
+void skills12();
+void skills19();

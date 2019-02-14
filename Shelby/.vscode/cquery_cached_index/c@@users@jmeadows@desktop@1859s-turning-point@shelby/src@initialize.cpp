@@ -6,7 +6,7 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
  pros::ADIGyro yawGyro (PORT_GYRO_YAW); /* tune variable for accurate 360 turn */ // for turning
- pros::ADIGyro rollGyro (PORT_GYRO_PITCH); // for climbing
+ pros::ADIGyro rollGyro (PORT_GYRO_ROLL); // for climbing
 
 // drive motors
  pros::Motor leftFront (PORT_DRIVE_LEFT_FRONT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
@@ -26,10 +26,15 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 bool autoShouldPark = true;
 int selectedAuto = 0;
-std::string nameList[9] = { "NOTHING SELECTED",
-							"Red Close", "Red Far",
-					   		"Blue Close", "Blue Far",
-						    "Skills"};
+std::string nameList[7] = {
+    "NOTHING SELECTED", // 0
+    "Red Close - 14PT", // 1
+    "Red Far - 8PT", // 2
+    "Blue Close - 14PT", // 3
+    "Blue Far - 8PT", // 4
+    "Skills - 12RAW", // 5
+    "Skills - 19RAW" // 6
+ };
 
 void updateAutoText()
 {
@@ -60,7 +65,10 @@ void on_left_button()
 
 void on_right_button()
 {
-     selectedAuto++;
+    if(selectedAuto < 6)
+    {
+        selectedAuto++;
+    }
      updateAutoText();
 }
 
@@ -75,14 +83,18 @@ void on_right_button()
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
+	pros::lcd::set_text(1, "- Shelby Pros -");
+    pros::lcd::set_text(2, "   - 1859s -   ");
+
 
 	pros::lcd::register_btn0_cb(on_left_button);
 	pros::lcd::register_btn1_cb(on_center_button);
 	pros::lcd::register_btn2_cb(on_right_button);
 
-    rollGyro.reset();
-    yawGyro.reset();
+    pros::ADIGyro yawGyro (PORT_GYRO_YAW);
+    pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
+
+
 }
 
 /**
@@ -90,7 +102,9 @@ void initialize() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
-void disabled() {}
+void disabled() {
+    setDriveBrakes(HOLD);
+}
 
 /**
  * Runs after initialize(), and before autonomous when connected to the Field
@@ -101,4 +115,17 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
+void competition_initialize() {
+    pros::lcd::set_text(4,
+         "L: " + std::to_string(round(std::abs(LENCO))) +
+         "R: " + std::to_string(round(std::abs(RENCO))) +
+         "A: " + std::to_string(round((std::abs(LENCO) + std::abs(RENCO)) / 2))
+     );
+
+    pros::lcd::set_text(5, "ClimbGy: " + std::to_string(round(rollGyro.get_value())));
+    pros::lcd::set_text(6, "TurnGy: " + std::to_string(round(yawGyro.get_value())));
+    pros::lcd::set_text(7,
+         "RPM: " + std::to_string(round(flyWheel1.get_actual_velocity() * 15)) +
+         "True RPM: " + std::to_string(round(flyWheel1.get_actual_velocity()))
+     );
+}

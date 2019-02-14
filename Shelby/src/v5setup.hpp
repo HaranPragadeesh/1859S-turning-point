@@ -123,4 +123,4 @@ extern pros::Motor lift;
 
 /* setup gyros  |- 1 through 8 -| */
 #define PORT_GYRO_YAW 1 // A // turn
-#define PORT_GYRO_PITCH 8 // H // climb
+#define PORT_GYRO_ROLL 8 // H // climb

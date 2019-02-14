@@ -17,8 +17,9 @@ void gyroClimb(int speed, int ang, int delay, int calibrateDelay)
     float zeroAng = 5;
 
     // calibrate - add -
-    pros::delay(calibrateDelay);
     rollGyro.reset();
+
+    pros::delay(calibrateDelay);
 
     // do until finished climbing
     while(!climbed)
