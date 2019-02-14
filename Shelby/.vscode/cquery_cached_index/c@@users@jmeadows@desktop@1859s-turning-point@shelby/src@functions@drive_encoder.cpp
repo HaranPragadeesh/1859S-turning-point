@@ -22,7 +22,7 @@ void line(int dir, int target, float factor)
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
-    int exitDelay = 350; // millis to check exit
+    int exitDelay = 400; // millis to check exit
     bool settled = false;
 
     // zero motors fix if this is not correct method

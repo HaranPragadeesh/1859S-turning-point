@@ -108,7 +108,7 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-    setDriveBrakes(HOLD);
+    //setDriveBrakes(HOLD);
 }
 
 /**

@@ -6,12 +6,25 @@
 
 void opcontrol() {
 
-	
+
 	//testauto();
 bool holding = false;
 
 	while (true)
 	{
+		pros::lcd::set_text(4,
+			 "L: " + std::to_string(round(std::abs(LENCO))) +
+			 "R: " + std::to_string(round(std::abs(RENCO))) +
+			 "A: " + std::to_string(round((std::abs(LENCO) + std::abs(RENCO)) / 2))
+		 );
+
+		pros::lcd::set_text(5, "ClimbGy: " + std::to_string(round(rollGyro.get_value())));
+		pros::lcd::set_text(6, "TurnGy: " + std::to_string(round(yawGyro.get_value())));
+		pros::lcd::set_text(7,
+			 "RPM: " + std::to_string(round(flyWheel1.get_actual_velocity() * 15)) +
+			 "True RPM: " + std::to_string(round(flyWheel1.get_actual_velocity()))
+		 );
+
 		setDriveBrakes(HOLD);
 		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
 		 {

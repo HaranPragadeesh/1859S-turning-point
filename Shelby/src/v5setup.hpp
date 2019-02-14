@@ -35,6 +35,7 @@ extern void right(int target, float factor = 1);
 extern void setDriveBrakes(pros::motor_brake_mode_e_t mode);
 extern int dzCorrect(int dz, int side);
 
+extern void waitDrive(int dir, int speed, int waitTime);
 
 //global variables
 extern std::string nameList[];
