@@ -69,7 +69,7 @@ void redfar()
 
     //gyroClimb(127, 25, 50, 0);
     //reverse(1200);
-    gyroClimb(100, 25, 50, 0);
+    gyroClimb(127, 30, 50, 0);
     }
 
     fly(0);

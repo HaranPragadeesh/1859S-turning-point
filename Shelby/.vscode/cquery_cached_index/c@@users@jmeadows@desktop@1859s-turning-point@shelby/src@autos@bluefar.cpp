@@ -38,7 +38,7 @@ void bluefar()
 
     ////////////////////////////////////////////////////////////////////////
 
-    right(470);
+    right(430); // aimon flag // red is 470
 
 
 
@@ -58,7 +58,7 @@ void bluefar()
     if(autoShouldPark)
     {
     right(650);
-    reverse(520);
+    reverse(440);
     right(560);
 
     setDriveBrakes(BRAKE);
@@ -66,7 +66,7 @@ void bluefar()
 
     //gyroClimb(127, 25, 50, 0);
     //reverse(1200);
-    gyroClimb(100, 25, 50, 0);
+    gyroClimb(100, 28, 50, 0);
     }
 
     fly(0);

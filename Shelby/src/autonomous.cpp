@@ -11,8 +11,7 @@
 
 void autonomous()
 {
-    //left(560);
-    //redfar();
+
     //testauto();
     switch(selectedAuto){
 

@@ -5,7 +5,7 @@
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
- pros::ADIGyro yawGyro (PORT_GYRO_YAW, .7); /* tune variable for accurate 360 turn */ // for turning
+ pros::ADIGyro yawGyro (PORT_GYRO_YAW); /* tune variable for accurate 360 turn */ // for turning
  pros::ADIGyro rollGyro (PORT_GYRO_PITCH); // for climbing
 
 // drive motors

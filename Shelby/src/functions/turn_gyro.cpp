@@ -6,7 +6,7 @@
 void g_turn(int dir, int target, float factor)
 {
     setDriveBrakes(BRAKE);
-    float kP = .15;
+    float kP = .05;
     float kI = .0005;
     float kD = .5;
 
@@ -20,17 +20,18 @@ void g_turn(int dir, int target, float factor)
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
-    int exitDelay = 350; // millis to check exit
+    int exitDelay = 700; // millis to check exit
     bool settled = false;
 
     // zero motors fix if this is not correct method
 	rollGyro.reset();
+    REST(1500);
 
-
+    target = target * dir;
      while(!settled)
     //while(rollGyro.get_value() < target) // left encoder  < target
     {
-        error = target - rollGyro.get_value();
+        error = target - yawGyro.get_value();
         // errorTot += error;
 
         if (error < errorZone) {
@@ -46,7 +47,7 @@ void g_turn(int dir, int target, float factor)
         dTerm = kD * (error - errorLast);
         errorLast = error;
 
-        power = ((pTerm + iTerm + dTerm) * factor) * -dir;
+        power = ((pTerm + iTerm + dTerm) * factor) * dir;
 
         leftFront.move(-power);
         leftRear.move(-power);
@@ -72,6 +73,12 @@ void g_turn(int dir, int target, float factor)
             }
         }
 
+        pros::lcd::set_text(2, "GYRO::" + std::to_string(yawGyro.get_value()));
+        pros::lcd::set_text(3, "target:" + std::to_string(target));
+        pros::lcd::set_text(4, "error:" + std::to_string(error));
+        pros::lcd::set_text(5, "ptime:" + std::to_string(pTime));
+        pros::lcd::set_text(6, "timer:" + std::to_string(pros::millis()));
+
         pros::Task::delay(20);
     }
 
@@ -86,10 +93,10 @@ void g_turn(int dir, int target, float factor)
 
 void g_left(int target, float factor)
 {
-  turn(LEFT, target, factor);
+  g_turn(LEFT, target, factor);
 }
 
 void g_right(int target, float factor)
 {
-  turn(RIGHT, target, factor);
+  g_turn(RIGHT, target, factor);
 }

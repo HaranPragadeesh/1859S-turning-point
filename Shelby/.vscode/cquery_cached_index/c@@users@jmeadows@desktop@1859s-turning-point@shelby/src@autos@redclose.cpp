@@ -37,7 +37,7 @@ void redclose()
      ////////////////////////////////////////////////////////////////////////
      fly(115); // start flywheel at full speed
 
-     left(560); // turn to line with flags
+     left(570); // turn to line with flags
 
      reverse(800); //650 // *tune* reverse to line with platform to double shot
 
@@ -54,7 +54,8 @@ void redclose()
 
      if(autoShouldPark)
      {
-         gyroClimb(100, 25, 50, 0);
+         reverse(50);
+         gyroClimb(127, 30, 50, 500);
 
      }
 
