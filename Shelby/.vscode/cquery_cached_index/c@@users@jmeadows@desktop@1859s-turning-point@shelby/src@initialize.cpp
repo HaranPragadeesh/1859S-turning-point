@@ -40,11 +40,16 @@ void updateAutoText()
 {
      pros::lcd::set_text(2, nameList[selectedAuto]);
 
+
      if(autoShouldPark){
          pros::lcd::set_text(4, "park");
      }
-     else{
+     else if(!autoShouldPark){
          pros::lcd::set_text(4, "dont park");
+     }
+     else if(selectedAuto > 4)
+     {
+         pros::lcd::clear_line(4);
      }
 }
 
