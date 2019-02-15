@@ -1,24 +1,27 @@
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 
-// 90 deg turn ~ 560
-
 void blueclose()
 {
+
+
     fly(FLYWHEEL_BOOST_SPEED);
      forward(1250); // hit bottom flag
 
-     reverse(900); // reverse from bottom flag
+     reverse(800); // reverse from bottom flag
 
+     left(80, 5);
 
      lift.move(LIFT_UP_SPEED);
      REST(300); // wait time for shoot
      lift.move(0);
      fly(115);
 
-     reverse(650);
+     right(80, 5);
 
-     left(565); // turn back towards tilt cap with ball under
+     reverse(700);
+
+     left(570); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
@@ -44,16 +47,18 @@ void blueclose()
      lift.move(0);
      ////////////////////////////////////////////////////////////////////////
 
-     right(570); // turn to line with flags
+     right(520); // turn to line with flags
 
      reverse(400); //650 // *tune* reverse to line with platform to double shot
 
+     //left(70, 5);
      //fly(0);
      lift.move(LIFT_UP_SPEED);
      REST(500); // wait time for shoot
      lift.move(0);
+     //right(70, 5);
 
-     reverse(365);
+     reverse(325);
 
      //forward(100);
 
@@ -66,5 +71,4 @@ void blueclose()
          //gyroClimb(127, 30, 50, 0);
 
      }
-
 }
