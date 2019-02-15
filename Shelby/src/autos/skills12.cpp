@@ -12,13 +12,13 @@ void skills12()
      lift.move(LIFT_UP_SPEED);
      REST(300); // wait time for shoot
      lift.move(0);
-     left(70, 5);
+     left(75, 5);
 
      fly(115);
 
      reverse(650);
 
-     right(565); // turn back towards tilt cap with ball under
+     right(570); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
@@ -28,16 +28,17 @@ void skills12()
 
      forward(1200, 2);   // drive to tilt cap
 
+
      //REST(50);
      lift.move(0);
+     //forward(150, 2);
      intake.move(-COMBINE_INTAKE_SPEED - 20);
-     forward(300, 2);
-
+     ///forward(200, 2);
 
 
      ////////////////////////////////////////////////////////////////////////
 
-     reverse(1500); // reverse to line with flags
+     reverse(1250); // reverse to line with flags
 
      //lift.move(LIFT_CLR_SPEED);
 
@@ -50,31 +51,26 @@ void skills12()
 
      left(570); // turn to line with flags
 
-     reverse(450); //650 // *tune* reverse to line with platform to double shot
+     reverse(400); //650 // *tune* reverse to line with platform to double shot
 
      //fly(0);
      lift.move(LIFT_UP_SPEED);
      REST(500); // wait time for shoot
      lift.move(0);
 
-     reverse(500);
+     reverse(400);
 
      //forward(100);
 
      right(560); // turn to climb plat
 
      setDriveBrakes(HOLD);
-     forward(1200);
+     forward(1300);
      REST(300);
-     forward(900);
+     forward(1000);
     // reverse(50);
      //gyroClimb(127, 30, 50, 0);
 
 
-
-}
-
-void skills19()
-{
 
 }

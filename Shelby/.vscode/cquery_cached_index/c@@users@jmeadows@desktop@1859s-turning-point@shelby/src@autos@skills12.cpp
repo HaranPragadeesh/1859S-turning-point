@@ -74,8 +74,3 @@ void skills12()
 
 
 }
-
-void skills19()
-{
-
-}
