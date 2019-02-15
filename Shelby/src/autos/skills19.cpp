@@ -14,7 +14,7 @@ void skills19()
 
     ////////////////////////////////////////////////////////////////////////
 
-    reverse(1300); // reverse to line with flags
+    reverse(1250); // reverse to line with flags
     lift.move(LIFT_CLR_SPEED);
     REST(400);
 
@@ -22,7 +22,7 @@ void skills19()
     ////////////////////////////////////////////////////////////////////////
     fly(80); // start flywheel at full speed
 
-    left(575); // turn to line with flags
+    left(590); // turn to line with flags
 
     forward(1250); // drive to red tile shoot pos
 
@@ -42,7 +42,7 @@ void skills19()
     forward(100); // forward enough to line with tilt cap
 
 
-    right(560); // turn to tilt cap
+    right(550); // turn to tilt cap
     fly(-35); // spin flywheel backwards in order to not get stuck
 
 
@@ -50,7 +50,7 @@ void skills19()
     intake.move(COMBINE_INTAKE_SPEED);
     lift.move(LIFT_UP_SPEED);
 
-    forward(1000);   // drive to tilt cap
+    forward(1100);   // drive to tilt cap
 
     REST(300);
 
@@ -58,28 +58,42 @@ void skills19()
 
     lift.move(0); // stop lift for wheel
 
-    reverse(600); // reverse enough to line with gap
+    reverse(650); // reverse enough to line with gap
 
-    left(280); // 45 degree left to clear gap
+    left(300); // 45 degree left to clear gap
 
-    forward(1000); // forward enough to go through gap
+    forward(870); // forward enough to go through gap
 
-    left(280); // line with mid post bottom flag
+    left(345); // line with mid post bottom flag
 
-    forward(600);
+    forward(700);
 
-    reverse(400); // reverse from mid bottom flag
-
-    left(280); // 45 degree left to reverse to mid mid flag shot spot
+    fly(FLYWHEEL_BOOST_SPEED);
 
 
-    fly(FLYWHEEL_IDLE);
-    reverse(1000); // reverse to mid mid shot spot
-    lift.move(LIFT_UP_SPEED);
+    reverse(800); // reverse from mid bottom flag
+
+    right(70, 5);
+
+    lift.move(LIFT_UP_SPEED); // shoot mid mid
     REST(500); // wait long enough for ball to clear
     lift.move(0);
 
-    left(280); // left line with tilt cap
+    forward(200, 3);
+    left(500); // left to clear right side
+
+
+    reverse(1400); // reverse to mid mid shot spot
+
+    //right(100, 3);
+
+
+
+
+
+
+
+    left(350); // left line with tilt cap
 
     lift.move(LIFT_UP_SPEED);
     forward(400);
