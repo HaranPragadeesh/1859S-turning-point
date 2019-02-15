@@ -26,6 +26,7 @@ void skills19()
 
     forward(1250); // drive to red tile shoot pos
 
+    intake.move(-100);
     lift.move(LIFT_UP_SPEED);
     REST(200); // lift just enough to shoot first ball
     lift.move(0);
@@ -48,7 +49,7 @@ void skills19()
 
 
     intake.move(COMBINE_INTAKE_SPEED);
-    lift.move(LIFT_UP_SPEED);
+    lift.move(LIFT_UP_SPEED - 30);
 
     forward(1100);   // drive to tilt cap
 
@@ -62,71 +63,85 @@ void skills19()
 
     left(300); // 45 degree left to clear gap
 
-    forward(870); // forward enough to go through gap
+    forward(890); // forward enough to go through gap
 
-    left(345); // line with mid post bottom flag
+    left(315); // line with mid post bottom flag
 
-    forward(700);
+    forward(650, 2);
 
     fly(FLYWHEEL_BOOST_SPEED);
 
 
     reverse(800); // reverse from mid bottom flag
 
-    right(70, 5);
+    right(100, 5);
 
     lift.move(LIFT_UP_SPEED); // shoot mid mid
     REST(500); // wait long enough for ball to clear
     lift.move(0);
 
-    forward(200, 3);
+    forward(250, 3);
     left(500); // left to clear right side
 
 
-    reverse(1400); // reverse to mid mid shot spot
+    reverse(1600); // reverse to mid mid shot spot
 
     //right(100, 3);
 
 
+    left(250); // left line with tilt cap
 
+    intake.move(COMBINE_INTAKE_SPEED);
 
-
-
-
-    left(350); // left line with tilt cap
-
-    lift.move(LIFT_UP_SPEED);
-    forward(400);
-    REST(300); // rest enough for ball to get in good spot consist
+    lift.move(LIFT_UP_SPEED - 40);
+    forward(700);
+    //REST(100); // rest enough for ball to get in good spot consist
     lift.move(0);
+    intake.move(-70);
+    //reverse(200, 3);
+    //forward(350, 3);
+    fly(FLYWHEEL_IDLE);
 
-    reverse(800); // reverse to line with shot spot
+
+
+    reverse(1100); // reverse to line with shot spot
 
     right(560); // arb deg right shot spot deg
 
-    reverse(1250); // reverse to back cap
+    left(50, 5);
+    lift.move(LIFT_UP_SPEED); // shoot mid mid
+    REST(500); // wait long enough for ball to clear
+    lift.move(0);
+    right(50, 5);
+
+    reverse(1500); // reverse to back cap
 
     left(560); // left to tilt cap
-
-    lift.move(LIFT_UP_SPEED);
+    intake.move(COMBINE_INTAKE_SPEED);
+    lift.move(LIFT_UP_SPEED - 40);
     forward(1100); // drive to blue back tilt cap
     REST(300); // delay long enough to get good spot
     lift.move(0);
 
     fly(FLYWHEEL_TOP_FLAG);
+
+    fly(FLYWHEEL_TOP_FLAG);
     reverse(1100); // reverse to line with flags
     right(560); // line with top flag
+
+    left(20, 5);
     lift.move(LIFT_UP_SPEED);
     REST(300); // delay enough for shoot top
     lift.move(0);
+    right(20, 5);
 
-    forward(400); // line with platform
+    forward(750); // line with platform
 
     left(560);
 
-    gyroClimb(127, 25, 50);
-    REST(200); // rest inbetween climbs
-    gyroClimb(127, 25, 50);
+    forward(1300);
+    REST(300);
+    forward(1000);
 
 
 
