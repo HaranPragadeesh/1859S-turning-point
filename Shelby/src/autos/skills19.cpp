@@ -53,13 +53,15 @@ void skills19()
 
     forward(1100);   // drive to tilt cap
 
-    REST(300);
+    REST(100);
 
     ////////////////////////////////////////////////////////////////////////
 
     lift.move(0); // stop lift for wheel
 
     reverse(650); // reverse enough to line with gap
+    intake.move(-70);
+
 
     left(300); // 45 degree left to clear gap
 
@@ -74,17 +76,17 @@ void skills19()
 
     reverse(800); // reverse from mid bottom flag
 
-    right(100, 5);
+    right(95, 5);
 
     lift.move(LIFT_UP_SPEED); // shoot mid mid
     REST(500); // wait long enough for ball to clear
     lift.move(0);
 
     forward(250, 3);
-    left(500); // left to clear right side
+    left(530); // left to clear right side
 
 
-    reverse(1600); // reverse to mid mid shot spot
+    reverse(1750); // reverse to mid mid shot spot
 
     //right(100, 3);
 
@@ -106,17 +108,21 @@ void skills19()
 
     reverse(1100); // reverse to line with shot spot
 
-    right(560); // arb deg right shot spot deg
+    right(480); // arb deg right shot spot deg
 
-    left(50, 5);
+    //left(80, 5);
     lift.move(LIFT_UP_SPEED); // shoot mid mid
     REST(500); // wait long enough for ball to clear
     lift.move(0);
-    right(50, 5);
+    //right(80, 5);
 
-    reverse(1500); // reverse to back cap
+    right(100, 5);
 
-    left(560); // left to tilt cap
+    reverse(1450); // reverse to back cap
+
+    left(545); // left to tilt cap
+
+
     intake.move(COMBINE_INTAKE_SPEED);
     lift.move(LIFT_UP_SPEED - 40);
     forward(1100); // drive to blue back tilt cap
@@ -129,17 +135,17 @@ void skills19()
     reverse(1100); // reverse to line with flags
     right(560); // line with top flag
 
-    left(20, 5);
+    left(50, 5);
     lift.move(LIFT_UP_SPEED);
     REST(300); // delay enough for shoot top
     lift.move(0);
-    right(20, 5);
+    right(50, 5);
 
     forward(750); // line with platform
 
     left(560);
 
-    forward(1300);
+    forward(1200);
     REST(300);
     forward(1000);
 
