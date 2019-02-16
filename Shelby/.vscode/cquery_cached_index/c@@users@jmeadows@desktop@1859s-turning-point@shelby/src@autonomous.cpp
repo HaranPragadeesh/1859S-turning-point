@@ -14,8 +14,9 @@ void autonomous()
 {
     rollGyro.reset();
     yawGyro.reset();
-    skills19();
-    //testauto();
+
+
+
     switch(selectedAuto){
         case 1:
             // do auto 1 red close

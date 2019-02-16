@@ -108,7 +108,7 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-    //setDriveBrakes(HOLD);
+    setDriveBrakes(HOLD);
 }
 
 /**
@@ -121,7 +121,7 @@ void disabled() {
  * starts.
  */
 void competition_initialize() {
-    pros::lcd::set_text(4,
+    /*pros::lcd::set_text(4,
          "L: " + std::to_string(round(std::abs(LENCO))) +
          "R: " + std::to_string(round(std::abs(RENCO))) +
          "A: " + std::to_string(round((std::abs(LENCO) + std::abs(RENCO)) / 2))
@@ -132,5 +132,5 @@ void competition_initialize() {
     pros::lcd::set_text(7,
          "RPM: " + std::to_string(round(flyWheel1.get_actual_velocity() * 15)) +
          "True RPM: " + std::to_string(round(flyWheel1.get_actual_velocity()))
-     );
+     );*/
 }
