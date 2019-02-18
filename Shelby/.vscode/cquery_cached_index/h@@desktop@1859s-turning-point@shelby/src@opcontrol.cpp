@@ -9,14 +9,13 @@ void opcontrol()
 
 	testauto();
 
-	//testauto();
 	bool holding = false;
 	int lastPress;
 	bool firstPress = true;
 
 	while (true)
 	{
-		/*pros::lcd::set_text(1,
+		pros::lcd::set_text(1,
 			"LEFTR R" + std::to_string(leftRear.get_actual_velocity()) + "    " +
 		 	"LEFTF R" + std::to_string(leftFront.get_actual_velocity()));
 		pros::lcd::set_text(2,
@@ -36,9 +35,9 @@ void opcontrol()
 		pros::lcd::set_text(6,
 			"RIGHTR T" + std::to_string(leftFront.get_torque()) + "    " +
 			"RIGHTF T" + std::to_string(rightFront.get_torque()));
-*/
 
 
+/*
 
 		pros::lcd::set_text(4,
 			 "L: " + std::to_string(round(std::abs(LENCO))) +
@@ -52,7 +51,7 @@ void opcontrol()
 			 "RPM: " + std::to_string(round(flyWheel1.get_actual_velocity() * 15)) +
 			 "True RPM: " + std::to_string(round(flyWheel1.get_actual_velocity()))
 		 );
-
+*/
 
 		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && ( (pros::millis() > lastPress + 1000) || firstPress) )
 		 {
@@ -76,11 +75,27 @@ void opcontrol()
 
 
 		//sets ints for right and left motor based on dead zone correction function
-		int left = dzCorrect(JOYSTICK_DEADZONE, LEFT) * 5;
-		int right = dzCorrect(JOYSTICK_DEADZONE, RIGHT) * 5;
+		int left = dzCorrect( master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y),JOYSTICK_DEADZONE);
+		int right = dzCorrect(master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y), JOYSTICK_DEADZONE);
 
-		LEFT_DRIVE(left);
-		RIGHT_DRIVE(right);
+		if(left == 0)
+		{
+			LEFT_DRIVE_V(0);
+		}
+		else{
+			LEFT_DRIVE(left * 2);
+
+		}
+
+		if(right == 0)
+		{
+			RIGHT_DRIVE_V(0);
+		}
+		else{
+			RIGHT_DRIVE(right * 2);
+
+		}
+
 
 		//leftFront.move_velocity(left);
 		//leftRear.move_velocity(left);

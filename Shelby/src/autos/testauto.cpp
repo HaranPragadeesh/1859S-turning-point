@@ -8,7 +8,7 @@ void testauto()
      REST(1500);
 
      g_left(900);
-     g_right(450);
+     g_right(900);
 
 
 }

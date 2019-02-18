@@ -34,7 +34,7 @@ extern void right(int target, float factor = 1);
 
 
 extern void setDriveBrakes(pros::motor_brake_mode_e_t mode);
-extern int dzCorrect(int dz, int side);
+extern int dzCorrect(int joy, int dz);
 
 extern void waitDrive(int dir, int speed, int waitTime);
 
@@ -68,8 +68,11 @@ extern pros::Motor lift;
 
 
 //drive move
-#define RIGHT_DRIVE(speed) rightRear.move_velocity(speed); rightFront.move_velocity(speed)
-#define LEFT_DRIVE(speed) leftRear.move_velocity(speed); leftFront.move_velocity(speed)
+#define RIGHT_DRIVE(speed) rightRear.move(speed); rightFront.move(speed)
+#define LEFT_DRIVE(speed) leftRear.move(speed); leftFront.move(speed)
+
+#define RIGHT_DRIVE_V(speed) rightRear.move_velocity(speed); rightFront.move_velocity(speed)
+#define LEFT_DRIVE_V(speed) leftRear.move_velocity(speed); leftFront.move_velocity(speed)
 
 //gyro
 
@@ -85,7 +88,7 @@ extern pros::Motor lift;
 #define FLYWHEEL_IDLE 90 // idling speed
 
 //intake speeds
-#define COMBINE_INTAKE_SPEED 80
+#define COMBINE_INTAKE_SPEED  80
 #define REVERSE_FLIP_SPEED -60
 
 // preset lift speeds

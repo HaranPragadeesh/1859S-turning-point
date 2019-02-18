@@ -6,20 +6,15 @@
 void g_turn(int dir, int target, float factor)
 {
 
+
      yawGyro.reset();
      target = target * dir;
 
-    setDriveBrakes(BRAKE);
-    // float kP = .25;
-    // float kI = .0005;
-    // float kD = .1;
+    //setDriveBrakes(BRAKE);
 
-    float kP = .3;
-    float kI = .0003;
-    float kD = 1;
-
-
-
+    float kP = .45;
+    float kI = .001;
+    float kD = .5;
 
     float errorZone = target * .1;
     float error, errorTot, errorLast;
@@ -31,15 +26,15 @@ void g_turn(int dir, int target, float factor)
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
-    int exitDelay = 500; // millis to check exit
+    int exitDelay = 750; // millis to check exit
     bool settled = false;
 
     // zero motors fix if this is not correct method
 
 
 
-    while(true)
-     //while(!settled)
+
+     while(!settled)
     //while(yawGyro.get_value() < target) // gyro  < target
     {
 
