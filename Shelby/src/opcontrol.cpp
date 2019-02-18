@@ -8,7 +8,7 @@
 void opcontrol()
 {
 
-	testauto();
+	//testauto();
 
 	bool holding = false;
 	int lastPress;
@@ -19,10 +19,9 @@ void opcontrol()
 	while (true)
 	{
 
-		pros::vision_object_s_t rtn = aimbot.get_by_sig(0, BLUE_FLAG_SIG);
-	    // Gets the largest object of the EXAMPLE_SIG signature
-	    std::cout << "sig: " << rtn.signature << "\n \n";
-	    // Prints "sig: 1"
+		std::cout << "Number of Objects Detected: " << aimbot.get_object_count() << "\n\n";
+    		pros::delay(2);
+
 
 
 
