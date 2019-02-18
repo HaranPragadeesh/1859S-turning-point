@@ -89,7 +89,7 @@ void on_right_button()
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "- Shelby Pros -");
-    pros::lcd::set_text(2, "   - 1859s -   ");
+     pros::lcd::set_text(2, "   - 1859s -   ");
 
 
 	pros::lcd::register_btn0_cb(on_left_button);
@@ -108,7 +108,7 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-    //setDriveBrakes(HOLD);
+    setDriveBrakes(HOLD);
 }
 
 /**

@@ -12,11 +12,13 @@
 
 void autonomous()
 {
-    //redclose();
+
+
     rollGyro.reset();
     yawGyro.reset();
-    //skills12();
-    //testauto();
+
+   // testauto();
+
     switch(selectedAuto){
         case 1:
             // do auto 1 red close

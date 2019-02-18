@@ -4,6 +4,7 @@
 
 extern void fly(int voltage);
 
+extern void debug();
 
 extern void gyroClimb(int speed, int ang, int delay, int calibrateDelay = 0);
 
@@ -65,6 +66,10 @@ extern pros::Motor flyWheel2;
 extern pros::Motor intake;
 extern pros::Motor lift;
 
+
+//drive move
+#define RIGHT_DRIVE(speed) rightRear.move_velocity(speed); rightFront.move_velocity(speed)
+#define LEFT_DRIVE(speed) leftRear.move_velocity(speed); leftFront.move_velocity(speed)
 
 //gyro
 

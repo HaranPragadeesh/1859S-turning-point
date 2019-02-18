@@ -4,8 +4,10 @@
 
 
 
-void opcontrol() {
+void opcontrol()
+{
 
+	testauto();
 
 	//testauto();
 	bool holding = false;
@@ -38,7 +40,7 @@ void opcontrol() {
 
 
 
-		/*pros::lcd::set_text(4,
+		pros::lcd::set_text(4,
 			 "L: " + std::to_string(round(std::abs(LENCO))) +
 			 "R: " + std::to_string(round(std::abs(RENCO))) +
 			 "A: " + std::to_string(round((std::abs(LENCO) + std::abs(RENCO)) / 2))
@@ -49,7 +51,9 @@ void opcontrol() {
 		pros::lcd::set_text(7,
 			 "RPM: " + std::to_string(round(flyWheel1.get_actual_velocity() * 15)) +
 			 "True RPM: " + std::to_string(round(flyWheel1.get_actual_velocity()))
-		 );*/
+		 );
+
+
 		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && ( (pros::millis() > lastPress + 1000) || firstPress) )
 		 {
 			 lastPress = pros::millis();
@@ -71,17 +75,17 @@ void opcontrol() {
  		 { setDriveBrakes(COAST); }
 
 
-
-
-
-
 		//sets ints for right and left motor based on dead zone correction function
 		int left = dzCorrect(JOYSTICK_DEADZONE, LEFT) * 5;
 		int right = dzCorrect(JOYSTICK_DEADZONE, RIGHT) * 5;
-		leftFront.move_velocity(left);
-		leftRear.move_velocity(left);
-		rightFront.move_velocity(right);
-		rightRear.move_velocity(right);
+
+		LEFT_DRIVE(left);
+		RIGHT_DRIVE(right);
+
+		//leftFront.move_velocity(left);
+		//leftRear.move_velocity(left);
+		//rightFront.move_velocity(right);
+		//rightRear.move_velocity(right);
 
 
 
@@ -91,8 +95,8 @@ void opcontrol() {
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
 			// flip these 2 if flywheel spins backwards
-			flyWheel1.move_velocity(FLYWHEEL_TOP_FLAG);
-			flyWheel2.move_velocity(FLYWHEEL_TOP_FLAG);
+			flyWheel1.move(FLYWHEEL_TOP_FLAG);
+			flyWheel2.move(FLYWHEEL_TOP_FLAG);
 			intake.move(COMBINE_INTAKE_SPEED);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2))

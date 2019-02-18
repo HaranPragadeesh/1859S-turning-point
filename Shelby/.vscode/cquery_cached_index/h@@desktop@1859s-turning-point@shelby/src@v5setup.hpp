@@ -4,6 +4,7 @@
 
 extern void fly(int voltage);
 
+extern void debug();
 
 extern void gyroClimb(int speed, int ang, int delay, int calibrateDelay = 0);
 
@@ -35,6 +36,7 @@ extern void right(int target, float factor = 1);
 extern void setDriveBrakes(pros::motor_brake_mode_e_t mode);
 extern int dzCorrect(int dz, int side);
 
+extern void waitDrive(int dir, int speed, int waitTime);
 
 //global variables
 extern std::string nameList[];
@@ -64,6 +66,10 @@ extern pros::Motor flyWheel2;
 extern pros::Motor intake;
 extern pros::Motor lift;
 
+
+//drive move
+#define RIGHT_DRIVE(speed) rightRear.move_velocity(speed); rightFront.move_velocity(speed)
+#define LEFT_DRIVE(speed) leftRear.move_velocity(speed); leftFront.move_velocity(speed)
 
 //gyro
 
@@ -123,4 +129,4 @@ extern pros::Motor lift;
 
 /* setup gyros  |- 1 through 8 -| */
 #define PORT_GYRO_YAW 1 // A // turn
-#define PORT_GYRO_PITCH 8 // H // climb
+#define PORT_GYRO_ROLL 8 // H // climb

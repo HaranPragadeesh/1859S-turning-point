@@ -5,10 +5,21 @@
 
 void g_turn(int dir, int target, float factor)
 {
+
+     yawGyro.reset();
+     target = target * dir;
+
     setDriveBrakes(BRAKE);
-    float kP = .15;
-    float kI = .0005;
-    float kD = .5;
+    // float kP = .25;
+    // float kI = .0005;
+    // float kD = .1;
+
+    float kP = .3;
+    float kI = .0003;
+    float kD = 1;
+
+
+
 
     float errorZone = target * .1;
     float error, errorTot, errorLast;
@@ -20,18 +31,21 @@ void g_turn(int dir, int target, float factor)
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
-    int exitDelay = 350; // millis to check exit
+    int exitDelay = 500; // millis to check exit
     bool settled = false;
 
     // zero motors fix if this is not correct method
-	rollGyro.reset();
 
 
-     while(!settled)
-    //while(rollGyro.get_value() < target) // left encoder  < target
+
+    while(true)
+     //while(!settled)
+    //while(yawGyro.get_value() < target) // gyro  < target
     {
-        error = target - rollGyro.get_value();
-        // errorTot += error;
+
+         debug();
+
+        error = target - yawGyro.get_value();
 
         if (error < errorZone) {
             errorTot += error;
@@ -46,13 +60,16 @@ void g_turn(int dir, int target, float factor)
         dTerm = kD * (error - errorLast);
         errorLast = error;
 
-        power = ((pTerm + iTerm + dTerm) * factor) * -dir;
+        power = ((pTerm + iTerm + dTerm) * factor) * dir;
 
-        leftFront.move(-power);
-        leftRear.move(-power);
+        LEFT_DRIVE(power * dir);
+        RIGHT_DRIVE(power * -dir);
 
-        rightFront.move(power);
-        rightRear.move(power);
+        // leftFront.move(-power);
+        // leftRear.move(-power);
+        //
+        // rightFront.move(power);
+        // rightRear.move(power);
 
         if(yawGyro.get_value() > targetMin && ft)
         {
@@ -72,24 +89,33 @@ void g_turn(int dir, int target, float factor)
             }
         }
 
+        pros::lcd::set_text(2, "GYRO::" + std::to_string(yawGyro.get_value()));
+        pros::lcd::set_text(3, "target:" + std::to_string(target));
+        pros::lcd::set_text(4, "error:" + std::to_string(error));
+        pros::lcd::set_text(5, "ptime:" + std::to_string(pTime));
+        pros::lcd::set_text(6, "timer:" + std::to_string(pros::millis()));
+
         pros::Task::delay(20);
     }
 
-    leftFront.move(0);
-    leftRear.move(0);
-    rightFront.move(0);
-    rightRear.move(0);
+    RIGHT_DRIVE(0);
+    LEFT_DRIVE(0);
 
-	rollGyro.reset();
+    //leftFront.move(0);
+    //leftRear.move(0);
+    //rightFront.move(0);
+    //rightRear.move(0);
+
+	yawGyro.reset();
 
 }
 
 void g_left(int target, float factor)
 {
-  turn(LEFT, target, factor);
+  g_turn(LEFT, target, factor);
 }
 
 void g_right(int target, float factor)
 {
-  turn(RIGHT, target, factor);
+  g_turn(RIGHT, target, factor);
 }

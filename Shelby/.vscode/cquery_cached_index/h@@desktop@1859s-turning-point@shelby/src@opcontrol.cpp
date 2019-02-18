@@ -4,38 +4,88 @@
 
 
 
-void opcontrol() {
+void opcontrol()
+{
 
-	
+	testauto();
+
 	//testauto();
-bool holding = false;
+	bool holding = false;
+	int lastPress;
+	bool firstPress = true;
 
 	while (true)
 	{
-		setDriveBrakes(HOLD);
-		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
+		/*pros::lcd::set_text(1,
+			"LEFTR R" + std::to_string(leftRear.get_actual_velocity()) + "    " +
+		 	"LEFTF R" + std::to_string(leftFront.get_actual_velocity()));
+		pros::lcd::set_text(2,
+			"LEFTR V" + std::to_string(leftRear.get_voltage()) + "    " +
+			"LEFTF V" + std::to_string(leftFront.get_voltage()));
+		pros::lcd::set_text(3,
+			"LEFTR T" + std::to_string(leftRear.get_torque()) + "    " +
+			"LEFTF T" + std::to_string(leftFront.get_torque()));
+
+
+		pros::lcd::set_text(4,
+			"RIGHTR R" + std::to_string(rightRear.get_actual_velocity()) + "    " +
+		 	"RIGHTF R" + std::to_string(rightFront.get_actual_velocity()));
+		pros::lcd::set_text(5,
+			"RIGHTR V" + std::to_string(rightRear.get_voltage()) + "    " +
+			"RIGHTF V" + std::to_string(rightFront.get_voltage()));
+		pros::lcd::set_text(6,
+			"RIGHTR T" + std::to_string(leftFront.get_torque()) + "    " +
+			"RIGHTF T" + std::to_string(rightFront.get_torque()));
+*/
+
+
+
+		pros::lcd::set_text(4,
+			 "L: " + std::to_string(round(std::abs(LENCO))) +
+			 "R: " + std::to_string(round(std::abs(RENCO))) +
+			 "A: " + std::to_string(round((std::abs(LENCO) + std::abs(RENCO)) / 2))
+		 );
+
+		pros::lcd::set_text(5, "ClimbGy: " + std::to_string(round(rollGyro.get_value())));
+		pros::lcd::set_text(6, "TurnGy: " + std::to_string(round(yawGyro.get_value())));
+		pros::lcd::set_text(7,
+			 "RPM: " + std::to_string(round(flyWheel1.get_actual_velocity() * 15)) +
+			 "True RPM: " + std::to_string(round(flyWheel1.get_actual_velocity()))
+		 );
+
+
+		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && ( (pros::millis() > lastPress + 1000) || firstPress) )
 		 {
-			 holding = true;
-		 }
-		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
-		 {
-			 holding = false;
+			 lastPress = pros::millis();
+			 firstPress = false;
+			 holding = !holding;
+
+			 if(holding == true)
+			 {
+				 setDriveBrakes(HOLD);
+
+			 }
+			 else{
+				 setDriveBrakes(COAST);
+			 }
+			 firstPress = false;
 		 }
 
-		if(holding)
-	 	{ setDriveBrakes(HOLD);  }
-		else
-		{ setDriveBrakes(COAST); }
-
+ 		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) )
+ 		 { setDriveBrakes(COAST); }
 
 
 		//sets ints for right and left motor based on dead zone correction function
-		int left = dzCorrect(JOYSTICK_DEADZONE, LEFT);
-		int right = dzCorrect(JOYSTICK_DEADZONE, RIGHT);
-		leftFront.move(left);
-		leftRear.move(left);
-		rightFront.move(right);
-		rightRear.move(right);
+		int left = dzCorrect(JOYSTICK_DEADZONE, LEFT) * 5;
+		int right = dzCorrect(JOYSTICK_DEADZONE, RIGHT) * 5;
+
+		LEFT_DRIVE(left);
+		RIGHT_DRIVE(right);
+
+		//leftFront.move_velocity(left);
+		//leftRear.move_velocity(left);
+		//rightFront.move_velocity(right);
+		//rightRear.move_velocity(right);
 
 
 

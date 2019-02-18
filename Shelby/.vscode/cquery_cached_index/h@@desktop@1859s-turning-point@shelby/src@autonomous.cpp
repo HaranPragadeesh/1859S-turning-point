@@ -7,74 +7,45 @@
 // 2- red far
 // 3- blue close
 // 4- blue far
-// 5- skills
+// 5- skills 12
+// 6- skills 19
 
 void autonomous()
 {
-    //left(560);
-    //redfar();
-    //testauto();
+
+
+    rollGyro.reset();
+    yawGyro.reset();
+
+   // testauto();
+
     switch(selectedAuto){
-
-
-/////////////////////////////////////////////////////////////////////////////////// BLUE CLOSE
         case 1:
             // do auto 1 red close
-            if(autoShouldPark){
-                redclose();
-            }
-            else {
-                redcloseNP();
-            }
+            redclose();
             break;
-/////////////////////////////////////////////////////////////////////////////////// BLUE CLOSE
-
-/////////////////////////////////////////////////////////////////////////////////// BLUE FAR
         case 2:
             // do auto 2 red far
-            if(autoShouldPark){
-                redfar();
-            }
-            else {
-                redfarNP();
-            }
+            redfar();
             break;
-/////////////////////////////////////////////////////////////////////////////////// BLUE FAR
-
-/////////////////////////////////////////////////////////////////////////////////// RED CLOSE
         case 3:
             // do auto 3 blue close
-            if(autoShouldPark){
-                blueclose();
-            }
-            else {
-                bluecloseNP();
-            }
+            blueclose();
             break;
-/////////////////////////////////////////////////////////////////////////////////// RED CLOSE
-
-/////////////////////////////////////////////////////////////////////////////////// RED FAR
         case 4:
             // do auto 4 blue far
-            if(autoShouldPark){
-                bluefar();
-            }
-            else {
-                bluefarNP();
-            }
+            bluefar();
             break;
-/////////////////////////////////////////////////////////////////////////////////// RED FAR
-
-/////////////////////////////////////////////////////////////////////////////////// SKILLS
         case 5:
-            // do auto 5  skills
-            skills();
+            // do auto 5 12 point skills
+            skills12();
             break;
-/////////////////////////////////////////////////////////////////////////////////// SKILLS
-
+        case 6:
+            // do 6 auto 19 point skills
+            skills19();
+            break;
         default:
             //testauto();
             break;
-
     }
 }
