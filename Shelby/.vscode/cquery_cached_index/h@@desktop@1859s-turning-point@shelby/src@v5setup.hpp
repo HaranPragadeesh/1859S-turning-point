@@ -132,7 +132,7 @@ extern pros::Motor lift;
 #define PORT_LIFT 6
 
 /* vision sensor port */
-#define PORT_AIMBOT 18
+#define PORT_AIMBOT 17
 
 /* setup gyros  |- 1 through 8 -| */
 #define PORT_GYRO_YAW 1 // A // turn
