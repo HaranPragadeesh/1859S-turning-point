@@ -19,10 +19,10 @@ void opcontrol()
 	while (true)
 	{
 
-		pros::vision_object_s_t rtn = aimbot.get_by_sig(0, RED_FLAG_SIG);
-	    // Gets the largest object
-	    std::cout << "x-mid: " << rtn.x_middle_coord << "\n";
-	    std::cout << "y-mid: " << rtn.y_middle_coord << "\n";
+		pros::vision_object_s_t rtn = aimbot.get_by_sig(0, BLUE_FLAG_SIG);
+	    // Gets the largest object of the EXAMPLE_SIG signature
+	    std::cout << "sig: " << rtn.signature << "\n \n";
+	    // Prints "sig: 1"
 
 
 
