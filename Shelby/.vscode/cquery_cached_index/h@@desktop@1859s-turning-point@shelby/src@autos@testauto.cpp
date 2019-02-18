@@ -7,8 +7,11 @@ void testauto()
      pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
      REST(1500);
 
-     g_left(900);
-     g_right(900);
+
+
+     g_left(450);
+     REST(500);
+     g_right(450);
 
 
 }

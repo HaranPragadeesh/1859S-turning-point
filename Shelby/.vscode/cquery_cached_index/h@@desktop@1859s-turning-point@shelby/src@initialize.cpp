@@ -100,6 +100,8 @@ void initialize() {
     pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
 
 
+
+
 }
 
 /**
@@ -121,6 +123,24 @@ void disabled() {
  * starts.
  */
 void competition_initialize() {
+
+     while(std::abs(yawGyro.get_value()) > 5)
+    {
+         pros::ADIGyro yawGyro (PORT_GYRO_YAW);
+         while(std::abs(yawGyro.get_value()) > 5)
+         {
+              REST(2);
+         }
+    }
+    while(std::abs(rollGyro.get_value()) > 5)
+   {
+        pros::ADIGyro rollGyro (PORT_GYRO_YAW);
+        while(std::abs(rollGyro.get_value()) > 5)
+        {
+            REST(2);
+        }
+   }
+
     /*pros::lcd::set_text(4,
          "L: " + std::to_string(round(std::abs(LENCO))) +
          "R: " + std::to_string(round(std::abs(RENCO))) +
