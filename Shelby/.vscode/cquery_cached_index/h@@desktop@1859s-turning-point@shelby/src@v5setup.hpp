@@ -66,7 +66,7 @@ extern pros::Motor flyWheel2;
 extern pros::Motor intake;
 extern pros::Motor lift;
 
-extern pros::Vision aimbot;
+
 
 
 //drive move
