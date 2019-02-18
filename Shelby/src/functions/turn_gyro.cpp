@@ -7,27 +7,31 @@ void g_turn(int dir, int target, float factor)
 {
 
 
+
      yawGyro.reset();
-     target = target * dir;
 
     //setDriveBrakes(BRAKE);
 
-    float kP = .7;
-    float kI = .001;
+    float kP = .5;
+    float kI = .005;
     float kD = 1;
 
-    float errorZone = (target - 150) * dir;
+    float errorZone = (target - 700);
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;
 
-    float targetMin = target - 10;
-    float targetMax = target + 10;
+
+    target = target * dir;
+    float targetMin = target - 12;
+    float targetMax = target + 12;
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
-    int exitDelay = 750; // millis to check exit
+    int exitDelay = 500; // millis to check exit
+    int emergancyExit = 55555; // millis to emergancyExit
     bool settled = false;
+    float firstPause;
 
     // zero motors fix if this is not correct method
 
@@ -41,11 +45,13 @@ void g_turn(int dir, int target, float factor)
         // debug();
 
         error = target - yawGyro.get_value();
+        pros::lcd::clear_line(5);
 
         if(dir == 1)
         {
              if (error < errorZone) {
                 errorTot += error;
+                pros::lcd::set_text(5, "in zone");
             } else {
                 errorTot = 0;
             }
@@ -54,8 +60,10 @@ void g_turn(int dir, int target, float factor)
         {
              if (error > -errorZone) {
                 errorTot += error;
+                pros::lcd::set_text(5, "in zone");
             } else {
                 errorTot = 0;
+
             }
         }
 
@@ -67,10 +75,12 @@ void g_turn(int dir, int target, float factor)
         dTerm = kD * (error - errorLast);
         errorLast = error;
 
-        power = ((pTerm + iTerm + dTerm) * factor) * dir;
 
-        LEFT_DRIVE(power * dir);
-        RIGHT_DRIVE(power * -dir);
+        power = ((pTerm + iTerm + dTerm) * factor);
+
+
+        LEFT_DRIVE(power);
+        RIGHT_DRIVE(-power);
 
         // leftFront.move(-power);
         // leftRear.move(-power);
@@ -81,12 +91,13 @@ void g_turn(int dir, int target, float factor)
         if(yawGyro.get_value() > targetMin && ft)
         {
             pTime = pros::millis();
+            firstPause = pros::millis();
             ft = false;
             ogPass = true;
         }
         if(pros::millis() > pTime + exitDelay && ogPass)
         {
-            if(yawGyro.get_value() > targetMin && yawGyro.get_value() < targetMax)
+            if((yawGyro.get_value() > targetMin && yawGyro.get_value() < targetMax) or pros::millis() > firstPause + emergancyExit)
             {
                 settled = true;
             }

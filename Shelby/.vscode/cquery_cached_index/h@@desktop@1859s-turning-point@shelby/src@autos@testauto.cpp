@@ -9,9 +9,9 @@ void testauto()
 
 
 
-     g_left(450);
+     g_left(900);
      REST(500);
-     g_right(450);
+     g_right(900);
 
-
+     REST(99999);
 }
