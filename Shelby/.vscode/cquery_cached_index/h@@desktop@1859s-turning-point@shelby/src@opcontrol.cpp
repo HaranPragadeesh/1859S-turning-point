@@ -19,12 +19,20 @@ void opcontrol()
 	while (true)
 	{
 
-
 		pros::vision_object_s_t rtn = aimbot.get_by_sig(0, RED_FLAG_SIG);
+	    // Gets the largest object
+	    std::cout << "x-mid: " << rtn.x_middle_coord << "\n";
+	    std::cout << "y-mid: " << rtn.y_middle_coord << "\n";
+
+
+
+
+
+		//pros::vision_object_s_t rtn = aimbot.get_by_sig(0, RED_FLAG_SIG);
 		// Gets the largest object of the EXAMPLE_SIG signature
 
 
-		debug();
+		//debug();
 
 		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && ( (pros::millis() > lastPress + 1000) || firstPress) )
 		 {
