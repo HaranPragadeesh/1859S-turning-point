@@ -5,17 +5,9 @@ void testauto()
 {
      pros::ADIGyro yawGyro (PORT_GYRO_YAW);
      pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
-     REST(1500);
+     //REST(1500);
 
 
 
-     g_left(900);
-     REST(500);
-     g_right(1800);
-     REST(500);
-     g_left(900);
 
-     gyroClimb(FORWARD, 240, 25, 100);
-
-     REST(99999);
 }

@@ -66,6 +66,8 @@ extern pros::Motor flyWheel2;
 extern pros::Motor intake;
 extern pros::Motor lift;
 
+extern pros::Vision aimbot;
+
 
 //drive move
 #define RIGHT_DRIVE(speed) rightRear.move(speed); rightFront.move(speed)
@@ -129,6 +131,9 @@ extern pros::Motor lift;
 /* setup intake */
 #define PORT_INTAKE 10
 #define PORT_LIFT 6
+
+/* vision sensor port */
+#define PORT_AIMBOT 18
 
 /* setup gyros  |- 1 through 8 -| */
 #define PORT_GYRO_YAW 1 // A // turn

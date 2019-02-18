@@ -1,7 +1,7 @@
 #include "../include/main.h"
 #include "v5setup.hpp"
 #include "autos/autos.hpp"
-
+#define EXAMPLE_SIG 1
 
 
 void opcontrol()
@@ -13,9 +13,13 @@ void opcontrol()
 	int lastPress;
 	bool firstPress = true;
 
+	pros::Vision aimbot (PORT_AIMBOT);
+
 	while (true)
 	{
-		pros::lcd::set_text(1,
+		pros::vision_object_s_t rtn = aimbot.get_by_sig(0, EXAMPLE_SIG);
+    		std::cout << "sig: " << rtn.signature;
+		/*pros::lcd::set_text(1,
 			"LEFTR R" + std::to_string(leftRear.get_actual_velocity()) + "    " +
 		 	"LEFTF R" + std::to_string(leftFront.get_actual_velocity()));
 		pros::lcd::set_text(2,
@@ -37,7 +41,7 @@ void opcontrol()
 			"RIGHTF T" + std::to_string(rightFront.get_torque()));
 
 
-/*
+
 
 		pros::lcd::set_text(4,
 			 "L: " + std::to_string(round(std::abs(LENCO))) +
