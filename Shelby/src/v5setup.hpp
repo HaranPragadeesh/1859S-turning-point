@@ -74,13 +74,13 @@ extern pros::Motor lift;
 #define RIGHT_DRIVE_V(speed) rightRear.move_velocity(speed); rightFront.move_velocity(speed)
 #define LEFT_DRIVE_V(speed) leftRear.move_velocity(speed); leftFront.move_velocity(speed)
 
-//gyro
-
+//motor max
+#define MAX_SPEED 127
 
 //joystick deadzone
 #define JOYSTICK_DEADZONE 15
 //preset GYRO CLIMB speeds
-#define GYRO_CLIMB_SPEED -127
+#define GYRO_CLIMB_SPEED 127
 
 //preset fly wheel speeds
 #define FLYWHEEL_TOP_FLAG 105

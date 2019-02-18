@@ -13,5 +13,7 @@ void testauto()
      REST(500);
      g_right(900);
 
+     gyroClimb(240, 10, 100);
+
      REST(99999);
 }
