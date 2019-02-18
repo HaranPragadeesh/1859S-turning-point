@@ -13,16 +13,16 @@ void g_turn(int dir, int target, float factor)
     //setDriveBrakes(BRAKE);
 
     float kP = .45;
-    float kI = .001;
-    float kD = .5;
+    float kI = .0005;
+    float kD = 1;
 
-    float errorZone = target * .1;
+    float errorZone = target - (100 * dir);
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;
 
-    float targetMin = target - 15;
-    float targetMax = target + 15;
+    float targetMin = target - 12.5;
+    float targetMax = target + 12.5;
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
@@ -42,7 +42,7 @@ void g_turn(int dir, int target, float factor)
 
         error = target - yawGyro.get_value();
 
-        if (error < errorZone) {
+        if (error > errorZone) {
             errorTot += error;
         } else {
             errorTot = 0;
@@ -83,12 +83,13 @@ void g_turn(int dir, int target, float factor)
                 pTime = pros::millis();
             }
         }
-
-        pros::lcd::set_text(2, "GYRO::" + std::to_string(yawGyro.get_value()));
+        pros::lcd::set_text(1, "POWER:" + std::to_string(power));
+        pros::lcd::set_text(2, "GYRO:" + std::to_string(yawGyro.get_value()));
         pros::lcd::set_text(3, "target:" + std::to_string(target));
         pros::lcd::set_text(4, "error:" + std::to_string(error));
         pros::lcd::set_text(5, "ptime:" + std::to_string(pTime));
         pros::lcd::set_text(6, "timer:" + std::to_string(pros::millis()));
+
 
         pros::Task::delay(20);
     }
