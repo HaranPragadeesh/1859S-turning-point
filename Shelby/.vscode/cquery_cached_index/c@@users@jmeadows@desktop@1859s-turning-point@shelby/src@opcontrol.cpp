@@ -12,7 +12,6 @@ bool holding = false;
 
 	while (true)
 	{
-		/*
 		pros::lcd::set_text(4,
 			 "L: " + std::to_string(round(std::abs(LENCO))) +
 			 "R: " + std::to_string(round(std::abs(RENCO))) +
@@ -24,9 +23,9 @@ bool holding = false;
 		pros::lcd::set_text(7,
 			 "RPM: " + std::to_string(round(flyWheel1.get_actual_velocity() * 15)) +
 			 "True RPM: " + std::to_string(round(flyWheel1.get_actual_velocity()))
-		 );*/
+		 );
 
-		 //setDriveBrakes(HOLD);
+		setDriveBrakes(HOLD);
 		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
 		 {
 			 holding = true;
