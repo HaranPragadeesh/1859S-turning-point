@@ -12,7 +12,7 @@ void g_turn(int dir, int target, float factor)
 
     //setDriveBrakes(BRAKE);
 
-    float kP = .5; // .5
+    float kP = .55; // .5
     float kI = .005; // .005
     float kD = 1; // 1
 
@@ -23,8 +23,8 @@ void g_turn(int dir, int target, float factor)
 
 
    // target = target * dir;
-    float targetMin = target - 13;
-    float targetMax = target + 13;
+    float targetMin = target - 15;
+    float targetMax = target + 15;
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time

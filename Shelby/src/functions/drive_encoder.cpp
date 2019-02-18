@@ -12,7 +12,7 @@ void line(int dir, int target, float factor)
     float kI = .005;//.0005;
     float kD = 1;//1;
 
-    float errorZone = target * .1;
+    float errorZone = 100; // target * .1;
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;

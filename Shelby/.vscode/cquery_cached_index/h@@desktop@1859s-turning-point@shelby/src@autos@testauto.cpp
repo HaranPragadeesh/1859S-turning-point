@@ -11,9 +11,11 @@ void testauto()
 
      g_left(900);
      REST(500);
-     g_right(900);
+     g_right(1800);
+     REST(500);
+     g_left(900);
 
-     gyroClimb(240, 10, 100);
+     gyroClimb(FORWARD, 240, 25, 100);
 
      REST(99999);
 }

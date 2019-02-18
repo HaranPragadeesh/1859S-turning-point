@@ -6,7 +6,7 @@ extern void fly(int voltage);
 
 extern void debug();
 
-extern void gyroClimb(int speed, int ang, int delay, int calibrateDelay = 0);
+extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay = 1);
 
 //experimental
 extern void lineExt(int dir, int target, float factor);
