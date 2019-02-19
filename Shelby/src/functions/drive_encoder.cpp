@@ -54,10 +54,13 @@ void line(int dir, int target, float factor)
 
         power = ((pTerm + iTerm + dTerm) * factor) * dir;
 
-        leftFront.move(power);
-        rightFront.move(power);
-        leftRear.move(power);
-        rightRear.move(power);
+        LEFT_DRIVE(power);
+        RIGHT_DRIVE(power);
+        
+        //leftFront.move(power);
+        //rightFront.move(power);
+        //leftRear.move(power);
+        //rightRear.move(power);
 
         if(std::abs(LENCO) > targetMin && ft)
         {
@@ -86,10 +89,13 @@ void line(int dir, int target, float factor)
         pros::Task::delay(20);
     }
 
-    leftFront.move(0);
-    leftRear.move(0);
-    rightFront.move(0);
-    rightRear.move(0);
+        
+    LEFT_DRIVE_V(0);
+    RIGHT_DRIVE_V(0);
+    //leftFront.move(0);
+    //leftRear.move(0);
+    //rightFront.move(0);
+    //rightRear.move(0);
 
     leftFront.tare_position();
     leftRear.tare_position();
