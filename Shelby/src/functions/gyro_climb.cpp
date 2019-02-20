@@ -29,10 +29,6 @@ void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay)
             {
                  LEFT_DRIVE(GYRO_CLIMB_SPEED * dir);
                  RIGHT_DRIVE(GYRO_CLIMB_SPEED * dir);
-              // leftFront.move(GYRO_CLIMB_SPEED);
-              // leftRear.move(GYRO_CLIMB_SPEED);
-              // rightFront.move(GYRO_CLIMB_SPEED);
-              // rightRear.move(GYRO_CLIMB_SPEED);
               pros::lcd::set_text(2, "GYRO:" + std::to_string(std::abs(rollGyro.get_value())));
               pros::lcd::set_text(3, "NOT CLIMBED");
 
@@ -44,10 +40,6 @@ void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay)
             {
                  LEFT_DRIVE(GYRO_CLIMB_SPEED * dir);
                  RIGHT_DRIVE(GYRO_CLIMB_SPEED * dir);
-              // leftFront.move(GYRO_CLIMB_SPEED);
-              // leftRear.move(GYRO_CLIMB_SPEED);
-              // rightFront.move(GYRO_CLIMB_SPEED);
-              // rightRear.move(GYRO_CLIMB_SPEED);
               pros::lcd::set_text(2, "GYRO:" + std::to_string(std::abs(rollGyro.get_value())));
               pros::lcd::set_text(3, "NOT CLIMBED");
             }
