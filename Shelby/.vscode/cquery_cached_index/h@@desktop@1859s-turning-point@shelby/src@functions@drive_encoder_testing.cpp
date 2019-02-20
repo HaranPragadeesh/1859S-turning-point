@@ -3,7 +3,7 @@
 #include "../v5setup.hpp"
 
 
-void line(int dir, int target, float factor)
+void line_test(int dir, int target, int maxPower, float factor)
 {
 
 
@@ -16,6 +16,8 @@ void line(int dir, int target, float factor)
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;
+    float masterPower;
+    float slavePower;
 
     float targetMin = target - 15;
     float targetMax = target + 15;
@@ -34,10 +36,8 @@ void line(int dir, int target, float factor)
 
 
     while(!settled)
-    //while(std::abs(LENCO) < target * .98) // left encoder  < target
     {
         error = target - std::abs(LENCO);
-        // errorTot += error;
 
         if (error < errorZone) {
             errorTot += error;
@@ -46,21 +46,25 @@ void line(int dir, int target, float factor)
         }
 
         pTerm = error * kP;
-
-
         iTerm = kI * errorTot;
         dTerm = kD * (error - errorLast);
         errorLast = error;
 
         power = ((pTerm + iTerm + dTerm) * factor) * dir;
 
-        LEFT_DRIVE(power);
-        RIGHT_DRIVE(power);
-        
-        //leftFront.move(power);
-        //rightFront.move(power);
-        //leftRear.move(power);
-        //rightRear.move(power);
+        if(power > maxPower)
+        {
+             power = maxPower;
+        }
+
+        masterPower = power;
+        slavePower = findSpeed(std::abs(LENCO), std::abs(RENCO), masterPower);
+
+
+        LEFT_DRIVE(masterPower);
+        RIGHT_DRIVE(slavePower);
+
+
 
         if(std::abs(LENCO) > targetMin && ft)
         {
@@ -89,7 +93,7 @@ void line(int dir, int target, float factor)
         pros::Task::delay(20);
     }
 
-        
+
     LEFT_DRIVE_V(0);
     RIGHT_DRIVE_V(0);
     //leftFront.move(0);
@@ -102,14 +106,4 @@ void line(int dir, int target, float factor)
     rightFront.tare_position();
     rightRear.tare_position();
 
-}
-
-void forward(int target, float factor)
-{
-    line(FORWARD, target, factor);
-}
-
-void reverse(int target, float factor)
-{
-    line(REVERSE, target, factor);
 }

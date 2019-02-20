@@ -12,3 +12,5 @@ extern void bluefar();
 
 extern void skills12();
 extern void skills19();
+
+extern void redclose_gy();
