@@ -5,21 +5,18 @@
 int findSpeed(int encoderMaster, int encoderSlave, int power)
 {
 
-     float kP = .5;
-     float kD = 1;//1;
+     float kP = .15;
 
-     float error,  errorLast;
-     float pTerm, dTerm;
+     float error;
+     float pTerm;
 
      float slavePower = power;
 
      pTerm = error * kP;
-     errorLast = error;
 
      error = encoderMaster - encoderSlave;
 
      slavePower = power + pTerm;
 
      return slavePower;
-
 }
