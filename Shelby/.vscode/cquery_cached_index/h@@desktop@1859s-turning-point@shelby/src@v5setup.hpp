@@ -10,7 +10,6 @@ extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay
 
 extern void line_test(int dir, int target, int maxPower, float factor = 0);
 
-extern int findSpeed(int encoderMaster, int encoderSlave, int power);
 
 //experimental
 extern void lineExt(int dir, int target, float factor);
