@@ -8,6 +8,7 @@
 void opcontrol()
 {
 
+	lift.set_brake_mode(HOLD);
 	//testauto();
 
 	bool holding = false;
@@ -123,7 +124,7 @@ void opcontrol()
 
 
 		// -------------------------------------------------------------------LIFT---------------------
-		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
+		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) || (limitSwitch.get_value() != 1 && !master.get_digital(pros::E_CONTROLLER_DIGITAL_A)))
 		{
 			lift.move(LIFT_UP_SPEED);
 		}
@@ -131,10 +132,16 @@ void opcontrol()
 		{
 			lift.move(LIFT_CLR_SPEED);
 		}
-		else if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)
-				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
+		else if((!master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)
+				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) || (limitSwitch.get_value() == 1))
 		{
 			lift.move(0);
+			if(limitSwitch.get_value() == 1)
+			{
+
+				master.rumble(".-");
+			}
+
 		}
 
 	// save brain cells
