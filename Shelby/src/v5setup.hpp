@@ -54,6 +54,7 @@ extern pros::Controller master;
 //gyros
 extern pros::ADIGyro yawGyro;
 extern pros::ADIGyro rollGyro;
+extern pros::ADIDigitalIn limitSwitch;
 
 //drive motors
 extern pros::Motor leftFront;
@@ -140,3 +141,4 @@ extern pros::Motor lift;
 /* setup gyros  |- 1 through 8 -| */
 #define PORT_GYRO_YAW 1 // A // turn
 #define PORT_GYRO_ROLL 8 // H // climb
+#define PORT_LIMIT_LIFT 2

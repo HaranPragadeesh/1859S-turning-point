@@ -18,7 +18,7 @@ void redclose_gy()
 
      reverse(650);
 
-     g_right(900); // turn back towards tilt cap with ball under
+     g_left(900); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
@@ -44,7 +44,7 @@ void redclose_gy()
      lift.move(0);
      ////////////////////////////////////////////////////////////////////////
 
-     g_left(900); // turn to line with flags
+     g_right(900); // turn to line with flags
 
      reverse(300); //650 // *tune* reverse to line with platform to double shot
 
@@ -57,7 +57,7 @@ void redclose_gy()
 
      //forward(100);
 
-     g_right(900); // turn to climb plat
+     g_left(900); // turn to climb plat
 
      if(autoShouldPark)
      {

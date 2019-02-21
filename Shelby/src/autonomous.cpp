@@ -22,7 +22,8 @@ void autonomous()
     switch(selectedAuto){
         case 1:
             // do auto 1 red close
-            redclose();
+            redclose_gy();
+        //  redclose();
             break;
         case 2:
             // do auto 2 red far
