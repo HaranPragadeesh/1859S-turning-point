@@ -17,6 +17,8 @@ void autonomous()
     rollGyro.reset();
     yawGyro.reset();
 
+    skills17_gy();
+
    // testauto();
 
     switch(selectedAuto){
@@ -47,7 +49,7 @@ void autonomous()
             break;
         case 6:
             // do 6 auto 19 point skills
-            skills19();
+            skills17_gy();
             break;
         default:
             //testauto();

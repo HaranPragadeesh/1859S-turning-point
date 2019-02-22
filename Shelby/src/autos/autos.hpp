@@ -20,3 +20,4 @@ extern void redfar_gy();
 extern void bluefar_gy();
 
 extern void skills12_gy();
+extern void skills17_gy();
