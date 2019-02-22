@@ -5,10 +5,10 @@ void waitDrive(int dir, int speed, int waitTime)
 {
   setDriveBrakes(COAST);
 
-  rightFront.move(speed);
-  rightRear.move(speed);
-  leftFront.move(speed);
-  leftRear.move(speed);
+  rightFront.move(speed*dir);
+  rightRear.move(speed*dir);
+  leftFront.move(speed*dir);
+  leftRear.move(speed*dir);
 
   pros::delay(waitTime);
 
