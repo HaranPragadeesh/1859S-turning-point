@@ -3,7 +3,7 @@
 
 // 90 deg turn ~ 560
 
-void blueclose_gy()
+void skills12_gy()
 {
     fly(FLYWHEEL_BOOST_SPEED);
      forward(1250); // hit bottom flag
@@ -18,7 +18,7 @@ void blueclose_gy()
 
      reverse(650);
 
-     g_left(900); // turn back towards tilt cap with ball under
+     g_right(900); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
@@ -44,7 +44,7 @@ void blueclose_gy()
      lift.move(0);
      ////////////////////////////////////////////////////////////////////////
 
-     g_right(900); // turn to line with flags
+     g_left(900); // turn to line with flags
 
      reverse(300); //650 // *tune* reverse to line with platform to double shot
 
@@ -57,11 +57,14 @@ void blueclose_gy()
 
      //forward(100);
 
-     g_left(900); // turn to climb plat
+     g_right(900); // turn to climb plat
 
      if(autoShouldPark)
      {
-       forward(1600);
+       forward(1450);
+       REST(500);
+       forward(750);
+
 
         //gyroClimb(FORWARD, 75, 20, 100);
         // forward(1700);
