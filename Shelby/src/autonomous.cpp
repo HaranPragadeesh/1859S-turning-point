@@ -17,7 +17,6 @@ void autonomous()
     rollGyro.reset();
     yawGyro.reset();
 
-    skills17_gy();
 
    // testauto();
 
