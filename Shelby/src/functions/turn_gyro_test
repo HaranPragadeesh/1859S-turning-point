@@ -3,7 +3,7 @@
 #include "../v5setup.hpp"
 
 
-void g_turn(int dir, int target, float factor)
+void g_turn_t(int dir, int target, float factor)
 {
 
 
@@ -112,12 +112,12 @@ void g_turn(int dir, int target, float factor)
 
 }
 
-void g_left(int target, float factor)
+void g_left_t(int target, float factor)
 {
   g_turn(LEFT, target, factor);
 }
 
-void g_right(int target, float factor)
+void g_right_t(int target, float factor)
 {
   g_turn(RIGHT, target, factor);
 }
