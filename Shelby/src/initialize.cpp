@@ -35,7 +35,7 @@ std::string nameList[7] = {
     "Blue Close - 14PT", // 3
     "Blue Far - 8PT", // 4
     "Skills - 12RAW", // 5
-    "Skills - 19RAW" // 6
+    "Skills - 15RAW" // 6
  };
 
 void updateAutoText()
