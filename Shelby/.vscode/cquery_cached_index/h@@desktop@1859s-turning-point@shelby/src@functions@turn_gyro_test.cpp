@@ -5,12 +5,9 @@
 
 void g_turn_t(int dir, int target, float factor)
 {
-
-
+     int aTarget = target - botAngle;
 
      yawGyro.reset();
-
-    //setDriveBrakes(BRAKE);
 
     float kP = .55; // .5
     float kI = .005; // .005
@@ -22,9 +19,8 @@ void g_turn_t(int dir, int target, float factor)
     float power;
 
 
-   // target = target * dir;
-    float targetMin = target - 15;
-    float targetMax = target + 15;
+    float targetMin = aTarget - 15;
+    float targetMax = aTarget + 15;
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
@@ -33,39 +29,24 @@ void g_turn_t(int dir, int target, float factor)
     bool settled = false;
     float firstPause;
 
-    // zero motors fix if this is not correct method
-
-
-
 
      while(!settled)
-    //while(yawGyro.get_value() < target) // gyro  < target
     {
-
-        // debug();
-
         error = target - std::abs(yawGyro.get_value());
 
         if (error < errorZone) {
            errorTot += error;
-           pros::lcd::set_text(5, "in zone");
        } else {
            errorTot = 0;
-           pros::lcd::clear_line(5);
-
        }
 
-
         pTerm = error * kP;
-
 
         iTerm = kI * errorTot;
         dTerm = kD * (error - errorLast);
         errorLast = error;
 
-
         power = ((pTerm + iTerm + dTerm) * factor);
-
 
         LEFT_DRIVE(power * dir);
         RIGHT_DRIVE(-power * dir);
@@ -89,24 +70,11 @@ void g_turn_t(int dir, int target, float factor)
             }
         }
 
-        pros::lcd::set_text(1, " LEFT: " + std::to_string(-power) + "RIGHT: " + std::to_string(power));
-        pros::lcd::set_text(3, std::to_string(yawGyro.get_value()) + " - " + std::to_string(target) + " = " + std::to_string(error));
-        pros::lcd::set_text(2, "GYRO: " + std::to_string(std::abs(yawGyro.get_value())));
-      //  pros::lcd::set_text(3, "target: " + std::to_string(target));
-        pros::lcd::set_text(6, "error: " + std::to_string(error));
-       // pros::lcd::set_text(5, "ptime: " + std::to_string(pTime));
-       // pros::lcd::set_text(6, "timer: " + std::to_string(pros::millis()));
-
         pros::Task::delay(20);
     }
 
     RIGHT_DRIVE(0);
     LEFT_DRIVE(0);
-
-    //leftFront.move(0);
-    //leftRear.move(0);
-    //rightFront.move(0);
-    //rightRear.move(0);
 
 	yawGyro.reset();
 

@@ -17,11 +17,16 @@ extern void forwardExt(int target, float factor = 1);
 extern void reverseExt(int target, float factor = 1);
 
 
+extern int botAngle;
 
 //gyro turn
 extern void g_turn(int dir, int target, float factor);
 extern void g_left(int target, float factor = 1);
 extern void g_right(int target, float factor = 1);
+
+extern void g_turn_t(int dir, int target, float factor);
+extern void g_left_t(int target, float factor = 1);
+extern void g_right_t(int target, float factor = 1);
 
 //extern void testauto();
 

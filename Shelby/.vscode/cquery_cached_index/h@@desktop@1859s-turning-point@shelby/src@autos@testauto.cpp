@@ -7,8 +7,7 @@ void testauto()
      pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
 
 
-     //        dir      tar   max
-     line_test(FORWARD, 1000, 100);
+     
 
 
 

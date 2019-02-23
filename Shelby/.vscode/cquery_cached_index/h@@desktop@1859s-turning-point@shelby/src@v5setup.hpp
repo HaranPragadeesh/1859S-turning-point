@@ -17,11 +17,16 @@ extern void forwardExt(int target, float factor = 1);
 extern void reverseExt(int target, float factor = 1);
 
 
+extern int botAngle;
 
 //gyro turn
 extern void g_turn(int dir, int target, float factor);
 extern void g_left(int target, float factor = 1);
 extern void g_right(int target, float factor = 1);
+
+extern void g_turn_t(int dir, int target, float factor);
+extern void g_left_t(int target, float factor = 1);
+extern void g_right_t(int target, float factor = 1);
 
 //extern void testauto();
 
@@ -54,6 +59,7 @@ extern pros::Controller master;
 //gyros
 extern pros::ADIGyro yawGyro;
 extern pros::ADIGyro rollGyro;
+extern pros::ADIDigitalIn limitSwitch;
 
 //drive motors
 extern pros::Motor leftFront;
@@ -140,3 +146,4 @@ extern pros::Motor lift;
 /* setup gyros  |- 1 through 8 -| */
 #define PORT_GYRO_YAW 1 // A // turn
 #define PORT_GYRO_ROLL 8 // H // climb
+#define PORT_LIMIT_LIFT 2

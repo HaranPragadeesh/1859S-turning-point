@@ -29,7 +29,7 @@ void g_turn(int dir, int target, float factor)
     bool ogPass = false;
     float pTime; // pause time
     int exitDelay = 500; // millis to check exit
-    int emergancyExit = 555555; // millis to emergancyExit
+    int emergancyExit = 5000000; // millis to emergancyExit
     bool settled = false;
     float firstPause;
 

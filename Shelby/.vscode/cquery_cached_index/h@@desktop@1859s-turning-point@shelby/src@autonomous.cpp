@@ -17,32 +17,38 @@ void autonomous()
     rollGyro.reset();
     yawGyro.reset();
 
+
    // testauto();
 
     switch(selectedAuto){
         case 1:
             // do auto 1 red close
-            redclose();
+            redclose_gy();
+        //  redclose();
             break;
         case 2:
             // do auto 2 red far
-            redfar();
+            //redfar();
+            redfar_gy();
             break;
         case 3:
             // do auto 3 blue close
-            blueclose();
+            //blueclose();
+            blueclose_gy();
             break;
         case 4:
             // do auto 4 blue far
-            bluefar();
+            //bluefar();
+            bluefar_gy();
             break;
         case 5:
             // do auto 5 12 point skills
-            skills12();
+            //skills12();
+            skills12_gy();
             break;
         case 6:
             // do 6 auto 19 point skills
-            skills19();
+            skills17_gy();
             break;
         default:
             //testauto();
