@@ -3,14 +3,8 @@
 #include "../v5setup.hpp"
 
 
-void line_test(int dir, int target, int maxPower, float factor)
+void line_test(int dir, int target, int maxPower)
 {
-
-
-
-
-
-
     setDriveBrakes(COAST);
 
     // distance pid stuff
@@ -76,7 +70,7 @@ void line_test(int dir, int target, int maxPower, float factor)
         errorLast = error; // set last error after calcs
 
         // set power to pid out mult by dir in order to find direction
-        power = ((pTerm + iTerm + dTerm) * factor) * dir;
+        power = (pTerm + iTerm + dTerm) * dir;
 
         // if power is above the max dont let it be
         if(power > maxPower)
