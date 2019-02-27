@@ -8,7 +8,8 @@ extern void debug();
 
 extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay = 1);
 
-extern void line_test(int dir, int target, int maxPower, float factor = 0);
+extern void line_test(int dir, int target, int maxPower = 127);
+
 
 
 //experimental
@@ -20,9 +21,9 @@ extern void reverseExt(int target, float factor = 1);
 extern int botAngle;
 
 //gyro turn
-extern void g_turn(int dir, int target, float factor);
-extern void g_left(int target, float factor = 1);
-extern void g_right(int target, float factor = 1);
+extern void g_turn(int dir, int target, int maxSpeed);
+extern void g_left(int target, int maxSpeed = 110);
+extern void g_right(int target, int maxSpeed = 110);
 
 extern void g_turn_t(int dir, int target, float factor);
 extern void g_left_t(int target, float factor = 1);

@@ -64,13 +64,6 @@ void skills12_gy()
        forward(1450);
        REST(500);
        forward(750);
-
-
-        //gyroClimb(FORWARD, 75, 20, 100);
-        // forward(1700);
-        // reverse(50);
-         //gyroClimb(127, 30, 50, 0);
-
      }
 
 }

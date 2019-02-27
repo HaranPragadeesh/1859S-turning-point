@@ -3,17 +3,15 @@
 #include "../v5setup.hpp"
 
 
-void g_turn(int dir, int target, float factor)
+void g_turn(int dir, int target, int maxSpeed)
 {
-
-
 
      yawGyro.reset();
 
     //setDriveBrakes(BRAKE);
 
-    float kP = .55; // .5
-    float kI = .005; // .005
+    float kP = .35; // .55
+    float kI = .05; // .005
     float kD = 1; // 1
 
     float errorZone = 150;
@@ -64,7 +62,12 @@ void g_turn(int dir, int target, float factor)
         errorLast = error;
 
 
-        power = ((pTerm + iTerm + dTerm) * factor);
+        power = (pTerm + iTerm + dTerm);
+
+        if(power > maxSpeed)
+        {
+          power = maxSpeed;
+        }
 
 
         LEFT_DRIVE(power * dir);
@@ -112,12 +115,12 @@ void g_turn(int dir, int target, float factor)
 
 }
 
-void g_left(int target, float factor)
+void g_left(int target, int maxSpeed)
 {
-  g_turn(LEFT, target, factor);
+  g_turn(LEFT, target, maxSpeed);
 }
 
-void g_right(int target, float factor)
+void g_right(int target, int maxSpeed)
 {
-  g_turn(RIGHT, target, factor);
+  g_turn(RIGHT, target, maxSpeed);
 }

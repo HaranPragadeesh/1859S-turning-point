@@ -3,7 +3,5 @@
 
 void skills19()
 {
-    fly(FLYWHEEL_TOP_FLAG);
-    REST(2000);
 
 }

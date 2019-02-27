@@ -64,7 +64,5 @@ void redclose()
          reverse(1700);
         // reverse(50);
          //gyroClimb(127, 30, 50, 0);
-
      }
-
 }
