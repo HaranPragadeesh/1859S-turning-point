@@ -8,6 +8,8 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
  pros::ADIGyro yawGyro (PORT_GYRO_YAW); /* tune variable for accurate 360 turn */ // for turning
  pros::ADIGyro rollGyro (PORT_GYRO_ROLL); // for climbing
 
+ pros::ADIButton limitSwitch(PORT_LIMIT_LIFT);
+
 // drive motors
  pros::Motor leftFront (PORT_DRIVE_LEFT_FRONT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
  pros::Motor leftRear (PORT_DRIVE_LEFT_REAR, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
@@ -33,7 +35,7 @@ std::string nameList[7] = {
     "Blue Close - 14PT", // 3
     "Blue Far - 8PT", // 4
     "Skills - 12RAW", // 5
-    "Skills - 19RAW" // 6
+    "Skills - 15RAW" // 6
  };
 
 void updateAutoText()
@@ -89,7 +91,7 @@ void on_right_button()
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "- Shelby Pros -");
-    pros::lcd::set_text(2, "   - 1859s -   ");
+     pros::lcd::set_text(2, "   - 1859s -   ");
 
 
 	pros::lcd::register_btn0_cb(on_left_button);
@@ -98,6 +100,11 @@ void initialize() {
 
     pros::ADIGyro yawGyro (PORT_GYRO_YAW);
     pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
+    pros::ADIDigitalIn limitSwitch (PORT_LIMIT_LIFT);
+    pros::Vision aimbot (PORT_AIMBOT, pros::E_VISION_ZERO_CENTER);
+
+
+
 
 
 }
@@ -121,7 +128,25 @@ void disabled() {
  * starts.
  */
 void competition_initialize() {
-    pros::lcd::set_text(4,
+
+     while(std::abs(yawGyro.get_value()) > 5)
+    {
+         pros::ADIGyro yawGyro (PORT_GYRO_YAW);
+         while(std::abs(yawGyro.get_value()) > 5)
+         {
+              REST(2);
+         }
+    }
+    while(std::abs(rollGyro.get_value()) > 5)
+   {
+        pros::ADIGyro rollGyro (PORT_GYRO_YAW);
+        while(std::abs(rollGyro.get_value()) > 5)
+        {
+            REST(2);
+        }
+   }
+
+    /*pros::lcd::set_text(4,
          "L: " + std::to_string(round(std::abs(LENCO))) +
          "R: " + std::to_string(round(std::abs(RENCO))) +
          "A: " + std::to_string(round((std::abs(LENCO) + std::abs(RENCO)) / 2))
@@ -132,5 +157,5 @@ void competition_initialize() {
     pros::lcd::set_text(7,
          "RPM: " + std::to_string(round(flyWheel1.get_actual_velocity() * 15)) +
          "True RPM: " + std::to_string(round(flyWheel1.get_actual_velocity()))
-     );
+     );*/
 }

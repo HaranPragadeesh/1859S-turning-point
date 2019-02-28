@@ -1,14 +1,23 @@
 #include "main.h"
 
-void testauto();
+extern void testauto();
 
-void redclose();
+extern void redclose();
 
-void blueclose();
+extern void blueclose();
 
-void redfar();
 
-void bluefar();
+extern void redfar();
 
-void skills12();
-void skills19();
+extern void bluefar();
+
+extern void skills12();
+extern void skills19();
+
+extern void redclose_gy();
+extern void blueclose_gy();
+extern void redfar_gy();
+extern void bluefar_gy();
+
+extern void skills12_gy();
+extern void skills17_gy();

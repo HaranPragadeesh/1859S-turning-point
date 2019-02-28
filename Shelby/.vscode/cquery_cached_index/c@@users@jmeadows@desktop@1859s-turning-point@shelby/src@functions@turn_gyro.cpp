@@ -3,42 +3,56 @@
 #include "../v5setup.hpp"
 
 
-void g_turn(int dir, int target, float factor)
+void g_turn(int dir, int target, int maxSpeed)
 {
-    setDriveBrakes(BRAKE);
-    float kP = .05;
-    float kI = .0005;
-    float kD = .5;
 
-    float errorZone = target * .1;
+     yawGyro.reset();
+
+    //setDriveBrakes(BRAKE);
+
+    float kP = .55; // .55
+    float kI = .005; // .005
+    float kD = 1; // 1
+
+    float errorZone = 150;
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;
 
+
+   // target = target * dir;
     float targetMin = target - 15;
     float targetMax = target + 15;
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
-    int exitDelay = 700; // millis to check exit
+    int exitDelay = 500; // millis to check exit
+    int emergancyExit = 5000000; // millis to emergancyExit
     bool settled = false;
+    float firstPause;
 
     // zero motors fix if this is not correct method
-	rollGyro.reset();
-    REST(1500);
 
-    target = target * dir;
+
+
+
      while(!settled)
-    //while(rollGyro.get_value() < target) // left encoder  < target
+    //while(yawGyro.get_value() < target) // gyro  < target
     {
-        error = target - yawGyro.get_value();
-        // errorTot += error;
+
+        // debug();
+
+        error = target - std::abs(yawGyro.get_value());
 
         if (error < errorZone) {
-            errorTot += error;
-        } else {
-            errorTot = 0;
-        }
+           errorTot += error;
+           pros::lcd::set_text(5, "in zone");
+       } else {
+           errorTot = 0;
+           pros::lcd::clear_line(5);
+
+       }
+
 
         pTerm = error * kP;
 
@@ -47,23 +61,28 @@ void g_turn(int dir, int target, float factor)
         dTerm = kD * (error - errorLast);
         errorLast = error;
 
-        power = ((pTerm + iTerm + dTerm) * factor) * dir;
 
-        leftFront.move(-power);
-        leftRear.move(-power);
+        power = (pTerm + iTerm + dTerm);
 
-        rightFront.move(power);
-        rightRear.move(power);
+        if(power > maxSpeed)
+        {
+          power = maxSpeed;
+        }
 
-        if(yawGyro.get_value() > targetMin && ft)
+
+        LEFT_DRIVE(power * dir);
+        RIGHT_DRIVE(-power * dir);
+
+        if(std::abs(yawGyro.get_value()) > targetMin && ft)
         {
             pTime = pros::millis();
+            firstPause = pros::millis();
             ft = false;
             ogPass = true;
         }
         if(pros::millis() > pTime + exitDelay && ogPass)
         {
-            if(yawGyro.get_value() > targetMin && yawGyro.get_value() < targetMax)
+            if((std::abs(yawGyro.get_value()) > targetMin && std::abs(yawGyro.get_value()) < targetMax) or pros::millis() > firstPause + emergancyExit)
             {
                 settled = true;
             }
@@ -73,30 +92,35 @@ void g_turn(int dir, int target, float factor)
             }
         }
 
-        pros::lcd::set_text(2, "GYRO::" + std::to_string(yawGyro.get_value()));
-        pros::lcd::set_text(3, "target:" + std::to_string(target));
-        pros::lcd::set_text(4, "error:" + std::to_string(error));
-        pros::lcd::set_text(5, "ptime:" + std::to_string(pTime));
-        pros::lcd::set_text(6, "timer:" + std::to_string(pros::millis()));
+        pros::lcd::set_text(1, " LEFT: " + std::to_string(-power) + "RIGHT: " + std::to_string(power));
+        pros::lcd::set_text(3, std::to_string(yawGyro.get_value()) + " - " + std::to_string(target) + " = " + std::to_string(error));
+        pros::lcd::set_text(2, "GYRO: " + std::to_string(std::abs(yawGyro.get_value())));
+      //  pros::lcd::set_text(3, "target: " + std::to_string(target));
+        pros::lcd::set_text(6, "error: " + std::to_string(error));
+       // pros::lcd::set_text(5, "ptime: " + std::to_string(pTime));
+       // pros::lcd::set_text(6, "timer: " + std::to_string(pros::millis()));
 
         pros::Task::delay(20);
     }
 
-    leftFront.move(0);
-    leftRear.move(0);
-    rightFront.move(0);
-    rightRear.move(0);
+    RIGHT_DRIVE(0);
+    LEFT_DRIVE(0);
 
-	rollGyro.reset();
+    //leftFront.move(0);
+    //leftRear.move(0);
+    //rightFront.move(0);
+    //rightRear.move(0);
+
+	yawGyro.reset();
 
 }
 
-void g_left(int target, float factor)
+void g_left(int target, int maxSpeed)
 {
-  g_turn(LEFT, target, factor);
+  g_turn(LEFT, target, maxSpeed);
 }
 
-void g_right(int target, float factor)
+void g_right(int target, int maxSpeed)
 {
-  g_turn(RIGHT, target, factor);
+  g_turn(RIGHT, target, maxSpeed);
 }

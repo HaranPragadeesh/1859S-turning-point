@@ -10,7 +10,7 @@ void skills12()
 
      right(70, 5);
      lift.move(LIFT_UP_SPEED);
-     REST(300); // wait time for shoot
+     REST(600); // wait time for shoot
      lift.move(0);
      left(75, 5);
 
@@ -24,7 +24,7 @@ void skills12()
      //fly(-35); // spin flywheel backwards in order to not get stuck
 
      intake.move(COMBINE_INTAKE_SPEED);
-     lift.move(LIFT_UP_SPEED - 30);
+     lift.move(LIFT_UP_SPEED);
 
      forward(1200, 2);   // drive to tilt cap
 
@@ -65,9 +65,9 @@ void skills12()
      right(560); // turn to climb plat
 
      setDriveBrakes(HOLD);
-     forward(1300);
+     forward(1150);
      REST(300);
-     forward(1000);
+     forward(900);
     // reverse(50);
      //gyroClimb(127, 30, 50, 0);
 

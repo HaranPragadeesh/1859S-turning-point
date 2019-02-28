@@ -10,7 +10,7 @@ void skills19()
     intake.move(90);
     lift.move(LIFT_UP_SPEED);
 
-    newForward(1300, 80);   // drive to tilt cap
+    newForward(1350, 80);   // drive to tilt cap
 
     REST(300);
 
@@ -21,10 +21,16 @@ void skills19()
 
     lift.move(0);
 
-    newReverse(1300, 80); // reverse to line with flags
+    newReverse(1350, 80); // reverse to line with flags
+
+    waitDrive(REVERSE, 60, 1000);
 
     ////////////////////////////////////////////////////////////////////////
     fly(80); // start flywheel at full speed
+
+    REST(250);
+
+    newForward(100, 60);
 
     g_left(900); // turn to line with flags
 
@@ -39,9 +45,9 @@ void skills19()
     lift.move(LIFT_UP_SPEED);
     REST(500); // lift enouugh to shoot second ball
     lift.move(0);
-    fly(0);
+    //fly(0);
 
-    REST(2000);// rest long enough to let flywheel coast slow
+    //REST(2000);// rest long enough to let flywheel coast slow
 
 
     newForward(100); // forward enough to line with tilt cap
@@ -63,7 +69,7 @@ void skills19()
 
     lift.move(0); // stop lift for wheel
 
-    newReverse(650); // reverse enough to line with gap
+    newReverse(750); // reverse enough to line with gap
     intake.move(-70);
 
 
@@ -73,35 +79,34 @@ void skills19()
 
     g_left(450); // line with mid post bottom flag
 
-    newForward(700);
+    newForward(750);
 
     fly(FLYWHEEL_BOOST_SPEED);
 
 
-    newReverse(400); // reverse from mid bottom flag
+    newReverse(750); // reverse from mid bottom flag
 
-    g_right(70);
+    g_right(100);
 
     lift.move(LIFT_UP_SPEED); // shoot mid mid
     REST(500); // wait long enough for ball to clear
     lift.move(0);
 
-    g_left(70);
+    newForward(200);
 
-    // mid mid
-
-
+    g_left(1000);
 
 
-    g_left(425); // 520 /f/ left to clear right side
-
-
-    newReverse(1700); // reverse to mid mid shot spot // lineright
+    newReverse(800); // reverse to mid mid shot spot // lineright
 
     //g_right(100, 3);
 
 
-    g_left(250); // left line with tilt cap
+    g_left(450); // left line with tilt cap
+
+    newReverse(800);
+
+    g_right(450);
 
     intake.move(COMBINE_INTAKE_SPEED);
 

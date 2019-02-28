@@ -5,7 +5,7 @@ void blueclose()
 {
 
 
-    fly(FLYWHEEL_BOOST_SPEED);
+     fly(FLYWHEEL_BOOST_SPEED);
      forward(1250); // hit bottom flag
 
      reverse(800); // reverse from bottom flag
@@ -13,7 +13,7 @@ void blueclose()
      left(80, 5);
 
      lift.move(LIFT_UP_SPEED);
-     REST(300); // wait time for shoot
+     REST(500); // wait time for shoot
      lift.move(0);
      fly(115);
 

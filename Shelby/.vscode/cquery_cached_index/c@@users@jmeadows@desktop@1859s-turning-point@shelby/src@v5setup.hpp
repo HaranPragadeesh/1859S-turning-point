@@ -4,8 +4,20 @@
 
 extern void fly(int voltage);
 
+extern void debug();
 
-extern void gyroClimb(int speed, int ang, int delay, int calibrateDelay = 0);
+extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay = 1);
+
+
+extern void line_test(int dir, int target, int maxPower);
+extern void newForward(int target, int maxPower = 110);
+extern void newReverse(int target, int maxPower = 110);
+
+// extern void line(int dir, int target, float factor);
+// extern void forward(int target, float factor = 1);
+// extern void reverse(int target, float factor = 1);
+
+
 
 //experimental
 extern void lineExt(int dir, int target, float factor);
@@ -13,11 +25,16 @@ extern void forwardExt(int target, float factor = 1);
 extern void reverseExt(int target, float factor = 1);
 
 
+extern int botAngle;
 
 //gyro turn
-extern void g_turn(int dir, int target, float factor);
-extern void g_left(int target, float factor = 1);
-extern void g_right(int target, float factor = 1);
+extern void g_turn(int dir, int target, int maxSpeed);
+extern void g_left(int target, int maxSpeed = 110);
+extern void g_right(int target, int maxSpeed = 110);
+
+extern void g_turn_t(int dir, int target, float factor);
+extern void g_left_t(int target, float factor = 1);
+extern void g_right_t(int target, float factor = 1);
 
 //extern void testauto();
 
@@ -33,7 +50,7 @@ extern void right(int target, float factor = 1);
 
 
 extern void setDriveBrakes(pros::motor_brake_mode_e_t mode);
-extern int dzCorrect(int dz, int side);
+extern int dzCorrect(int joy, int dz);
 
 extern void waitDrive(int dir, int speed, int waitTime);
 
@@ -50,6 +67,7 @@ extern pros::Controller master;
 //gyros
 extern pros::ADIGyro yawGyro;
 extern pros::ADIGyro rollGyro;
+extern pros::ADIDigitalIn limitSwitch;
 
 //drive motors
 extern pros::Motor leftFront;
@@ -66,13 +84,21 @@ extern pros::Motor intake;
 extern pros::Motor lift;
 
 
-//gyro
 
+//drive move
+#define RIGHT_DRIVE(speed) rightRear.move(speed); rightFront.move(speed)
+#define LEFT_DRIVE(speed) leftRear.move(speed); leftFront.move(speed)
+
+#define RIGHT_DRIVE_V(speed) rightRear.move_velocity(speed); rightFront.move_velocity(speed)
+#define LEFT_DRIVE_V(speed) leftRear.move_velocity(speed); leftFront.move_velocity(speed)
+
+//motor max
+#define MAX_SPEED 127
 
 //joystick deadzone
 #define JOYSTICK_DEADZONE 15
 //preset GYRO CLIMB speeds
-#define GYRO_CLIMB_SPEED -127
+#define GYRO_CLIMB_SPEED 127
 
 //preset fly wheel speeds
 #define FLYWHEEL_TOP_FLAG 105
@@ -80,7 +106,7 @@ extern pros::Motor lift;
 #define FLYWHEEL_IDLE 90 // idling speed
 
 //intake speeds
-#define COMBINE_INTAKE_SPEED 80
+#define COMBINE_INTAKE_SPEED  80
 #define REVERSE_FLIP_SPEED -60
 
 // preset lift speeds
@@ -122,6 +148,10 @@ extern pros::Motor lift;
 #define PORT_INTAKE 10
 #define PORT_LIFT 6
 
+/* vision sensor port */
+#define PORT_AIMBOT 17
+
 /* setup gyros  |- 1 through 8 -| */
 #define PORT_GYRO_YAW 1 // A // turn
 #define PORT_GYRO_ROLL 8 // H // climb
+#define PORT_LIMIT_LIFT 2

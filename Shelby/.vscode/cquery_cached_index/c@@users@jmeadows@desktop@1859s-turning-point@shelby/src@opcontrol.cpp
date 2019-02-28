@@ -1,54 +1,87 @@
 #include "../include/main.h"
 #include "v5setup.hpp"
 #include "autos/autos.hpp"
+#define BLUE_FLAG_SIG 1
+#define GREEN_FLAG_SIG 2
+#define RED_FLAG_SIG 3
 
+void opcontrol()
+{
 
-
-void opcontrol() {
-
-
+	lift.set_brake_mode(HOLD);
 	//testauto();
-bool holding = false;
+
+	bool holding = false;
+	int lastPress;
+	bool firstPress = true;
+
+	pros::Vision aimbot (PORT_AIMBOT);
 
 	while (true)
 	{
-		pros::lcd::set_text(4,
-			 "L: " + std::to_string(round(std::abs(LENCO))) +
-			 "R: " + std::to_string(round(std::abs(RENCO))) +
-			 "A: " + std::to_string(round((std::abs(LENCO) + std::abs(RENCO)) / 2))
-		 );
 
-		pros::lcd::set_text(5, "ClimbGy: " + std::to_string(round(rollGyro.get_value())));
-		pros::lcd::set_text(6, "TurnGy: " + std::to_string(round(yawGyro.get_value())));
-		pros::lcd::set_text(7,
-			 "RPM: " + std::to_string(round(flyWheel1.get_actual_velocity() * 15)) +
-			 "True RPM: " + std::to_string(round(flyWheel1.get_actual_velocity()))
-		 );
+		std::cout << "Number of Objects Detected: " << aimbot.get_object_count() << "\n\n";
+    		pros::delay(2);
 
-		setDriveBrakes(HOLD);
-		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
+
+
+
+
+
+		//pros::vision_object_s_t rtn = aimbot.get_by_sig(0, RED_FLAG_SIG);
+		// Gets the largest object of the EXAMPLE_SIG signature
+
+
+		//debug();
+
+		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && ( (pros::millis() > lastPress + 1000) || firstPress) )
 		 {
-			 holding = true;
-		 }
-		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
-		 {
-			 holding = false;
+			 lastPress = pros::millis();
+			 firstPress = false;
+			 holding = !holding;
+
+			 if(holding == true)
+			 {
+				 setDriveBrakes(HOLD);
+
+			 }
+			 else{
+				 setDriveBrakes(COAST);
+			 }
+			 firstPress = false;
 		 }
 
-		if(holding)
-	 	{ setDriveBrakes(HOLD);  }
-		else
-		{ setDriveBrakes(COAST); }
-
+ 		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) )
+ 		 { setDriveBrakes(COAST); }
 
 
 		//sets ints for right and left motor based on dead zone correction function
-		int left = dzCorrect(JOYSTICK_DEADZONE, LEFT);
-		int right = dzCorrect(JOYSTICK_DEADZONE, RIGHT);
-		leftFront.move(left);
-		leftRear.move(left);
-		rightFront.move(right);
-		rightRear.move(right);
+		int left = dzCorrect( master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y),JOYSTICK_DEADZONE);
+		int right = dzCorrect(master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y), JOYSTICK_DEADZONE);
+
+		if(left == 0)
+		{
+			LEFT_DRIVE_V(0);
+		}
+		else{
+			LEFT_DRIVE(left * 2);
+
+		}
+
+		if(right == 0)
+		{
+			RIGHT_DRIVE_V(0);
+		}
+		else{
+			RIGHT_DRIVE(right * 2);
+
+		}
+
+
+		//leftFront.move_velocity(left);
+		//leftRear.move_velocity(left);
+		//rightFront.move_velocity(right);
+		//rightRear.move_velocity(right);
 
 
 
@@ -91,7 +124,7 @@ bool holding = false;
 
 
 		// -------------------------------------------------------------------LIFT---------------------
-		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
+		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) || (limitSwitch.get_value() != 1 && !master.get_digital(pros::E_CONTROLLER_DIGITAL_A)))
 		{
 			lift.move(LIFT_UP_SPEED);
 		}
@@ -99,10 +132,16 @@ bool holding = false;
 		{
 			lift.move(LIFT_CLR_SPEED);
 		}
-		else if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)
-				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_A))
+		else if((!master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)
+				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) || (limitSwitch.get_value() == 1))
 		{
 			lift.move(0);
+			if(limitSwitch.get_value() == 1)
+			{
+
+				master.rumble(".-");
+			}
+
 		}
 
 	// save brain cells

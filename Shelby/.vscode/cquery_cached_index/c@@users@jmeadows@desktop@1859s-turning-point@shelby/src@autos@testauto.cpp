@@ -3,6 +3,16 @@
 
 void testauto()
 {
-    left(300);
-    right(300);
+     pros::ADIGyro yawGyro (PORT_GYRO_YAW);
+     pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
+
+     REST(1500);
+
+     g_right(900);
+     g_left(900);
+
+
+
+
+
 }

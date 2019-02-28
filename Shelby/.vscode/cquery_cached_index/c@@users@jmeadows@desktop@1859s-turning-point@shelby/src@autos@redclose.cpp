@@ -12,7 +12,7 @@ void redclose()
 
 
      lift.move(LIFT_UP_SPEED);
-     REST(300); // wait time for shoot
+     REST(500); // wait time for shoot
      lift.move(0);
      fly(115);
 
@@ -64,7 +64,5 @@ void redclose()
          reverse(1700);
         // reverse(50);
          //gyroClimb(127, 30, 50, 0);
-
      }
-
 }
