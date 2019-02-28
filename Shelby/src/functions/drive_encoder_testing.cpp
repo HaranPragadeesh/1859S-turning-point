@@ -19,7 +19,7 @@ void line_test(int dir, int target, int maxPower)
 
 
     // line pid stuff
-    float kPl = .15;
+    float kPl = .1;
     float errorl;
     float pTerml;
     float masterPower;
@@ -158,5 +158,13 @@ void line_test(int dir, int target, int maxPower)
     leftRear.tare_position();
     rightFront.tare_position();
     rightRear.tare_position();
+
+}
+
+void newForward(int target, int maxPower){
+  line_test(FORWARD, target, maxPower);
+}
+void newReverse(int target, int maxPower){
+  line_test(REVERSE, target, maxPower);
 
 }

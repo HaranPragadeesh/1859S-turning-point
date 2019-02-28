@@ -17,6 +17,8 @@ void autonomous()
     rollGyro.reset();
     yawGyro.reset();
 
+
+    skills19();
    // testauto();
 
     switch(selectedAuto){

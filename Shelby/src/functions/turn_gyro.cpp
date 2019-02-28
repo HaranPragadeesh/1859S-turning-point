@@ -10,8 +10,8 @@ void g_turn(int dir, int target, int maxSpeed)
 
     //setDriveBrakes(BRAKE);
 
-    float kP = .35; // .55
-    float kI = .05; // .005
+    float kP = .45; // .55
+    float kI = .025; // .005
     float kD = 1; // 1
 
     float errorZone = 150;
