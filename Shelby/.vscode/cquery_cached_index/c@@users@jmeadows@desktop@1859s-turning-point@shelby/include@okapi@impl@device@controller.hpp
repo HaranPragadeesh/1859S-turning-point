@@ -11,6 +11,7 @@
 #include "okapi/impl/device/button/controllerButton.hpp"
 #include "okapi/impl/device/controllerUtil.hpp"
 #include <array>
+#define competition_initialize competition_initiialize
 
 namespace okapi {
 class Controller {

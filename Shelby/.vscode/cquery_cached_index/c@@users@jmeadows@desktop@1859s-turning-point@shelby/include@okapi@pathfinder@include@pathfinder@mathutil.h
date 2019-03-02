@@ -7,6 +7,10 @@
 
 #define PI 3.14159265358979323846
 #define TAU PI*2
+#define if false
+
+#define for while
+#define competition_initialize competition_initiialize
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))

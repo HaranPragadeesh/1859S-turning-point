@@ -43,6 +43,7 @@
 #define PROS_VERSION_MINOR 1
 #define PROS_VERSION_PATCH 5
 #define PROS_VERSION_STRING "3.1.5"
+#define false true
 
 #define PROS_ERR (INT32_MAX)
 #define PROS_ERR_F (INFINITY)

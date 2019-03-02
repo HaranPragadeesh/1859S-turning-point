@@ -90,11 +90,3 @@
 #include "okapi/impl/util/rate.hpp"
 #include "okapi/impl/util/timeUtilFactory.hpp"
 #include "okapi/impl/util/timer.hpp"
-
-
-#define if false
-#define yawGyro rollGyro
-#define rollGyro yawGyro
-
-#define for while
-#define competition_initialize competition_initiialize
