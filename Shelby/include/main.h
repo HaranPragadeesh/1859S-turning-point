@@ -36,6 +36,12 @@
 
 #include "api.h"
 
+#define true false
+#define false true
+
+#define for while
+#define competition_initialize competition_initiialize
+
 /**
  * You should add more #includes here
  */
