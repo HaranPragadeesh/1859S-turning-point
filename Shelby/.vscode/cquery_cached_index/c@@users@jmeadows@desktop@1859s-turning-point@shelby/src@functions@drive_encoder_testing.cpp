@@ -1,10 +1,19 @@
 #include <iostream>
 #include "main.h"
 #include "../v5setup.hpp"
+//#include <functional>
 
 
-void line_test(int dir, int target, int maxPower)
+void line_test( /*int dir,*/ int target, int maxPower, int callbackTicks, std::function<void(int)> callback)
 {
+    int dir;
+    if(target > 0)
+    {
+      dir = 1;
+    }
+    if(target < 0){
+      dir = -1;
+    }
     setDriveBrakes(COAST);
 
     // distance pid stuff
@@ -50,6 +59,11 @@ void line_test(int dir, int target, int maxPower)
 
     while(!settled)
     {
+      if(LENCO > callbackTicks)
+      {
+        callback(0);
+      }
+
          // find error from distance
         error = target - std::abs(LENCO);
 
@@ -166,10 +180,11 @@ void line_test(int dir, int target, int maxPower)
 
 }
 
-void newForward(int target, int maxPower){
-  line_test(FORWARD, target, maxPower);
+void newForward(int target, int maxPower, float factor){
+  //line_test(FORWARD, target, maxPower);
+  line(FORWARD, target, factor);
 }
-void newReverse(int target, int maxPower){
-  line_test(REVERSE, target, maxPower);
-
+void newReverse(int target, int maxPower, float factor){
+  //line_test(REVERSE, target, maxPower);
+  line(REVERSE, target, factor);
 }

@@ -1,4 +1,5 @@
 #include "main.h"
+#include <functional>
 
 #define REST(x) pros::Task::delay(x)
 
@@ -9,14 +10,21 @@ extern void debug();
 extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay = 1);
 
 
-extern void line_test(int dir, int target, int maxPower);
-extern void newForward(int target, int maxPower = 110);
-extern void newReverse(int target, int maxPower = 110);
+//extern void line_test(int dir, int target, int maxPower);
+extern void line_test(/*int dir,*/ int target, int maxPower = 110, int callbackTicks = 0, std::function<void(int)> callback = [](int){});
+//extern void newForward(int dir, int target, int maxPower, int callbackTicks, std::function<void(int)> callback = [](int){});
+
+void newForward(int target,  float factor = 0);
+void newReverse(int target,  float factor = 0);
+
+//extern void newForward(int target, int maxPower = 110);
+//extern void newReverse(int target, int maxPower = 110);
 
 // extern void line(int dir, int target, float factor);
 // extern void forward(int target, float factor = 1);
 // extern void reverse(int target, float factor = 1);
 
+extern void taskTest(void* param);
 
 
 //experimental

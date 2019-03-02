@@ -20,8 +20,9 @@ void opcontrol()
 	while (true)
 	{
 
-		std::cout << "Number of Objects Detected: " << aimbot.get_object_count() << "\n\n";
-    		pros::delay(2);
+		debug();
+		//std::cout << "Number of Objects Detected: " << aimbot.get_object_count() << "\n\n";
+    //		pros::delay(2);
 
 
 
@@ -64,7 +65,7 @@ void opcontrol()
 			LEFT_DRIVE_V(0);
 		}
 		else{
-			LEFT_DRIVE(left * 2);
+			LEFT_DRIVE(left * 2.5);
 
 		}
 
@@ -73,7 +74,7 @@ void opcontrol()
 			RIGHT_DRIVE_V(0);
 		}
 		else{
-			RIGHT_DRIVE(right * 2);
+			RIGHT_DRIVE(right * 2.25);
 
 		}
 

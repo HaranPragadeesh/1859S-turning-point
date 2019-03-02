@@ -4,16 +4,17 @@
 
 void debug()
 {
-     /*pros::lcd::set_text(1,
-          "LEFTR R" + std::to_string(leftRear.get_actual_velocity()) + "    " +
-          "LEFTF R" + std::to_string(leftFront.get_actual_velocity()));
-     pros::lcd::set_text(2,
-          "LEFTR V" + std::to_string(leftRear.get_voltage()) + "    " +
-          "LEFTF V" + std::to_string(leftFront.get_voltage()));
-     pros::lcd::set_text(3,
-          "LEFTR T" + std::to_string(leftRear.get_torque()) + "    " +
-          "LEFTF T" + std::to_string(leftFront.get_torque()));
 
+  int lefto = (leftRear.get_actual_velocity() + leftFront.get_actual_velocity()) / 2;
+  int righto = (rightRear.get_actual_velocity() + rightFront.get_actual_velocity()) / 2;
+
+     pros::lcd::set_text(1, "LEFT " + std::to_string(lefto));
+     pros::lcd::set_text(2, "RIGHT  " + std::to_string(righto));
+
+
+
+
+/*
 
      pros::lcd::set_text(4,
           "RIGHTR R" + std::to_string(rightRear.get_actual_velocity()) + "    " +
