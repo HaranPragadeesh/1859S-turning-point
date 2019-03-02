@@ -98,7 +98,7 @@ void initialize() {
 	pros::lcd::register_btn1_cb(on_center_button);
 	pros::lcd::register_btn2_cb(on_right_button);
 
-    pros::ADIGyro yawGyro (PORT_GYRO_YAW);
+    pros::ADIGyro yawGyro (PORT_GYRO_YAW, .975);
     pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
     pros::ADIDigitalIn limitSwitch (PORT_LIMIT_LIFT);
     pros::Vision aimbot (PORT_AIMBOT, pros::E_VISION_ZERO_CENTER);

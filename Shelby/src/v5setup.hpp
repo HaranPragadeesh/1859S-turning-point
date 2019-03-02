@@ -11,7 +11,7 @@ extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay
 
 
 //extern void line_test(int dir, int target, int maxPower);
-extern void line_test(/*int dir,*/ int target, int maxPower = 110, int callbackTicks = 0, std::function<void(int)> callback = [](int){});
+extern void drive(/*int dir,*/ int targetM, int maxPower = 110, int callbackTicks = 0, std::function<void()> callback = [](){});
 //extern void newForward(int dir, int target, int maxPower, int callbackTicks, std::function<void(int)> callback = [](int){});
 
 void newForward(int target,  float factor = 0);
@@ -64,6 +64,7 @@ extern void waitDrive(int dir, int speed, int waitTime);
 
 //global variables
 extern std::string nameList[];
+
 extern int selectedAuto;
 extern bool autoShouldPark;
 

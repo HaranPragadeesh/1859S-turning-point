@@ -21,8 +21,8 @@ void g_turn(int dir, int target, int maxSpeed)
 
 
    // target = target * dir;
-    float targetMin = target - 15;
-    float targetMax = target + 15;
+    float targetMin = target - 12;
+    float targetMax = target + 12;
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time

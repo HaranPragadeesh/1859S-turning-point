@@ -8,10 +8,9 @@ void testauto()
 
 
 
-     line_test(1000, 40, 500, [=](int flywheel){
+     drive(1000, 40, 500, [=](){
         fly(127);
         lift.move(50);
-
      });
 
 }

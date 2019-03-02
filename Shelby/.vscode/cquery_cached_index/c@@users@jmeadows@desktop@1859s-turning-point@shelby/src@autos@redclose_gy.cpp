@@ -3,10 +3,10 @@
 
 void redclose_gy()
 {
-    fly(FLYWHEEL_BOOST_SPEED);
-     line_test(1250); // hit bottom flag
+     fly(FLYWHEEL_BOOST_SPEED);
+     drive(1250); // hit bottom flag
 
-     line_test(-850); // newReverse from bottom flag
+     drive(-850); // newReverse from bottom flag
 
 
      lift.move(LIFT_UP_SPEED);
@@ -14,7 +14,7 @@ void redclose_gy()
      lift.move(0);
      fly(115);
 
-     line_test(-650);
+     drive(-650);
 
      g_right(900); // turn back towards tilt cap with ball under
 
@@ -24,14 +24,14 @@ void redclose_gy()
      intake.move(COMBINE_INTAKE_SPEED);
      lift.move(LIFT_UP_SPEED - 30);
 
-     line_test(1200);   // drive to tilt cap
+     drive(1200);   // drive to tilt cap
 
      //REST(50);
      lift.move(0);
 
      ////////////////////////////////////////////////////////////////////////
 
-     line_test(-1200); // newReverse to line with flags
+     drive(-1200); // newReverse to line with flags
 
      //lift.move(LIFT_CLR_SPEED);
 
@@ -44,26 +44,26 @@ void redclose_gy()
 
      g_left(900); // turn to line with flags
 
-     line_test(-300); //650 // *tune* newReverse to line with platform to double shot
+     drive(-300); //650 // *tune* newReverse to line with platform to double shot
 
      //fly(0);
      lift.move(LIFT_UP_SPEED);
      REST(500); // wait time for shoot
      lift.move(0);
 
-     line_test(-500);
+     drive(-500);
 
-     //line_test(100);
+     //drive(100);
 
      g_right(900); // turn to climb plat
 
      if(autoShouldPark)
      {
-       line_test(1600);
+       drive(1600);
 
         //gyroClimb(newForward, 75, 20, 100);
-        // line_test(1700);
-        // line_test(-50);
+        // drive(1700);
+        // drive(-50);
          //gyroClimb(127, 30, 50, 0);
 
      }
@@ -75,9 +75,9 @@ void redclose_gy()
 // void redclose_gy()
 // {
 //     fly(FLYWHEEL_BOOST_SPEED);
-//      line_test(1250); // hit bottom flag
+//      drive(1250); // hit bottom flag
 //
-//      line_test(-850); // newReverse from bottom flag
+//      drive(-850); // newReverse from bottom flag
 //
 //
 //      lift.move(LIFT_UP_SPEED);
@@ -85,7 +85,7 @@ void redclose_gy()
 //      lift.move(0);
 //      fly(115);
 //
-//      line_test(-650);
+//      drive(-650);
 //
 //      g_right(900); // turn back towards tilt cap with ball under
 //
@@ -95,14 +95,14 @@ void redclose_gy()
 //      intake.move(COMBINE_INTAKE_SPEED);
 //      lift.move(LIFT_UP_SPEED - 30);
 //
-//      line_test(1200);   // drive to tilt cap
+//      drive(1200);   // drive to tilt cap
 //
 //      //REST(50);
 //      lift.move(0);
 //
 //      ////////////////////////////////////////////////////////////////////////
 //
-//      line_test(-1200); // newReverse to line with flags
+//      drive(-1200); // newReverse to line with flags
 //
 //      //lift.move(LIFT_CLR_SPEED);
 //
@@ -115,26 +115,26 @@ void redclose_gy()
 //
 //      g_left(900); // turn to line with flags
 //
-//      line_test(-300); //650 // *tune* newReverse to line with platform to double shot
+//      drive(-300); //650 // *tune* newReverse to line with platform to double shot
 //
 //      //fly(0);
 //      lift.move(LIFT_UP_SPEED);
 //      REST(500); // wait time for shoot
 //      lift.move(0);
 //
-//      line_test(-500);
+//      drive(-500);
 //
-//      //line_test(100);
+//      //drive(100);
 //
 //      g_right(900); // turn to climb plat
 //
 //      if(autoShouldPark)
 //      {
-//        line_test(1600);
+//        drive(1600);
 //
 //         //gyroClimb(newForward, 75, 20, 100);
-//         // line_test(1700);
-//         // line_test(-50);
+//         // drive(1700);
+//         // drive(-50);
 //          //gyroClimb(127, 30, 50, 0);
 //
 //      }

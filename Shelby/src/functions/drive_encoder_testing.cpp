@@ -4,14 +4,15 @@
 //#include <functional>
 
 
-void line_test( /*int dir,*/ int target, int maxPower, int callbackTicks, std::function<void(int)> callback)
+void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::function<void()> callback)
 {
+    int target = std::abs(targetM);
     int dir;
-    if(target > 0)
+    if(targetM > 0)
     {
       dir = 1;
     }
-    if(target < 0){
+    if(targetM < 0){
       dir = -1;
     }
     setDriveBrakes(COAST);
@@ -28,7 +29,7 @@ void line_test( /*int dir,*/ int target, int maxPower, int callbackTicks, std::f
 
 
     // line pid stuff
-    float kPl = .1;
+    float kPl = 0;
     float errorl;
     float pTerml;
     float masterPower;
@@ -59,9 +60,9 @@ void line_test( /*int dir,*/ int target, int maxPower, int callbackTicks, std::f
 
     while(!settled)
     {
-      if(LENCO > callbackTicks)
+      if(std::abs(LENCO) > callbackTicks)
       {
-        callback(0);
+        callback();
       }
 
          // find error from distance

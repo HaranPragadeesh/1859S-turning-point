@@ -12,6 +12,8 @@ void debug()
      pros::lcd::set_text(2, "RIGHT  " + std::to_string(righto));
 
 
+     pros::lcd::set_text(4, "GYRO: " + std::to_string(yawGyro.get_value()));
+
 
 
 /*

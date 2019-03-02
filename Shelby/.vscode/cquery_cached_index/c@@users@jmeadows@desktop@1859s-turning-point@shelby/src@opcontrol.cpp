@@ -20,6 +20,8 @@ void opcontrol()
 	while (true)
 	{
 
+		
+
 		debug();
 		//std::cout << "Number of Objects Detected: " << aimbot.get_object_count() << "\n\n";
     //		pros::delay(2);
