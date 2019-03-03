@@ -29,7 +29,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
 
     // line pid stuff
-    float kPl = 0;
+    float kPl = 1;
     float errorl;
     float pTerml;
     float masterPower;
@@ -99,7 +99,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
         }
 
         // set pid stuff for keeping in line
-        pTerml = errorl * kPl;
+        pTerml = errorl * (kPl * dir);
 
         // set master (left) power to normal power after maxing
         masterPower = power;

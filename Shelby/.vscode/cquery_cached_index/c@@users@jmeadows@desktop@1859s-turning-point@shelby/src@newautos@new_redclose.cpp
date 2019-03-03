@@ -5,7 +5,7 @@ void new_redclose()
 {
   fly(FLYWHEEL_BOOST_SPEED);
   drive(1200, 100);
-  drive(-1350, 100, 500, [=](){
+  drive(-1350, 100, 450, [=](){
      lift.move(127);
   });
 
@@ -54,7 +54,8 @@ void new_redclose()
 
        if(autoShouldPark)
        {
-         drive(1600);
+         drive(1700);
+
        }
 
 }

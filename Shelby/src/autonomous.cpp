@@ -17,7 +17,7 @@ void autonomous()
 
     rollGyro.reset();
     yawGyro.reset();
-
+    //testauto2();
     new_redclose();
     //skills19();
    // testauto();
