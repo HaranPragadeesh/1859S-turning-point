@@ -10,7 +10,7 @@ void skills19()
     intake.move(90);
     lift.move(LIFT_UP_SPEED);
 
-    newForward(1350, 80);   // drive to tilt cap
+    drive(1350, 80);   // drive to tilt cap
 
     REST(300);
 
@@ -21,7 +21,7 @@ void skills19()
 
     lift.move(0);
 
-    newReverse(1350, 80); // reverse to line with flags
+    drive(-1350, 80); // reverse to line with flags
 
     waitDrive(REVERSE, 60, 1000);
 
@@ -30,11 +30,11 @@ void skills19()
 
     REST(250);
 
-    newForward(100, 60);
+    drive(100, 60);
 
     g_left(900); // turn to line with flags
 
-    newForward(1250); // drive to red tile shoot pos
+    drive(1250); // drive to red tile shoot pos
 
     intake.move(-100);
     lift.move(LIFT_UP_SPEED);
@@ -50,7 +50,7 @@ void skills19()
     //REST(2000);// rest long enough to let flywheel coast slow
 
 
-    newForward(100); // forward enough to line with tilt cap
+    drive(100); // forward enough to line with tilt cap
 
 
     g_right(900); // turn to tilt cap
@@ -61,7 +61,7 @@ void skills19()
     intake.move(COMBINE_INTAKE_SPEED);
     lift.move(LIFT_UP_SPEED - 30);
 
-    newForward(1200);   // drive to tilt cap
+    drive(1200);   // drive to tilt cap
 
     REST(100);
 
@@ -69,59 +69,59 @@ void skills19()
 
     lift.move(0); // stop lift for wheel
 
-    newReverse(750); // reverse enough to line with gap
+    drive(-750); // reverse enough to line with gap
     intake.move(-70);
 
 
     g_left(450); // 45 degree left to clear gap
 
-    newForward(800); // forward enough to go through gap
+    drive(900); // forward enough to go through gap
 
     g_left(450); // line with mid post bottom flag
 
-    newForward(750);
+    drive(750);
 
     fly(FLYWHEEL_BOOST_SPEED);
 
 
-    newReverse(750); // reverse from mid bottom flag
+    drive(-750); // reverse from mid bottom flag
 
-    g_right(100);
+    g_right(120);
 
     lift.move(LIFT_UP_SPEED); // shoot mid mid
     REST(500); // wait long enough for ball to clear
     lift.move(0);
 
-    newForward(200);
+    drive(200);
 
-    g_left(1000);
+    g_left(1020);
 
 
-    newReverse(800); // reverse to mid mid shot spot // lineright
+    drive(-350); // reverse to mid mid shot spot // lineright
 
     //g_right(100, 3);
 
 
-    g_left(450); // left line with tilt cap
+    g_right(450); // left line with tilt cap
 
-    newReverse(800);
+    drive(-800);
 
-    g_right(450);
+    g_left(450);
 
     intake.move(COMBINE_INTAKE_SPEED);
 
     lift.move(LIFT_UP_SPEED - 30);
-    newForward(750);
+    drive(750);
     REST(100); // rest enough for ball to get in good spot consist
     lift.move(0);
 
-    //newReverse(200, 3);
-    //newForward(350, 3);
+    //drive(-200, 3);
+    //drive(350, 3);
     fly(FLYWHEEL_IDLE - 10);
 
 
 
-    newReverse(1150); // reverse to line with shot spot
+    drive(-1150); // reverse to line with shot spot
 
     intake.move(-70);
 
@@ -135,20 +135,20 @@ void skills19()
 
     g_right(100, 5);
 
-    newReverse(1400); // reverse to back cap
+    drive(-1400); // reverse to back cap
 
     g_left(570); // left to tilt cap
 
 
     intake.move(COMBINE_INTAKE_SPEED);
     lift.move(LIFT_UP_SPEED - 40);
-    newForward(1150); // drive to blue back tilt cap
+    drive(1150); // drive to blue back tilt cap
     REST(300); // delay long enough to get good spot
     lift.move(0);
 
     fly(FLYWHEEL_TOP_FLAG - 5);
 
-    newReverse(1100); // reverse to line with flags
+    drive(-1100); // reverse to line with flags
     g_right(530); // line with top flag
 
     //g_left(50, 5);
@@ -157,13 +157,13 @@ void skills19()
     lift.move(0);
     g_right(50, 5);
 
-    newForward(750); // line with platform
+    drive(750); // line with platform
 
     g_left(590);
 
-    newForward(1200);
+    drive(1200);
     REST(300);
-    newForward(800);
+    drive(800);
 
 
 

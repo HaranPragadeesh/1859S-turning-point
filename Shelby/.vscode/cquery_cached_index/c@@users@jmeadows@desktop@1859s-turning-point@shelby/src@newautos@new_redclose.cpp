@@ -46,16 +46,20 @@ void new_redclose()
        REST(500); // wait time for shoot
        lift.move(0);
 
+
+       if(autoShouldPark)
+       {
        drive(-350);
 
        //drive(100);
 
        g_right(900); // turn to climb plat
 
-       if(autoShouldPark)
-       {
+
          drive(1700);
 
        }
+       else
+       {}
 
 }

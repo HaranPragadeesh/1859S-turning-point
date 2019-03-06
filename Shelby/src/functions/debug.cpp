@@ -1,6 +1,7 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
+#define TRUEGYRO yawGyroT.get_value() + yawGyroB.get_value()
 
 void debug()
 {
@@ -8,11 +9,16 @@ void debug()
   int lefto = (leftRear.get_actual_velocity() + leftFront.get_actual_velocity()) / 2;
   int righto = (rightRear.get_actual_velocity() + rightFront.get_actual_velocity()) / 2;
 
-     pros::lcd::set_text(1, "LEFT " + std::to_string(lefto));
-     pros::lcd::set_text(2, "RIGHT  " + std::to_string(righto));
+  pros::lcd::set_text(3, "gyroT: " + std::to_string(yawGyroT.get_value()));
+  pros::lcd::set_text(4, "gyroB: " + std::to_string(yawGyroB.get_value()));
 
+  pros::lcd::set_text(6, "GYRO TRUE: " + std::to_string(TRUEGYRO));
 
-     pros::lcd::set_text(4, "GYRO: " + std::to_string(yawGyro.get_value()));
+     // pros::lcd::set_text(1, "LEFT " + std::to_string(lefto));
+     // pros::lcd::set_text(2, "RIGHT  " + std::to_string(righto));
+     //
+     //
+     // pros::lcd::set_text(4, "GYRO: " + std::to_string(yawGyro.get_value()));
 
 
 

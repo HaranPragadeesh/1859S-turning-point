@@ -1,9 +1,6 @@
 #include "../include/main.h"
 #include "v5setup.hpp"
 #include "autos/autos.hpp"
-#define BLUE_FLAG_SIG 1
-#define GREEN_FLAG_SIG 2
-#define RED_FLAG_SIG 3
 
 void opcontrol()
 {
@@ -20,7 +17,7 @@ void opcontrol()
 	while (true)
 	{
 
-		
+
 
 		debug();
 		//std::cout << "Number of Objects Detected: " << aimbot.get_object_count() << "\n\n";

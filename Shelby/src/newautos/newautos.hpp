@@ -8,3 +8,4 @@ extern void new_blueclose();
 extern void new_bluefar();
 
 extern void new_skills();
+extern void skills19();

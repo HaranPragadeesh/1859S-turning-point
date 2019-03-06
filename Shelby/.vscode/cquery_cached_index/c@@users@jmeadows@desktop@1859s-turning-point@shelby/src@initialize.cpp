@@ -4,8 +4,8 @@
 
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
-
- pros::ADIGyro yawGyro (PORT_GYRO_YAW); /* tune variable for accurate 360 turn */ // for turning
+ pros::ADIGyro yawGyroB (PORT_GYRO_BOT, .58);
+ pros::ADIGyro yawGyroT (PORT_GYRO_TOP); /* tune variable for accurate 360 turn */ // for turning
  pros::ADIGyro rollGyro (PORT_GYRO_ROLL); // for climbing
 
  pros::ADIButton limitSwitch(PORT_LIMIT_LIFT);
@@ -98,7 +98,8 @@ void initialize() {
 	pros::lcd::register_btn1_cb(on_center_button);
 	pros::lcd::register_btn2_cb(on_right_button);
 
-    pros::ADIGyro yawGyro (PORT_GYRO_YAW, .975);
+    pros::ADIGyro yawGyroT (PORT_GYRO_TOP);
+    pros::ADIGyro yawGyroB (PORT_GYRO_BOT);
     pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
     pros::ADIDigitalIn limitSwitch (PORT_LIMIT_LIFT);
     pros::Vision aimbot (PORT_AIMBOT, pros::E_VISION_ZERO_CENTER);
@@ -131,9 +132,9 @@ void disabled() {
  */
 void competition_initialize() {
 
-     while(std::abs(yawGyro.get_value()) > 5)
+     while(std::abs(yawGyroB.get_value()) > 5)
     {
-         pros::ADIGyro yawGyro (PORT_GYRO_YAW);
+         pros::ADIGyro yawGyro (PORT_GYRO_BOT);
          while(std::abs(yawGyro.get_value()) > 5)
          {
               REST(2);
@@ -141,7 +142,7 @@ void competition_initialize() {
     }
     while(std::abs(rollGyro.get_value()) > 5)
    {
-        pros::ADIGyro rollGyro (PORT_GYRO_YAW);
+        pros::ADIGyro rollGyro (PORT_GYRO_BOT);
         while(std::abs(rollGyro.get_value()) > 5)
         {
             REST(2);

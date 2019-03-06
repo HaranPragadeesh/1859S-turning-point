@@ -14,13 +14,17 @@
 void autonomous()
 {
 
+    pros::ADIGyro yawGyroT (PORT_GYRO_TOP); /* tune variable for accurate 360 turn */ // for turning
+    pros::ADIGyro yawGyroB (PORT_GYRO_BOT); /* tune variable for accurate 360 turn */ // for turning
 
     rollGyro.reset();
-    yawGyro.reset();
-    //testauto2();
-    new_redclose();
-    //skills19();
-   // testauto();
+    yawGyroT.reset();
+    yawGyroB.reset();
+
+    REST(1500);
+
+    skills19();
+    //new_redclose();
 
     switch(selectedAuto){
         case 1:

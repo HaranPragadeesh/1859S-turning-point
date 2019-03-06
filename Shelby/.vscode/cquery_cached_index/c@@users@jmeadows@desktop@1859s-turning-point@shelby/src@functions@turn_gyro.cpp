@@ -6,7 +6,7 @@
 void g_turn(int dir, int target, int maxSpeed)
 {
 
-     yawGyro.reset();
+     yawGyroT.reset();
 
     //setDriveBrakes(BRAKE);
 
@@ -42,7 +42,7 @@ void g_turn(int dir, int target, int maxSpeed)
 
         // debug();
 
-        error = target - std::abs(yawGyro.get_value());
+        error = target - std::abs(yawGyroT.get_value());
 
         if (error < errorZone) {
            errorTot += error;
@@ -73,7 +73,7 @@ void g_turn(int dir, int target, int maxSpeed)
         LEFT_DRIVE(power * dir);
         RIGHT_DRIVE(-power * dir);
 
-        if(std::abs(yawGyro.get_value()) > targetMin && ft)
+        if(std::abs(yawGyroT.get_value()) > targetMin && ft)
         {
             pTime = pros::millis();
             firstPause = pros::millis();
@@ -82,7 +82,7 @@ void g_turn(int dir, int target, int maxSpeed)
         }
         if(pros::millis() > pTime + exitDelay && ogPass)
         {
-            if((std::abs(yawGyro.get_value()) > targetMin && std::abs(yawGyro.get_value()) < targetMax) or pros::millis() > firstPause + emergancyExit)
+            if((std::abs(yawGyroT.get_value()) > targetMin && std::abs(yawGyroT.get_value()) < targetMax) or pros::millis() > firstPause + emergancyExit)
             {
                 settled = true;
             }
@@ -93,8 +93,8 @@ void g_turn(int dir, int target, int maxSpeed)
         }
 
         pros::lcd::set_text(1, " LEFT: " + std::to_string(-power) + "RIGHT: " + std::to_string(power));
-        pros::lcd::set_text(3, std::to_string(yawGyro.get_value()) + " - " + std::to_string(target) + " = " + std::to_string(error));
-        pros::lcd::set_text(2, "GYRO: " + std::to_string(std::abs(yawGyro.get_value())));
+        pros::lcd::set_text(3, std::to_string(yawGyroT.get_value()) + " - " + std::to_string(target) + " = " + std::to_string(error));
+        pros::lcd::set_text(2, "GYRO: " + std::to_string(std::abs(yawGyroT.get_value())));
       //  pros::lcd::set_text(3, "target: " + std::to_string(target));
         pros::lcd::set_text(6, "error: " + std::to_string(error));
        // pros::lcd::set_text(5, "ptime: " + std::to_string(pTime));
@@ -111,7 +111,7 @@ void g_turn(int dir, int target, int maxSpeed)
     //rightFront.move(0);
     //rightRear.move(0);
 
-	yawGyro.reset();
+	yawGyroT.reset();
 
 }
 

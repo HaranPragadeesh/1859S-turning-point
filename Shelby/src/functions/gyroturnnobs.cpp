@@ -2,11 +2,19 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
+#define TRUEGYRO yawGyroT.get_value() + yawGyroB.get_value()
 
-void g_turn(int dir, int target, int maxSpeed)
+void turn(int target, int maxSpeed)
 {
+    int dir;
+    if(target > 0)
+    { dir = 1; }
+    if(target < 0)
+    { dir = -1; }
 
-     yawGyroT.reset();
+
+    yawGyroT.reset();
+    yawGyroB.reset();
 
     //setDriveBrakes(BRAKE);
 
@@ -33,16 +41,13 @@ void g_turn(int dir, int target, int maxSpeed)
 
     // zero motors fix if this is not correct method
 
-
-
-
      while(!settled)
     //while(yawGyro.get_value() < target) // gyro  < target
     {
 
         // debug();
 
-        error = target - std::abs(yawGyroT.get_value());
+        error = target - TRUEGYRO;
 
         if (error < errorZone) {
            errorTot += error;
@@ -73,7 +78,7 @@ void g_turn(int dir, int target, int maxSpeed)
         LEFT_DRIVE(power * dir);
         RIGHT_DRIVE(-power * dir);
 
-        if(std::abs(yawGyroT.get_value()) > targetMin && ft)
+        if(TRUEGYRO > targetMin && ft)
         {
             pTime = pros::millis();
             firstPause = pros::millis();
@@ -82,7 +87,7 @@ void g_turn(int dir, int target, int maxSpeed)
         }
         if(pros::millis() > pTime + exitDelay && ogPass)
         {
-            if((std::abs(yawGyroT.get_value()) > targetMin && std::abs(yawGyroT.get_value()) < targetMax) or pros::millis() > firstPause + emergancyExit)
+            if((TRUEGYRO > targetMin && TRUEGYRO < targetMax) || pros::millis() > firstPause + emergancyExit)
             {
                 settled = true;
             }
@@ -92,13 +97,10 @@ void g_turn(int dir, int target, int maxSpeed)
             }
         }
 
-        pros::lcd::set_text(1, " LEFT: " + std::to_string(-power) + "RIGHT: " + std::to_string(power));
-        pros::lcd::set_text(3, std::to_string(yawGyroT.get_value()) + " - " + std::to_string(target) + " = " + std::to_string(error));
-        pros::lcd::set_text(2, "GYRO: " + std::to_string(std::abs(yawGyroT.get_value())));
-      //  pros::lcd::set_text(3, "target: " + std::to_string(target));
-        pros::lcd::set_text(6, "error: " + std::to_string(error));
-       // pros::lcd::set_text(5, "ptime: " + std::to_string(pTime));
-       // pros::lcd::set_text(6, "timer: " + std::to_string(pros::millis()));
+        pros::lcd::set_text(3, "gyroT: " + std::to_string(yawGyroT.get_value()));
+        pros::lcd::set_text(4, "gyroB: " + std::to_string(yawGyroB.get_value()));
+
+        pros::lcd::set_text(6, "GYRO TRUE: " + std::to_string(TRUEGYRO));
 
         pros::Task::delay(20);
     }
@@ -106,21 +108,7 @@ void g_turn(int dir, int target, int maxSpeed)
     RIGHT_DRIVE(0);
     LEFT_DRIVE(0);
 
-    //leftFront.move(0);
-    //leftRear.move(0);
-    //rightFront.move(0);
-    //rightRear.move(0);
 
 	yawGyroT.reset();
-
-}
-
-void g_left(int target, int maxSpeed)
-{
-  g_turn(LEFT, target, maxSpeed);
-}
-
-void g_right(int target, int maxSpeed)
-{
-  g_turn(RIGHT, target, maxSpeed);
+    yawGyroB.reset();
 }

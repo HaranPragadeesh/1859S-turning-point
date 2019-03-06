@@ -3,8 +3,8 @@
 
 void testauto()
 {
-     pros::ADIGyro yawGyro (PORT_GYRO_YAW);
-     pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
+     pros::ADIGyro yawGyroT (PORT_GYRO_TOP);
+     pros::ADIGyro rollGyro (PORT_GYRO_BOT);
 
 
 

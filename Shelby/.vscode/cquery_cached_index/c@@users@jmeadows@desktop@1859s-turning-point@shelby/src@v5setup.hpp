@@ -51,10 +51,15 @@ extern void line(int dir, int target, float factor);
 extern void forward(int target, float factor = 1);
 extern void reverse(int target, float factor = 1);
 
+//double gyro turn
+void turn_g2(int target, int maxSpeed = 110);
+
+
 // encoder turn
 extern void turn(int dir, int target, float factor);
 extern void left(int target, float factor = 1);
 extern void right(int target, float factor = 1);
+
 
 
 extern void setDriveBrakes(pros::motor_brake_mode_e_t mode);
@@ -74,7 +79,8 @@ extern pros::Controller master;
 
 
 //gyros
-extern pros::ADIGyro yawGyro;
+extern pros::ADIGyro yawGyroT;
+extern pros::ADIGyro yawGyroB;
 extern pros::ADIGyro rollGyro;
 extern pros::ADIDigitalIn limitSwitch;
 
@@ -161,6 +167,8 @@ extern pros::Motor lift;
 #define PORT_AIMBOT 17
 
 /* setup gyros  |- 1 through 8 -| */
-#define PORT_GYRO_YAW 1 // A // turn
+#define PORT_GYRO_TOP 4 // D // turn
+#define PORT_GYRO_BOT 3 // C
+
 #define PORT_GYRO_ROLL 8 // H // climb
-#define PORT_LIMIT_LIFT 2
+#define PORT_LIMIT_LIFT 2 // B

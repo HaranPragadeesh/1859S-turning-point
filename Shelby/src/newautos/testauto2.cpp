@@ -3,13 +3,14 @@
 
 void testauto2()
 {
-  pros::ADIGyro yawGyro (PORT_GYRO_YAW);
+  pros::ADIGyro yawGyroT (PORT_GYRO_TOP);
+  pros::ADIGyro yawGyroB (PORT_GYRO_BOT);
   pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
 
   REST(1500);
 
-  g_right(900);
-  g_left(900);
+  turn_g2(900);
+  //turn(-900);
 
 
   // drive(-1350, 100, 500, [=](){
