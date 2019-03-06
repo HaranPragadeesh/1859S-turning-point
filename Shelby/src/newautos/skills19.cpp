@@ -75,7 +75,7 @@ void skills19()
 
     g_left(450); // 45 degree left to clear gap
 
-    drive(900); // forward enough to go through gap
+    drive(950); // forward enough to go through gap
 
     g_left(450); // line with mid post bottom flag
 
@@ -97,14 +97,14 @@ void skills19()
     g_left(1020);
 
 
-    drive(-350); // reverse to mid mid shot spot // lineright
+    drive(-450); // reverse to mid mid shot spot // lineright
 
     //g_right(100, 3);
 
 
     g_right(450); // left line with tilt cap
 
-    drive(-800);
+    drive(-1000);
 
     g_left(450);
 
