@@ -13,20 +13,25 @@ void skills19()
 
     lift.move(0);
 
-    drive(-100);
+    //drive(-100);
     g_right(900);
 
-    //REST(500);
-    //fly(-45); // spin flywheel backwards in order to not get stuck
+    waitDrive(REVERSE, 40, 700);
 
-    // intake.move(50);
-    // lift.move(LIFT_UP_SPEED);
+    // //REST(500);
+    // //fly(-45); // spin flywheel backwards in order to not get stuck
+
+    // // intake.move(50);
+    // // lift.move(LIFT_UP_SPEED);
 
     intake.move(-100);
 
-    drive(1250, 80, 1050, [=](){
+
+    //drive(1350, 90, 1050, [=](){
+    drive(1500, 90, 1050, [=](){
+
         intake.move(50);
-        lift.move(LIFT_UP_SPEED - 40);
+        lift.move(LIFT_UP_SPEED - 20);
     });
     lift.move(0);
     //drive(1250, 80);   // drive to tilt cap
@@ -57,7 +62,7 @@ void skills19()
 
     intake.move(-60);
     lift.move(LIFT_UP_SPEED);
-    REST(500); // lift just enough to shoot first ball
+    REST(800); // lift just enough to shoot first ball
     lift.move(0);
     // fly(FLYWHEEL_BOOST_SPEED);
     // REST(2000); // rest long enough to get to boost speed
@@ -162,38 +167,12 @@ void skills19()
 
     g_right(50);
 
-    drive(-1400); // reverse to back cap
+    drive(-800); // reverse to back cap
 
-    g_left(570); // left to tilt cap
+    g_right(900); // left to tilt cap
 
-
-    intake.move(COMBINE_INTAKE_SPEED);
-    lift.move(LIFT_UP_SPEED - 40);
-    drive(1150); // drive to blue back tilt cap
-    REST(300); // delay long enough to get good spot
-    lift.move(0);
-
-    fly(FLYWHEEL_TOP_FLAG - 5);
-
-    drive(-1100); // reverse to line with flags
-    g_right(530); // line with top flag
-
-    //g_left(50, 5);
-    lift.move(LIFT_UP_SPEED);
-    REST(600); // delay enough for shoot top
-    lift.move(0);
-    g_right(50, 5);
-
-    drive(750); // line with platform
-
-    g_left(590);
-
-    drive(1200);
-    REST(300);
-    drive(800);
-
-
-
-
+    drive(-1100);
+    REST(500);
+    drive(-900);
 
 }
