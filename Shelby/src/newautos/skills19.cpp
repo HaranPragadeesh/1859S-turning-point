@@ -5,14 +5,14 @@ void skills19()
 {
     setDriveBrakes(COAST);
     REST(500);
-    fly(-35); // spin flywheel backwards in order to not get stuck
+    fly(-45); // spin flywheel backwards in order to not get stuck
 
-    intake.move(90);
+    intake.move(50);
     lift.move(LIFT_UP_SPEED);
 
     drive(1350, 80);   // drive to tilt cap
 
-    REST(300);
+    REST(100);
 
     ////////////////////////////////////////////////////////////////////////
 
@@ -94,7 +94,7 @@ void skills19()
 
     drive(200);
 
-    g_left(1020);
+    g_left(1050);
 
 
     drive(-450); // reverse to mid mid shot spot // lineright
@@ -104,14 +104,17 @@ void skills19()
 
     g_right(450); // left line with tilt cap
 
-    drive(-1000);
+    drive(-1200);
 
     g_left(450);
+
+    drive(-500);
+    waitDrive(REVERSE, 40, 900);
 
     intake.move(COMBINE_INTAKE_SPEED);
 
     lift.move(LIFT_UP_SPEED - 30);
-    drive(750);
+    drive(1350, 80);
     REST(100); // rest enough for ball to get in good spot consist
     lift.move(0);
 
@@ -125,7 +128,7 @@ void skills19()
 
     intake.move(-70);
 
-    g_right(480); // arb deg right shot spot deg
+    g_right(560); // arb deg right shot spot deg
 
     //g_left(80, 5);
     lift.move(LIFT_UP_SPEED); // shoot mid mid
