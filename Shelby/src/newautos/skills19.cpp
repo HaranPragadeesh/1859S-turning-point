@@ -14,9 +14,9 @@ void skills19()
     lift.move(0);
 
     //drive(-100);
-    g_right(900);
+    g_right(920);
 
-    waitDrive(REVERSE, 40, 700);
+    //waitDrive(REVERSE, 40, 700);
 
     // //REST(500);
     // //fly(-45); // spin flywheel backwards in order to not get stuck
@@ -25,10 +25,7 @@ void skills19()
     // // lift.move(LIFT_UP_SPEED);
 
     intake.move(-100);
-
-
-    //drive(1350, 90, 1050, [=](){
-    drive(1500, 90, 1050, [=](){
+    drive(1350, 80, 1050, [=](){
 
         intake.move(50);
         lift.move(LIFT_UP_SPEED - 20);
@@ -82,9 +79,9 @@ void skills19()
 
     intake.move(-70);
 
-    drive(1200, 90, 900, [=](){
+    drive(1200, 90, 1050, [=](){
         intake.move(50);
-        lift.move(LIFT_UP_SPEED - 20);
+        lift.move(LIFT_UP_SPEED - 40);
     });
 
     //intake.move(COMBINE_INTAKE_SPEED);
@@ -133,17 +130,25 @@ void skills19()
 
     g_right(450); // left line with tilt cap
 
-    drive(-1225);
+    drive(-1200);
 
     g_left(450);
 
     drive(-500);
     waitDrive(REVERSE, 40, 900);
 
-    intake.move(COMBINE_INTAKE_SPEED);
+    // intake.move(COMBINE_INTAKE_SPEED);
+    //
+    // lift.move(LIFT_UP_SPEED - 30);
+    // drive(1350, 80);
 
-    lift.move(LIFT_UP_SPEED - 30);
-    drive(1350, 80);
+    intake.move(-100);
+    drive(1350, 80, 1050, [=](){
+
+        intake.move(50);
+        lift.move(LIFT_UP_SPEED - 20);
+    });
+
     REST(100); // rest enough for ball to get in good spot consist
     lift.move(0);
 
@@ -153,11 +158,11 @@ void skills19()
 
 
 
-    drive(-850); // reverse to line with shot spot
+    drive(-950); // reverse to line with shot spot
 
     intake.move(-70);
 
-    g_right(900); // arb deg right shot spot deg
+    g_right(800); // arb deg right shot spot deg
 
     //g_left(80, 5);
     lift.move(LIFT_UP_SPEED); // shoot mid mid
@@ -165,13 +170,13 @@ void skills19()
     lift.move(0);
     //g_right(80, 5);
 
-    g_right(50);
+    g_right(100);
 
-    drive(-800); // reverse to back cap
+    drive(-600); // reverse to back cap
 
     g_right(900); // left to tilt cap
 
-    drive(-1100);
+    drive(-900);
     REST(500);
     drive(-900);
 
