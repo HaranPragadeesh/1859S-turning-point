@@ -7,10 +7,16 @@ void skills19()
     REST(500);
     fly(-45); // spin flywheel backwards in order to not get stuck
 
-    intake.move(50);
-    lift.move(LIFT_UP_SPEED);
+    // intake.move(50);
+    // lift.move(LIFT_UP_SPEED);
 
-    drive(1350, 80);   // drive to tilt cap
+    intake.move(-70);
+
+    drive(1250, 80, 800, [=](){
+        intake.move(50);
+        lift.move(LIFT_UP_SPEED);
+    });
+    //drive(1250, 80);   // drive to tilt cap
 
     REST(100);
 
@@ -61,7 +67,7 @@ void skills19()
     intake.move(COMBINE_INTAKE_SPEED);
     lift.move(LIFT_UP_SPEED - 30);
 
-    drive(1200);   // drive to tilt cap
+    drive(1200, 80);   // drive to tilt cap
 
     REST(100);
 
@@ -104,7 +110,7 @@ void skills19()
 
     g_right(450); // left line with tilt cap
 
-    drive(-1200);
+    drive(-1225);
 
     g_left(450);
 
@@ -124,11 +130,11 @@ void skills19()
 
 
 
-    drive(-1150); // reverse to line with shot spot
+    drive(-850); // reverse to line with shot spot
 
     intake.move(-70);
 
-    g_right(560); // arb deg right shot spot deg
+    g_right(900); // arb deg right shot spot deg
 
     //g_left(80, 5);
     lift.move(LIFT_UP_SPEED); // shoot mid mid
@@ -136,7 +142,7 @@ void skills19()
     lift.move(0);
     //g_right(80, 5);
 
-    g_right(100, 5);
+    g_right(50);
 
     drive(-1400); // reverse to back cap
 
