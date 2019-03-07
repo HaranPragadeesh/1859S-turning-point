@@ -4,28 +4,41 @@
 void skills19()
 {
     setDriveBrakes(COAST);
-    REST(500);
-    fly(-45); // spin flywheel backwards in order to not get stuck
+
+
+    fly(FLYWHEEL_TOP_FLAG + 5);
+    REST(2000);
+    lift.move(LIFT_UP_SPEED);
+    REST(500); // lift just enough to shoot first ball
+
+    lift.move(0);
+
+    drive(-100);
+    g_right(900);
+
+    //REST(500);
+    //fly(-45); // spin flywheel backwards in order to not get stuck
 
     // intake.move(50);
     // lift.move(LIFT_UP_SPEED);
 
-    intake.move(-70);
+    intake.move(-100);
 
-    drive(1250, 80, 800, [=](){
+    drive(1250, 80, 1050, [=](){
         intake.move(50);
-        lift.move(LIFT_UP_SPEED);
+        lift.move(LIFT_UP_SPEED - 40);
     });
+    lift.move(0);
     //drive(1250, 80);   // drive to tilt cap
 
     REST(100);
 
     ////////////////////////////////////////////////////////////////////////
 
-    lift.move(LIFT_CLR_SPEED);
-    REST(400);
+    //lift.move(LIFT_CLR_SPEED);
+    //REST(400);
 
-    lift.move(0);
+    //lift.move(0);
 
     drive(-1350, 80); // reverse to line with flags
 
@@ -42,32 +55,37 @@ void skills19()
 
     drive(1250); // drive to red tile shoot pos
 
-    intake.move(-100);
+    intake.move(-60);
     lift.move(LIFT_UP_SPEED);
-    REST(200); // lift just enough to shoot first ball
+    REST(500); // lift just enough to shoot first ball
     lift.move(0);
-    fly(FLYWHEEL_BOOST_SPEED);
-    REST(2000); // rest long enough to get to boost speed
-    lift.move(LIFT_UP_SPEED);
-    REST(500); // lift enouugh to shoot second ball
-    lift.move(0);
-    //fly(0);
-
-    //REST(2000);// rest long enough to let flywheel coast slow
+    // fly(FLYWHEEL_BOOST_SPEED);
+    // REST(2000); // rest long enough to get to boost speed
+    // lift.move(LIFT_UP_SPEED);
+    // REST(500); // lift enouugh to shoot second ball
+    // lift.move(0);
+    // //fly(0);
+    //
+    // //REST(2000);// rest long enough to let flywheel coast slow
 
 
     drive(100); // forward enough to line with tilt cap
 
 
     g_right(900); // turn to tilt cap
-    fly(-35); // spin flywheel backwards in order to not get stuck
+    //fly(-35); // spin flywheel backwards in order to not get stuck
 
+    intake.move(-70);
 
+    drive(1200, 90, 900, [=](){
+        intake.move(50);
+        lift.move(LIFT_UP_SPEED - 20);
+    });
 
-    intake.move(COMBINE_INTAKE_SPEED);
-    lift.move(LIFT_UP_SPEED - 30);
+    //intake.move(COMBINE_INTAKE_SPEED);
+    //___int_size_t_hlift.move(LIFT_UP_SPEED - 30);
 
-    drive(1200, 80);   // drive to tilt cap
+    //drive(1200, 80);   // drive to tilt cap
 
     REST(100);
 
