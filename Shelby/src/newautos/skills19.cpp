@@ -5,16 +5,15 @@ void skills19()
 {
     setDriveBrakes(COAST);
 
-
-    fly(FLYWHEEL_TOP_FLAG + 5);
-    REST(2000);
-    lift.move(LIFT_UP_SPEED);
-    REST(500); // lift just enough to shoot first ball
-
-    lift.move(0);
-
-    //drive(-100);
-    g_right(920);
+    // fly(FLYWHEEL_TOP_FLAG + 5);
+    // REST(2000);
+    // lift.move(LIFT_UP_SPEED);
+    // REST(500); // lift just enough to shoot first ball
+    //
+    // lift.move(0);
+    //
+    // //drive(-100);
+    // g_right(900);
 
     //waitDrive(REVERSE, 40, 700);
 

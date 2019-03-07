@@ -4,7 +4,7 @@
 
 void opcontrol()
 {
-
+	yawGyroT.reset();
 	lift.set_brake_mode(HOLD);
 	//testauto();
 

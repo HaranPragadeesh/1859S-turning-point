@@ -13,8 +13,8 @@ void testauto2()
   //turn(-900);
 
 
-  // drive(-1350, 100, 500, [=](){
-  //    lift.move(127);
+  // drive(dist, maxP, tickCheck, [=](){
+  //  //  stuff
   // });
 
 }

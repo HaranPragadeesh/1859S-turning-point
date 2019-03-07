@@ -21,7 +21,8 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
-    REST(1500);
+
+    REST(1200);
 
     skills19();
     //new_redclose();

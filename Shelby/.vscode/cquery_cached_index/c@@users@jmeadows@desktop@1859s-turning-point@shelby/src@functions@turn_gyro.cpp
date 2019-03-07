@@ -2,6 +2,7 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
+float factor = 0.985f;
 
 void g_turn(int dir, int target, int maxSpeed)
 {
@@ -42,7 +43,7 @@ void g_turn(int dir, int target, int maxSpeed)
 
         // debug();
 
-        error = target - std::abs(yawGyroT.get_value());
+        error = target - std::abs(yawGyroT.get_value()) * factor;
 
         if (error < errorZone) {
            errorTot += error;
@@ -73,7 +74,7 @@ void g_turn(int dir, int target, int maxSpeed)
         LEFT_DRIVE(power * dir);
         RIGHT_DRIVE(-power * dir);
 
-        if(std::abs(yawGyroT.get_value()) > targetMin && ft)
+        if(std::abs(yawGyroT.get_value()) * factor > targetMin && ft)
         {
             pTime = pros::millis();
             firstPause = pros::millis();
@@ -82,7 +83,7 @@ void g_turn(int dir, int target, int maxSpeed)
         }
         if(pros::millis() > pTime + exitDelay && ogPass)
         {
-            if((std::abs(yawGyroT.get_value()) > targetMin && std::abs(yawGyroT.get_value()) < targetMax) or pros::millis() > firstPause + emergancyExit)
+            if((std::abs(yawGyroT.get_value()) * factor > targetMin && std::abs(yawGyroT.get_value()) * factor < targetMax) or pros::millis() > firstPause + emergancyExit)
             {
                 settled = true;
             }
