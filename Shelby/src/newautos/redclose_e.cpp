@@ -17,15 +17,20 @@ void redclose_e()
 
      drive(-500);
 
-     rotate(910); // turn back towards tilt cap with ball under
+     rotate(900); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
 
-     intake.move(COMBINE_INTAKE_SPEED);
-     lift.move(50);
 
-     drive(1100, 90);   // drive to tilt cap
+
+     drive(1100, 90, 700, [=](){
+         intake.move(COMBINE_INTAKE_SPEED);
+         lift.move(100);
+     });
+     liftCheck(500);
+
+     //drive(1100, 90);   // drive to tilt cap
      REST(200);
      //REST(50);
      lift.move(0);
@@ -56,7 +61,7 @@ void redclose_e()
 
      //drive(100);
 
-     rotate(910); // turn to climb plat
+     rotate(900); // turn to climb plat
 
      if(autoShouldPark)
      {

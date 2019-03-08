@@ -20,7 +20,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
     setDriveBrakes(COAST);
 
     // distance pid stuff
-    float kP = .5; //.50;//.3; // .25
+    float kP = .7; //.50;//.3; // .25
     float kI = .005;//.0005;
     float kD = 1;//1;
 
@@ -48,7 +48,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
     // timer stuff
     float pTime; // pause time
-    int exitDelay = 400;
+    int exitDelay = 350;
     //settle
     bool settled = false;
 

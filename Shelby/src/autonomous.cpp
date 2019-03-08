@@ -28,8 +28,8 @@ void autonomous()
     //skills19();
     //new_redclose();
 
-    rotate(900);
-    rotate(-900);
+    // rotate(900);
+    // rotate(-900);
 
     switch(selectedAuto){
         case 1:

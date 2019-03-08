@@ -6,7 +6,7 @@
 extern void rotate(int target, int maxSpeed = 110);
 
 
-extern void liftCheck();
+extern void liftCheck(int exitTime = 1000);
 extern void singleOutDouble();
 extern void fly(int voltage);
 

@@ -1,10 +1,9 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
-int exitTime = 1500;
 
 
-void liftCheck()
+void liftCheck(int exitTime)
 {
     bool hasBall = false;
     int freezeTime = pros::millis();

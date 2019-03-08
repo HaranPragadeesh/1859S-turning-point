@@ -2,10 +2,13 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
-int rotateFactor = 2.3;
+float rotateFactor = 2.45;
 
 void rotate(int targetE, int maxSpeed)
 {
+
+
+    setDriveBrakes(BRAKE);
     int target = targetE / rotateFactor;
 
     int dir = target / std::abs(target);
@@ -17,9 +20,9 @@ void rotate(int targetE, int maxSpeed)
     rightFront.tare_position();
     rightRear.tare_position();
 
-    float kP = 1; // .55
+    float kP = .65; // .55
     float kI = .005; // .005
-    float kD = .5; // 1
+    float kD = 1; // 1
 
     float errorZone = 150;
     float errorL, errorTotL, errorLastL;
@@ -33,8 +36,8 @@ void rotate(int targetE, int maxSpeed)
 
 
    // target = target * dir;
-    float targetMin = target - 20;
-    float targetMax = target + 20;
+    float targetMin = std::abs(target) - 22;
+    float targetMax = std::abs(target) + 22;
     bool ftL = true;
     bool ftR = true;
     bool ogPassL = false;
@@ -76,6 +79,8 @@ void rotate(int targetE, int maxSpeed)
           powerR = maxSpeed;
 
 
+        pros::lcd::set_text(3, std::to_string(errorL));
+        pros::lcd::set_text(4, std::to_string(errorR));
 
 
         LEFT_DRIVE(powerL * dir);
@@ -87,18 +92,28 @@ void rotate(int targetE, int maxSpeed)
             firstPauseL = pros::millis();
             ftL = false;
             ogPassL = true;
+            pros::lcd::set_text(2, "ogPassL");
         }
-        if(pros::millis() > pTimeL + exitDelay && ogPassL)
+        if(settledL == false)
         {
-            if((std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax) or pros::millis() > firstPauseL + emergancyExit)
+            if(pros::millis() > pTimeL + exitDelay && ogPassL)
             {
-                settledL = true;
-            }
-            else
-            {
-                pTimeL = pros::millis();
+                if((std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax) or pros::millis() > firstPauseL + emergancyExit)
+                {
+                    settledL = true;
+                    pros::lcd::set_text(5, "settledL");
+
+                }
+                else
+                {
+                    pTimeL = pros::millis();
+                    pros::lcd::set_text(5, "not settledL");
+
+
+                }
             }
         }
+
 
         if(std::abs(RENCO) > targetMin && ftR)
         {
@@ -106,18 +121,27 @@ void rotate(int targetE, int maxSpeed)
             firstPauseR = pros::millis();
             ftR = false;
             ogPassR = true;
+            pros::lcd::set_text(3, "ogPassR");
         }
-        if(pros::millis() > pTimeR + exitDelay && ogPassR)
+        if(settledR == false)
         {
-            if((std::abs(RENCO) > targetMin && std::abs(RENCO) < targetMax) or pros::millis() > firstPauseR + emergancyExit)
+            if(pros::millis() > pTimeR + exitDelay && ogPassR)
             {
-                settledR = true;
-            }
-            else
-            {
-                pTimeR = pros::millis();
+                if((std::abs(RENCO) > targetMin && std::abs(RENCO) < targetMax) or pros::millis() > firstPauseR + emergancyExit)
+                {
+                    settledR = true;
+                    pros::lcd::set_text(6, "settledR");
+
+                }
+                else
+                {
+                    pTimeR = pros::millis();
+                    pros::lcd::set_text(6, "not settledR");
+
+                }
             }
         }
+
 
         pros::Task::delay(20);
     }

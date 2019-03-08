@@ -9,3 +9,5 @@ extern void new_bluefar();
 
 extern void new_skills();
 extern void skills19();
+
+extern void redclose_e();
