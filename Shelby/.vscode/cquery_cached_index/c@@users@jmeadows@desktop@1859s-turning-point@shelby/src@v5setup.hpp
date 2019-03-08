@@ -4,7 +4,7 @@
 #define REST(x) pros::Task::delay(x)
 
 extern void liftCheck();
-
+extern void singleOutDouble();
 extern void fly(int voltage);
 
 extern void debug();

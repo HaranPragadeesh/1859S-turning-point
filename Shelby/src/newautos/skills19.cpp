@@ -18,17 +18,18 @@ void skills19()
     //waitDrive(REVERSE, 40, 700);
 
     // //REST(500);
-    // //fly(-45); // spin flywheel backwards in order to not get stuck
+    //fly(-45); // spin flywheel backwards in order to not get stuck
 
-    // // intake.move(50);
-    // // lift.move(LIFT_UP_SPEED);
+    intake.move(-50);
+    lift.move(50);
 
-    intake.move(-100);
+    //intake.move(-100);
     drive(1350, 80, 1050, [=](){
 
-        intake.move(50);
-        lift.move(LIFT_UP_SPEED - 20);
+        intake.move(70);
+        lift.move(50);
     });
+    liftCheck();
     lift.move(0);
     //drive(1250, 80);   // drive to tilt cap
 
@@ -41,25 +42,38 @@ void skills19()
 
     //lift.move(0);
 
-    drive(-1350, 80); // reverse to line with flags
+    fly(FLYWHEEL_IDLE); // start flywheel at full speed
+
+    drive(-1450); // reverse to line with flags
 
     waitDrive(REVERSE, 60, 1000);
 
     ////////////////////////////////////////////////////////////////////////
-    fly(80); // start flywheel at full speed
 
     REST(250);
 
-    drive(100, 60);
+    drive(150, 60);
 
     g_left(900); // turn to line with flags
+
+    singleOutDouble();
+
+    fly(FLYWHEEL_BOOST_SPEED);
 
     drive(1250); // drive to red tile shoot pos
 
     intake.move(-60);
-    lift.move(LIFT_UP_SPEED);
-    REST(800); // lift just enough to shoot first ball
+
+
+    //fly(FLYWHEEL_BOOST_SPEED);
+    //REST(2000);
+    lift.move(127);
+    REST(400);
     lift.move(0);
+
+    // lift.move(LIFT_UP_SPEED);
+    // REST(800); // lift just enough to shoot first ball
+    // lift.move(0);
     // fly(FLYWHEEL_BOOST_SPEED);
     // REST(2000); // rest long enough to get to boost speed
     // lift.move(LIFT_UP_SPEED);
@@ -73,15 +87,22 @@ void skills19()
     drive(100); // forward enough to line with tilt cap
 
 
-    g_right(900); // turn to tilt cap
+    g_right(950); // turn to tilt cap
     //fly(-35); // spin flywheel backwards in order to not get stuck
 
-    intake.move(-70);
+    // intake.move(-100);
+    //
+    // drive(1350, 90, 1250, [=](){
+    //     intake.move(50);
+    //     lift.move(LIFT_UP_SPEED - 40);
+    // });
+    // liftCheck();
 
-    drive(1200, 90, 1050, [=](){
-        intake.move(50);
-        lift.move(LIFT_UP_SPEED - 40);
-    });
+    intake.move(50);
+    lift.move(40);
+    drive(1250);
+    liftCheck();
+    lift.move(0);
 
     //intake.move(COMBINE_INTAKE_SPEED);
     //___int_size_t_hlift.move(LIFT_UP_SPEED - 30);
@@ -94,13 +115,13 @@ void skills19()
 
     lift.move(0); // stop lift for wheel
 
-    drive(-750); // reverse enough to line with gap
+    drive(-850); // reverse enough to line with gap
     intake.move(-70);
 
 
     g_left(450); // 45 degree left to clear gap
 
-    drive(950); // forward enough to go through gap
+    drive(900); // forward enough to go through gap
 
     g_left(450); // line with mid post bottom flag
 
@@ -171,12 +192,13 @@ void skills19()
 
     g_right(100);
 
-    drive(-600); // reverse to back cap
+    drive(-650); // reverse to back cap
 
     g_right(900); // left to tilt cap
 
+    setDriveBrakes(HOLD);
     drive(-900);
     REST(500);
-    drive(-900);
+    drive(-800);
 
 }

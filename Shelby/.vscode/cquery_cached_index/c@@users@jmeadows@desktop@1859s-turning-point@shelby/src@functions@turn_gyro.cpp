@@ -2,7 +2,7 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
-float factor = 0.985f;
+float factor = 1;
 
 void g_turn(int dir, int target, int maxSpeed)
 {
@@ -12,7 +12,7 @@ void g_turn(int dir, int target, int maxSpeed)
     //setDriveBrakes(BRAKE);
 
     float kP = .55; // .55
-    float kI = .005; // .005
+    float kI = .01; // .005
     float kD = 1; // 1
 
     float errorZone = 150;

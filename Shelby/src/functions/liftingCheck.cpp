@@ -16,6 +16,9 @@ void liftCheck()
         if(limitSwitch.get_value() == 1){
             hasBall = true;
         }
+        else{
+            lift.move(100);
+        }
     }
     lift.set_brake_mode(BRAKE);
     lift.move_velocity(0);
