@@ -6,6 +6,7 @@
 
 void noPidRotate(int targetE, int speed)
 {
+    int dir = targetE / std::abs(targetE);
     float rotateFactor = 2.40;
 
 
@@ -19,8 +20,7 @@ void noPidRotate(int targetE, int speed)
     int target = targetE / rotateFactor;
 
 
-    int dir = target / std::abs(target);
-    while(LENCO < std::abs(target) - 15)
+    while(std::abs(LENCO) < std::abs(target) - 15)
     {
         LEFT_DRIVE(speed * dir);
         RIGHT_DRIVE(-speed * dir);
