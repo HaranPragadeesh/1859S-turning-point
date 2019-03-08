@@ -3,6 +3,9 @@
 
 #define REST(x) pros::Task::delay(x)
 
+extern void rotate(int target, int maxSpeed = 110);
+
+
 extern void liftCheck();
 extern void singleOutDouble();
 extern void fly(int voltage);

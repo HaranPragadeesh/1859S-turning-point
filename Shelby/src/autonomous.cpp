@@ -28,14 +28,16 @@ void autonomous()
     //skills19();
     //new_redclose();
 
-
+    rotate(900);
+    rotate(-900);
 
     switch(selectedAuto){
         case 1:
             // do auto 1 red close
             //new_redclose();
-            redclose_gy();
-        //  redclose();
+            //redclose_gy();
+            //  redclose();
+            redclose_e();
             break;
         case 2:
             // do auto 2 red far
