@@ -17,7 +17,7 @@ void liftCheck()
             hasBall = true;
         }
         else{
-            lift.move(100);
+            lift.move(60);
         }
     }
     lift.set_brake_mode(BRAKE);

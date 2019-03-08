@@ -6,6 +6,8 @@
 
 void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::function<void()> callback)
 {
+    int minPower = 15;
+
     int target = std::abs(targetM);
     int dir;
     if(targetM > 0)
@@ -18,11 +20,11 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
     setDriveBrakes(COAST);
 
     // distance pid stuff
-    float kP = .5;//.3; // .25
+    float kP = .25;//.3; // .25
     float kI = .005;//.0005;
     float kD = 1;//1;
 
-    float errorZone = 100; // target * .1;
+    float errorZone = 150; // target * .1;
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;
@@ -37,8 +39,8 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
 
     // target zone
-    float targetMin = target - 15;
-    float targetMax = target + 15;
+    float targetMin = target - 25;
+    float targetMax = target + 25;
 
     // first run stuff
     bool ft = true;
@@ -97,6 +99,18 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
         {
           power = -maxPower;
         }
+
+        if(dir == 1 && power > minPower)
+        {
+          power = maxPower;
+
+        }
+        if(dir == -1 && power < -minPower)
+        {
+          power = -maxPower;
+        }
+
+
 
         // set pid stuff for keeping in line
         pTerml = errorl * (kPl * dir);

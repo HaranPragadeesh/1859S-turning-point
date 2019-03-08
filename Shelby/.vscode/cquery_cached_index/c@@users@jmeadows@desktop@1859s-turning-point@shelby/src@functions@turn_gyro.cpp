@@ -6,14 +6,15 @@ float factor = 1;
 
 void g_turn(int dir, int target, int maxSpeed)
 {
+    int minPower = 20;
 
      yawGyroT.reset();
 
     //setDriveBrakes(BRAKE);
 
     float kP = .55; // .55
-    float kI = .01; // .005
-    float kD = 1; // 1
+    float kI = .005; // .005
+    float kD = 2; // 1
 
     float errorZone = 150;
     float error, errorTot, errorLast;
@@ -27,7 +28,7 @@ void g_turn(int dir, int target, int maxSpeed)
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
-    int exitDelay = 500; // millis to check exit
+    int exitDelay = 350; // millis to check exit
     int emergancyExit = 5000000; // millis to emergancyExit
     bool settled = false;
     float firstPause;
@@ -69,7 +70,14 @@ void g_turn(int dir, int target, int maxSpeed)
         {
           power = maxSpeed;
         }
-
+        if(power < minPower && error > 0)
+        {
+            power = minPower;
+        }
+        if(power < minPower && error < 0)
+        {
+            power = -minPower;
+        }
 
         LEFT_DRIVE(power * dir);
         RIGHT_DRIVE(-power * dir);

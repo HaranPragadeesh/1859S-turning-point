@@ -5,21 +5,6 @@ void skills19()
 {
     setDriveBrakes(COAST);
 
-    // fly(FLYWHEEL_TOP_FLAG + 5);
-    // REST(2000);
-    // lift.move(LIFT_UP_SPEED);
-    // REST(500); // lift just enough to shoot first ball
-    //
-    // lift.move(0);
-    //
-    // //drive(-100);
-    // g_right(900);
-
-    //waitDrive(REVERSE, 40, 700);
-
-    // //REST(500);
-    //fly(-45); // spin flywheel backwards in order to not get stuck
-
     intake.move(-50);
     lift.move(50);
 
@@ -44,9 +29,9 @@ void skills19()
 
     fly(FLYWHEEL_IDLE); // start flywheel at full speed
 
-    drive(-1450); // reverse to line with flags
+    drive(-1425); // reverse to line with flags
 
-    waitDrive(REVERSE, 60, 1000);
+    waitDrive(REVERSE, 60, 400);
 
     ////////////////////////////////////////////////////////////////////////
 
@@ -87,36 +72,33 @@ void skills19()
     drive(100); // forward enough to line with tilt cap
 
 
-    g_right(950); // turn to tilt cap
-    //fly(-35); // spin flywheel backwards in order to not get stuck
+    g_right(935); // turn to tilt cap
 
-    // intake.move(-100);
-    //
-    // drive(1350, 90, 1250, [=](){
-    //     intake.move(50);
-    //     lift.move(LIFT_UP_SPEED - 40);
-    // });
-    // liftCheck();
+    intake.move(-50);
+    lift.move(50);
 
-    intake.move(50);
-    lift.move(40);
-    drive(1250);
+    //intake.move(-100);
+    drive(1250, 80, 1050, [=](){
+
+        intake.move(70);
+        lift.move(50);
+    });
     liftCheck();
     lift.move(0);
 
-    //intake.move(COMBINE_INTAKE_SPEED);
-    //___int_size_t_hlift.move(LIFT_UP_SPEED - 30);
+    // intake.move(70);
+    // lift.move(70);
+    // drive(1250);
+    // liftCheck();
+    // lift.move(0);
 
-    //drive(1200, 80);   // drive to tilt cap
 
     REST(100);
 
     ////////////////////////////////////////////////////////////////////////
 
-    lift.move(0); // stop lift for wheel
 
     drive(-850); // reverse enough to line with gap
-    intake.move(-70);
 
 
     g_left(450); // 45 degree left to clear gap
@@ -140,7 +122,7 @@ void skills19()
 
     drive(200);
 
-    g_left(1050);
+    g_left(1100);
 
 
     drive(-450); // reverse to mid mid shot spot // lineright
@@ -154,8 +136,8 @@ void skills19()
 
     g_left(450);
 
-    drive(-500);
-    waitDrive(REVERSE, 40, 900);
+    //drive(-500);
+    //waitDrive(REVERSE, 40, 900);
 
     // intake.move(COMBINE_INTAKE_SPEED);
     //
@@ -163,13 +145,15 @@ void skills19()
     // drive(1350, 80);
 
     intake.move(-100);
-    drive(1350, 80, 1050, [=](){
+    drive(600, 80, 500, [=](){
+
 
         intake.move(50);
         lift.move(LIFT_UP_SPEED - 20);
     });
 
-    REST(100); // rest enough for ball to get in good spot consist
+
+    liftCheck();
     lift.move(0);
 
     //drive(-200, 3);
@@ -197,8 +181,8 @@ void skills19()
     g_right(900); // left to tilt cap
 
     setDriveBrakes(HOLD);
-    drive(-900);
+    drive(-950, 127);
     REST(500);
-    drive(-800);
+    drive(-800, 127);
 
 }

@@ -21,17 +21,20 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
+    //g_right(900);
 
-    REST(1200);
+    //REST(1200);
 
-    skills19();
+    //skills19();
     //new_redclose();
+
+
 
     switch(selectedAuto){
         case 1:
             // do auto 1 red close
-            new_redclose();
-            //redclose_gy();
+            //new_redclose();
+            redclose_gy();
         //  redclose();
             break;
         case 2:

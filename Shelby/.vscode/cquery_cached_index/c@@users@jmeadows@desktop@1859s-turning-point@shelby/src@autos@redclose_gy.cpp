@@ -4,9 +4,9 @@
 void redclose_gy()
 {
      fly(FLYWHEEL_BOOST_SPEED);
-     drive(1250); // hit bottom flag
+     drive(1150); // hit bottom flag
 
-     drive(-850); // newReverse from bottom flag
+     drive(-750); // newReverse from bottom flag
 
 
      lift.move(LIFT_UP_SPEED);
@@ -14,7 +14,7 @@ void redclose_gy()
      lift.move(0);
      fly(115);
 
-     drive(-650);
+     drive(-500);
 
      g_right(900); // turn back towards tilt cap with ball under
 
@@ -51,7 +51,7 @@ void redclose_gy()
      REST(500); // wait time for shoot
      lift.move(0);
 
-     drive(-500);
+     drive(-300);
 
      //drive(100);
 
