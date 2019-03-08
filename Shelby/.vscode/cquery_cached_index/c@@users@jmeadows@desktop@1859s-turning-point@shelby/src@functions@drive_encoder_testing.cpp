@@ -4,7 +4,7 @@
 //#include <functional>
 
 
-void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::function<void()> callback)
+void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::function<void()> callback, bool check)
 {
     //int minPower = 15;
 
@@ -62,6 +62,19 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
     while(!settled)
     {
+        if(check)
+        {
+            if(limitSwitch.get_value() != 1)
+            {
+                lift.move(127);
+            }
+            if(limitSwitch.get_value() == 1)
+            {
+                lift.set_brake_mode(BRAKE);
+                lift.move(0);
+            }
+        }
+
       if(std::abs(LENCO) > callbackTicks)
       {
         callback();

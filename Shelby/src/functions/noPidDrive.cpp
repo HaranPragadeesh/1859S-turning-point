@@ -12,12 +12,11 @@ void noPidDrive(int target, int speed)
     rightRear.tare_position();
 
     int dir = target / std::abs(target);
-    while(LENCO < std::abs(target))
+    while(std::abs(LENCO) < std::abs(target))
     {
-        LEFT_DRIVE(speed);
-        RIGHT_DRIVE(speed);
+        LEFT_DRIVE(speed * dir);
+        RIGHT_DRIVE(speed * dir);
     }
-    setDriveBrakes(BRAKE);
     LEFT_DRIVE(0);
     RIGHT_DRIVE(0);
 }

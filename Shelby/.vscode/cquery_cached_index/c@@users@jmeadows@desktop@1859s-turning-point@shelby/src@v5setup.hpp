@@ -17,9 +17,10 @@ extern void debug();
 extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay = 1);
 
 
+void swing(int side, int target, int speed = 127);
 
 //extern void line_test(int dir, int target, int maxPower);
-extern void drive(/*int dir,*/ int targetM, int maxPower = 110, int callbackTicks = 0, std::function<void()> callback = [](){});
+extern void drive(/*int dir,*/ int targetM, int maxPower = 110, int callbackTicks = 0, std::function<void()> callback = [](){}, bool check = false);
 //extern void newForward(int dir, int target, int maxPower, int callbackTicks, std::function<void(int)> callback = [](int){});
 
 void newForward(int target,  float factor = 0);

@@ -5,7 +5,7 @@
 
 void rotate(int targetE, int maxSpeed)
 {
-    float rotateFactor = 2.45;
+    float rotateFactor = 2.40;
 
 
 

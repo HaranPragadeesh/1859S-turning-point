@@ -6,12 +6,14 @@
 
 void noPidRotate(int targetE, int speed)
 {
+    float rotateFactor = 2.40;
+
+
     leftFront.tare_position();
     leftRear.tare_position();
     rightFront.tare_position();
     rightRear.tare_position();
 
-    float rotateFactor = 2.45;
 
 
     int target = targetE / rotateFactor;

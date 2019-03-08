@@ -24,20 +24,20 @@ void redclose_e()
 
 
 
-     drive(1150, 110, 700, [=](){
+     drive(1100, 110, 700, [=](){
          intake.move(COMBINE_INTAKE_SPEED);
-         lift.move(127);
-     });
-     liftCheck(500);
+         //lift.move(50);
+     }, true);
+     liftCheck(250);
 
      //drive(1100, 90);   // drive to tilt cap
-     REST(200);
+     //REST(200);
      //REST(50);
-     lift.move(0);
+     //lift.move(0);
 
      ////////////////////////////////////////////////////////////////////////
 
-     drive(-1150); // newReverse to line with flags
+     drive(-1100, 110, 0, [=](){}, true); // newReverse to line with flags
 
      //lift.move(LIFT_CLR_SPEED);
 
@@ -50,7 +50,8 @@ void redclose_e()
 
      rotate(-900); // turn to line with flags
 
-     drive(-300); //650 // *tune* newReverse to line with platform to double shot
+     //drive(-300); //650 // *tune* newReverse to line with platform to double shot
+     drive(-300, 110, 0, [=](){}, true); // newReverse to line with flags
 
      //fly(0);
      shoot(800);
@@ -78,12 +79,13 @@ void redclose_e()
      }
      else{ // if no park
 
+         setDriveBrakes(BRAKE);
 
-         noPidRotate(250);
-         intake.move(-50);
-         noPidDrive(600);
-         noPidRotate(250);
-         noPidDrive(1200, 127);
+         rotate(400);
+         intake.move(-40);
+         drive(1500);
+         drive(-200);
+
      }
 
 }
