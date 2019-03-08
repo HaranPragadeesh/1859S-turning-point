@@ -48,7 +48,7 @@ void redclose_e()
      lift.move(0);
      ////////////////////////////////////////////////////////////////////////
 
-     rotate(-900); // turn to line with flags
+     rotate(-890); // turn to line with flags
 
      //drive(-300); //650 // *tune* newReverse to line with platform to double shot
      drive(-300, 110, 0, [=](){}, true); // newReverse to line with flags
