@@ -4,6 +4,8 @@
 
 void opcontrol()
 {
+
+	setDriveBrakes(COAST);
 	yawGyroT.reset();
 	lift.set_brake_mode(HOLD);
 	//testauto();
@@ -16,9 +18,6 @@ void opcontrol()
 
 	while (true)
 	{
-
-
-
 		debug();
 		//std::cout << "Number of Objects Detected: " << aimbot.get_object_count() << "\n\n";
     //		pros::delay(2);

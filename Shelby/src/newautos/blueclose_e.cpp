@@ -21,7 +21,7 @@ void blueclose_e()
 
      drive(-500);
 
-     rotate(-900); // turn back towards tilt cap with ball under
+     rotate(-880); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
@@ -41,7 +41,7 @@ void blueclose_e()
 
      ////////////////////////////////////////////////////////////////////////
 
-     drive(-1100, 110, 0, [=](){}, true); // newReverse to line with flags
+     drive(-1060, 110, 0, [=](){}, true); // newReverse to line with flags
 
      //lift.move(LIFT_CLR_SPEED);
 
@@ -58,7 +58,9 @@ void blueclose_e()
      drive(-300, 110, 0, [=](){}, true); // newReverse to line with flags
 
      //fly(0);
-     shoot(800);
+     noPidRotate(-50);
+     shoot(500);
+     noPidRotate(50);
 
      if(autoShouldPark)
      {
