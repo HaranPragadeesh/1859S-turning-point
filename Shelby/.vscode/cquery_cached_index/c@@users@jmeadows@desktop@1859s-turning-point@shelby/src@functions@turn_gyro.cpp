@@ -6,7 +6,7 @@ float factor = 1;
 
 void g_turn(int dir, int target, int maxSpeed)
 {
-    int minPower = 20;
+    int minPower = 15;
 
      yawGyroT.reset();
 

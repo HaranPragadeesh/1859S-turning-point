@@ -5,7 +5,7 @@
 
 void debug()
 {
-
+    pros::lcd::set_text(1, std::to_string(pros::millis()));
   int lefto = (leftRear.get_actual_velocity() + leftFront.get_actual_velocity()) / 2;
   int righto = (rightRear.get_actual_velocity() + rightFront.get_actual_velocity()) / 2;
 

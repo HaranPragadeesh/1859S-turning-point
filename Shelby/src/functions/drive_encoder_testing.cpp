@@ -6,7 +6,7 @@
 
 void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::function<void()> callback)
 {
-    int minPower = 15;
+    //int minPower = 15;
 
     int target = std::abs(targetM);
     int dir;
@@ -20,7 +20,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
     setDriveBrakes(COAST);
 
     // distance pid stuff
-    float kP = .25;//.3; // .25
+    float kP = .5; //.50;//.3; // .25
     float kI = .005;//.0005;
     float kD = 1;//1;
 
@@ -39,8 +39,8 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
 
     // target zone
-    float targetMin = target - 25;
-    float targetMax = target + 25;
+    float targetMin = target - 20;
+    float targetMax = target + 20;
 
     // first run stuff
     bool ft = true;
@@ -100,15 +100,15 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
           power = -maxPower;
         }
 
-        if(dir == 1 && power > minPower)
-        {
-          power = maxPower;
 
-        }
-        if(dir == -1 && power < -minPower)
-        {
-          power = -maxPower;
-        }
+        // if(power < minPower && error > 0)
+        // {
+        //   power = minPower;
+        // }
+        // if(power > -minPower && error < 0)
+        // {
+        //   power = -minPower;
+        // }
 
 
 
@@ -156,27 +156,27 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
         // pros::lcd::set_text(6, "timer:" + std::to_string(pros::millis())); // total time since program start
 
      // master motor debug
-        pros::lcd::set_text(1,
-             "LENCO:" + std::to_string(std::abs(LENCO)) +
-             " PowerL: " + std::to_string(masterPower)); // outputs master encoder
-
-     // slave motor debug
-        pros::lcd::set_text(2,
-             "RENCO:" + std::to_string(std::abs(RENCO)) +
-             " PowerR: " + std::to_string(slavePower)); // outputs slave encoder
-
-
-        pros::lcd::set_text(3, "ERROR:" + std::to_string(std::abs(LENCO) - std::abs(RENCO))); // outputs master - slave
-
-        pros::lcd::set_text(5,
-             "p: " + std::to_string(pTerm) +
-             "i: " + std::to_string(iTerm) +
-             "d: " + std::to_string(dTerm)
-        );
-
-        pros::lcd::set_text(6,
-             "line p: " + std::to_string(pTerml)
-        );
+     //    pros::lcd::set_text(1,
+     //         "LENCO:" + std::to_string(std::abs(LENCO)) +
+     //         " PowerL: " + std::to_string(masterPower)); // outputs master encoder
+     //
+     // // slave motor debug
+     //    pros::lcd::set_text(2,
+     //         "RENCO:" + std::to_string(std::abs(RENCO)) +
+     //         " PowerR: " + std::to_string(slavePower)); // outputs slave encoder
+     //
+     //
+     //    pros::lcd::set_text(3, "ERROR:" + std::to_string(std::abs(LENCO) - std::abs(RENCO))); // outputs master - slave
+     //
+     //    pros::lcd::set_text(5,
+     //         "p: " + std::to_string(pTerm) +
+     //         "i: " + std::to_string(iTerm) +
+     //         "d: " + std::to_string(dTerm)
+     //    );
+     //
+     //    pros::lcd::set_text(6,
+     //         "line p: " + std::to_string(pTerml)
+     //    );
 
 
         //save brain cells
