@@ -49,6 +49,7 @@ void autonomous()
             // do auto 3 blue close
             //blueclose();
             //blueclose_gy();
+            blueclose_e();
             break;
         case 4:
             // do auto 4 blue far

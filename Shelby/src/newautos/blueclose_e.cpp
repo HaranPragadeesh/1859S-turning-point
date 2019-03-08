@@ -3,23 +3,25 @@
 
 
 
-void redclose_e()
+void blueclose_e()
 {
      fly(FLYWHEEL_BOOST_SPEED);
      drive(1150); // hit bottom flag
 
      drive(-750, 90); // newReverse from bottom flag
 
-     lift.move(LIFT_UP_SPEED);
-     REST(500); // wait time for shoot
-     lift.move(0);
+     noPidRotate(-100);
+     shoot(500);
+     noPidRotate(100);
+
+
      fly(115);
 
      intake.move(100);
 
      drive(-500);
 
-     rotate(900); // turn back towards tilt cap with ball under
+     rotate(-900); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
@@ -50,7 +52,7 @@ void redclose_e()
      lift.move(0);
      ////////////////////////////////////////////////////////////////////////
 
-     rotate(-890); // turn to line with flags
+     rotate(890); // turn to line with flags
 
      //drive(-300); //650 // *tune* newReverse to line with platform to double shot
      drive(-300, 110, 0, [=](){}, true); // newReverse to line with flags
@@ -67,7 +69,7 @@ void redclose_e()
 
      //drive(100);
 
-     rotate(900); // turn to climb plat
+     rotate(-900); // turn to climb plat
 
 
          setDriveBrakes(HOLD);
@@ -83,12 +85,12 @@ void redclose_e()
 
          setDriveBrakes(BRAKE);
 
-         rotate(400);
+         rotate(-400);
          intake.move(-40);
          drive(1500, 110, 0, [=](){}, true); // newReverse to line with flags
 
          drive(-200);
-         noPidRotate(100);
+         noPidRotate(-100);
          shoot(1500);
 
      }
