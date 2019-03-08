@@ -4,6 +4,8 @@
 #define REST(x) pros::Task::delay(x)
 
 extern void rotate(int target, int maxSpeed = 110);
+extern void noPidDrive(int target, int speed = 110);
+extern void noPidRotate(int targetE, int speed = 110);
 
 
 extern void liftCheck(int exitTime = 1000);
@@ -13,6 +15,7 @@ extern void fly(int voltage);
 extern void debug();
 
 extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay = 1);
+
 
 
 //extern void line_test(int dir, int target, int maxPower);
@@ -177,3 +180,6 @@ extern pros::Motor lift;
 
 #define PORT_GYRO_ROLL 8 // H // climb
 #define PORT_LIMIT_LIFT 2 // B
+
+
+void shoot(int time, int liftSpeed = LIFT_UP_SPEED);

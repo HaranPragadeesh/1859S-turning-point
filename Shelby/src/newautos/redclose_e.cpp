@@ -24,9 +24,9 @@ void redclose_e()
 
 
 
-     drive(1100, 90, 700, [=](){
+     drive(1150, 110, 700, [=](){
          intake.move(COMBINE_INTAKE_SPEED);
-         lift.move(100);
+         lift.move(127);
      });
      liftCheck(500);
 
@@ -37,7 +37,7 @@ void redclose_e()
 
      ////////////////////////////////////////////////////////////////////////
 
-     drive(-1100); // newReverse to line with flags
+     drive(-1150); // newReverse to line with flags
 
      //lift.move(LIFT_CLR_SPEED);
 
@@ -53,9 +53,12 @@ void redclose_e()
      drive(-300); //650 // *tune* newReverse to line with platform to double shot
 
      //fly(0);
-     lift.move(LIFT_UP_SPEED);
-     REST(800); // wait time for shoot
-     lift.move(0);
+     shoot(800);
+
+     if(autoShouldPark)
+     {
+
+
 
      drive(-375);
 
@@ -63,8 +66,8 @@ void redclose_e()
 
      rotate(900); // turn to climb plat
 
-     if(autoShouldPark)
-     {
+
+         setDriveBrakes(HOLD);
        drive(1600);
 
         //gyroClimb(newForward, 75, 20, 100);
@@ -72,6 +75,15 @@ void redclose_e()
         // drive(-50);
          //gyroClimb(127, 30, 50, 0);
 
+     }
+     else{ // if no park
+
+
+         noPidRotate(250);
+         intake.move(-50);
+         noPidDrive(600);
+         noPidRotate(250);
+         noPidDrive(1200, 127);
      }
 
 }

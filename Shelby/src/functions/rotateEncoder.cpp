@@ -2,10 +2,11 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
-float rotateFactor = 2.45;
 
 void rotate(int targetE, int maxSpeed)
 {
+    float rotateFactor = 2.45;
+
 
 
     setDriveBrakes(BRAKE);
