@@ -58,9 +58,9 @@ void blueclose_e()
      drive(-300, 110, 0, [=](){}, true); // newReverse to line with flags
 
      //fly(0);
-     noPidRotate(-50);
+     noPidRotate(-75);
      shoot(500);
-     noPidRotate(50);
+     noPidRotate(75);
 
      if(autoShouldPark)
      {
@@ -71,7 +71,7 @@ void blueclose_e()
 
      //drive(100);
 
-     rotate(-900); // turn to climb plat
+     rotate(-930); // turn to climb plat
 
 
          setDriveBrakes(HOLD);
