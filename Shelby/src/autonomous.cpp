@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../include/main.h"
 #include "v5setup.hpp"
 #include "autos/autos.hpp"
 #include "newautos/newautos.hpp"
@@ -31,7 +31,7 @@ void autonomous()
     // rotate(900);
     // rotate(-900);
 
-    redfar_e();
+    //redfar_e_2cap();
 
     switch(selectedAuto){
         case 1:
@@ -45,6 +45,8 @@ void autonomous()
             // do auto 2 red far
             //redfar();
             //redfar_gy();
+            //redfar_e();
+            redfar_e_2cap();
             break;
         case 3:
             // do auto 3 blue close
