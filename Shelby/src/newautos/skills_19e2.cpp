@@ -13,12 +13,12 @@ void skills19_e()
 
         intake.move(70);
         lift.move(50);
-    });
-    liftCheck();
-    lift.move(0);
+    }, true);
+    liftCheck(1500);
+    //lift.move(0);
     //drive(1250, 80);   // drive to tilt cap
 
-    REST(100);
+    //REST(100);
 
     ////////////////////////////////////////////////////////////////////////
 
@@ -27,7 +27,7 @@ void skills19_e()
 
     //lift.move(0);
 
-    fly(FLYWHEEL_IDLE + 5); // start flywheel at full speed
+    fly(FLYWHEEL_IDLE + 2); // start flywheel at full speed
 
     drive(-1425, 110, 0, [=](){
     }, true);
@@ -133,9 +133,9 @@ void skills19_e()
 
     rotate(450); // left line with tilt cap
 
-    drive(-1200);
+    drive(-1000);
 
-    rotate(-450);
+    rotate(-500);
 
     //drive(-500);
     //waitDrive(REVERSE, 40, 900);
@@ -145,16 +145,12 @@ void skills19_e()
     // lift.move(LIFT_UP_SPEED - 30);
     // drive(1350, 80);
 
-    intake.move(-100);
-    drive(600, 80, 500, [=](){
-
-
+    //intake.move(-100);
+    drive(500, 80, 500, [=](){
         intake.move(50);
         lift.move(LIFT_UP_SPEED - 20);
-    });
-
-
-    liftCheck();
+    }, true);
+    liftCheck(1500);
     lift.move(0);
 
     //drive(-200, 3);
@@ -162,8 +158,8 @@ void skills19_e()
     fly(FLYWHEEL_IDLE - 10);
 
 
-
-    drive(-950); // reverse to line with shot spot
+    drive(-950, 90, 0, [=](){}, true);
+    //drive(-850); // reverse to line with shot spot
 
     intake.move(-70);
 
@@ -184,6 +180,6 @@ void skills19_e()
     setDriveBrakes(HOLD);
     drive(-950, 127);
     REST(500);
-    drive(-800, 127);
+    drive(-750, 127);
 
 }
