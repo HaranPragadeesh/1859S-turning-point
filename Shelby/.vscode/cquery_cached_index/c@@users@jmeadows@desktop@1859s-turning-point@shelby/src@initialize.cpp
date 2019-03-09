@@ -28,14 +28,15 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 bool autoShouldPark = true;
 int selectedAuto = 0;
-std::string nameList[7] = {
+std::string nameList[8] = {
     "NOTHING SELECTED", // 0
-    "Red Close - 14PT", // 1
-    "Red Far - 8PT", // 2
-    "Blue Close - 14PT", // 3
-    "Blue Far - 8PT", // 4
-    "Skills - 12RAW", // 5
-    "Skills - 15RAW" // 6
+    "Red Close", // 1
+    "Red Far", // 2
+    "Red Far Defense", // 3
+    "Blue Close", // 4
+    "Blue Far", // 5
+    "Blue Far Defense", // 6
+    "Skills"
  };
 
 void updateAutoText()
@@ -72,7 +73,7 @@ void on_left_button()
 
 void on_right_button()
 {
-    if(selectedAuto < 6)
+    if(selectedAuto < 7)
     {
         selectedAuto++;
     }

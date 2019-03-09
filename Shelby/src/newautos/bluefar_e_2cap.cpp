@@ -1,7 +1,7 @@
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 
-void redfar_e_2cap()
+void bluefar_e_2cap()
 {
     drive(1250, 110, 0, [=](){
         intake.move(COMBINE_INTAKE_SPEED);
@@ -37,7 +37,7 @@ void redfar_e_2cap()
 
     ////////////////////////////////////////////////////////////////////////
 
-    rotate(-715);
+    rotate(700);
 
 
 
@@ -50,7 +50,7 @@ void redfar_e_2cap()
     //combineBack.stop();
 
     drive(-600);
-    rotate(740);
+    rotate(-725);
 
     intake.move(-70);
     drive(900, 95);
@@ -60,9 +60,9 @@ void redfar_e_2cap()
     {
 
         drive(-380);
-        rotate(-860);
+        rotate(860);
 
-        drive(1500, 110, 0, [=](){
+        drive(1450, 110, 0, [=](){
             intake.move(COMBINE_INTAKE_SPEED);
             lift.move(50);
         }, true);

@@ -1,7 +1,7 @@
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 
-void redfar_e_2cap()
+void redfar_e_2cap_defense()
 {
     drive(1250, 110, 0, [=](){
         intake.move(COMBINE_INTAKE_SPEED);
@@ -25,44 +25,39 @@ void redfar_e_2cap()
 
         }, true);
 
-        lift.move(-70);
-        REST(350);
-        lift.move(0);
+
 
         REST(200);
 
-        fly(115); // double shot speed
 
 
 
     ////////////////////////////////////////////////////////////////////////
 
-    rotate(-715);
+    rotate(-520);
 
+    liftCheck(1000);
+    lift.move(-70);
+    REST(350);
+    lift.move(0);
 
+    REST(500);
 
-
-
-
-
-    REST(1000);
+    fly(115); // double shot speed
+    REST(3500);
     shoot(800); // double shoot
     //combineBack.stop();
-
-    drive(-600);
-    rotate(740);
-
-    intake.move(-70);
-    drive(900, 95);
-
 
     if(autoShouldPark)
     {
 
-        drive(-380);
-        rotate(-860);
+        rotate(520);
 
-        drive(1500, 110, 0, [=](){
+        drive(350);
+
+        rotate(-900);
+
+        drive(900, 110, 0, [=](){
             intake.move(COMBINE_INTAKE_SPEED);
             lift.move(50);
         }, true);

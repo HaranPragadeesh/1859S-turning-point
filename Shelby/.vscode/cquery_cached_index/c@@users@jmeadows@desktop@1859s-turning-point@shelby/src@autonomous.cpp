@@ -33,6 +33,9 @@ void autonomous()
 
     //redfar_e_2cap();
 
+    bluefar_e_2cap_defense();
+
+
     switch(selectedAuto){
         case 1:
             // do auto 1 red close
@@ -52,21 +55,19 @@ void autonomous()
             // do auto 3 blue close
             //blueclose();
             //blueclose_gy();
-            blueclose_e();
+            redfar_e_2cap_defense();
             break;
         case 4:
-            // do auto 4 blue far
-            //bluefar();
-            //bluefar_gy();
+            blueclose_e();
             break;
         case 5:
-            // do auto 5 12 point skills
-            //skills12();
-            //skills12_gy();
+            bluefar_e_2cap();
             break;
         case 6:
-            // do 6 auto 19 point skills
-            //skills17_gy();
+            bluefar_e_2cap_defense();
+
+            break;
+        case 7:
             break;
         default:
             //testauto();

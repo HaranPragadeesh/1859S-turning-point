@@ -71,7 +71,9 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
             if(limitSwitch.get_value() == 1)
             {
                 lift.set_brake_mode(BRAKE);
-                lift.move(0);
+
+                lift.move_velocity(0);
+
             }
         }
 
