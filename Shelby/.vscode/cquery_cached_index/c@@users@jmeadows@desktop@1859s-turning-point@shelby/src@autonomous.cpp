@@ -21,7 +21,7 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
-    //g_right(900);
+    //rotate(900);
 
     //REST(1200);
 
@@ -33,7 +33,8 @@ void autonomous()
 
     //redfar_e_2cap();
 
-    redfar_e_2cap();
+    //redfar_e_2cap();
+    skills19_e();
 
 
     switch(selectedAuto){
@@ -68,6 +69,7 @@ void autonomous()
 
             break;
         case 7:
+            skills19_e();
             break;
         default:
             //testauto();

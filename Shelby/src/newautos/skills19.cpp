@@ -39,7 +39,7 @@ void skills19()
 
     drive(150, 60);
 
-    g_left(900); // turn to line with flags
+    rotate(-900); // turn to line with flags
 
     singleOutDouble();
 
@@ -72,7 +72,7 @@ void skills19()
     drive(100); // forward enough to line with tilt cap
 
 
-    g_right(935); // turn to tilt cap
+    rotate(935); // turn to tilt cap
 
     intake.move(-50);
     lift.move(50);
@@ -101,11 +101,11 @@ void skills19()
     drive(-850); // reverse enough to line with gap
 
 
-    g_left(450); // 45 degree left to clear gap
+    rotate(-450); // 45 degree left to clear gap
 
     drive(900); // forward enough to go through gap
 
-    g_left(450); // line with mid post bottom flag
+    rotate(-450); // line with mid post bottom flag
 
     drive(750);
 
@@ -114,7 +114,7 @@ void skills19()
 
     drive(-750); // reverse from mid bottom flag
 
-    g_right(120);
+    rotate(120);
 
     lift.move(LIFT_UP_SPEED); // shoot mid mid
     REST(500); // wait long enough for ball to clear
@@ -122,19 +122,19 @@ void skills19()
 
     drive(200);
 
-    g_left(1100);
+    rotate(-1100);
 
 
     drive(-450); // reverse to mid mid shot spot // lineright
 
-    //g_right(100, 3);
+    //rotate(100, 3);
 
 
-    g_right(450); // left line with tilt cap
+    rotate(450); // left line with tilt cap
 
     drive(-1200);
 
-    g_left(450);
+    rotate(-450);
 
     //drive(-500);
     //waitDrive(REVERSE, 40, 900);
@@ -166,19 +166,19 @@ void skills19()
 
     intake.move(-70);
 
-    g_right(800); // arb deg right shot spot deg
+    rotate(800); // arb deg right shot spot deg
 
-    //g_left(80, 5);
+    //rotate(-80, 5);
     lift.move(LIFT_UP_SPEED); // shoot mid mid
     REST(600); // wait long enough for ball to clear
     lift.move(0);
-    //g_right(80, 5);
+    //rotate(80, 5);
 
-    g_right(100);
+    rotate(100);
 
     drive(-650); // reverse to back cap
 
-    g_right(900); // left to tilt cap
+    rotate(900); // left to tilt cap
 
     setDriveBrakes(HOLD);
     drive(-950, 127);

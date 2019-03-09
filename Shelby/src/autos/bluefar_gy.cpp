@@ -39,7 +39,7 @@ void bluefar_gy()
 
     ////////////////////////////////////////////////////////////////////////
 
-    g_right(730);
+    rotate(730);
 
 
 
@@ -51,10 +51,10 @@ void bluefar_gy()
     if(autoShouldPark)
     {
 
-    g_left(730);
+    rotate(-730);
     //left(650);
     forward(380);
-    g_right(900);
+    rotate(900);
 
     setDriveBrakes(HOLD);
 

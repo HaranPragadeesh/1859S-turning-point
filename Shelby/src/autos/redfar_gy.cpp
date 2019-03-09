@@ -39,7 +39,7 @@ void redfar_gy()
 
     ////////////////////////////////////////////////////////////////////////
 
-    g_left(750);
+    rotate(-750);
 
 
 
@@ -51,10 +51,10 @@ void redfar_gy()
     if(autoShouldPark)
     {
 
-    g_right(750);
+    rotate(750);
     //left(650);
     forward(430);
-    g_left(900);
+    rotate(-900);
 
     setDriveBrakes(HOLD);
 

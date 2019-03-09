@@ -11,7 +11,7 @@ void new_redclose()
 
   lift.move(0);
 
-       g_right(900); // turn back towards tilt cap with ball under
+       rotate(900); // turn back towards tilt cap with ball under
 
 
        //fly(-35); // spin flywheel backwards in order to not get stuck
@@ -37,7 +37,7 @@ void new_redclose()
        lift.move(0);
        ////////////////////////////////////////////////////////////////////////
 
-       g_left(900); // turn to line with flags
+       rotate(-900); // turn to line with flags
 
        drive(-300); //650 // *tune* newReverse to line with platform to double shot
 
@@ -53,7 +53,7 @@ void new_redclose()
 
        //drive(100);
 
-       g_right(900); // turn to climb plat
+       rotate(900); // turn to climb plat
 
 
          drive(1700);
