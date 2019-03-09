@@ -21,20 +21,6 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
-    //rotate(900);
-
-    //REST(1200);
-
-    //skills19();
-    //new_redclose();
-
-    // rotate(900);
-    // rotate(-900);
-
-    //redfar_e_2cap();
-
-    //redfar_e_2cap();
-    skills19_e();
 
 
     switch(selectedAuto){
@@ -66,7 +52,6 @@ void autonomous()
             break;
         case 6:
             bluefar_e_2cap_defense();
-
             break;
         case 7:
             skills19_e();

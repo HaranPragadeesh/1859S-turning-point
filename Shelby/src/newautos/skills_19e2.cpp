@@ -29,8 +29,7 @@ void skills19_e()
 
     fly(FLYWHEEL_IDLE + 2); // start flywheel at full speed
 
-    drive(-1425, 110, 0, [=](){
-    }, true);
+    drive(-1425, 110, 0, [=](){}, true);
     waitDrive(REVERSE, 60, 400);
 
     ////////////////////////////////////////////////////////////////////////
@@ -53,8 +52,9 @@ void skills19_e()
 
     //fly(FLYWHEEL_BOOST_SPEED);
     //REST(2000);
+
     lift.move(127);
-    REST(400);
+    REST(1200);
     lift.move(0);
 
     // lift.move(LIFT_UP_SPEED);
@@ -99,16 +99,16 @@ void skills19_e()
     ////////////////////////////////////////////////////////////////////////
 
 
-    drive(-850); // reverse enough to line with gap
+    drive(-850, 110, 0, [=](){}, true); // reverse enough to line with gap
 
 
     rotate(-450); // 45 degree left to clear gap
 
-    drive(800); // forward enough to go through gap
+    drive(800, 110, 0, [=](){}, true); // forward enough to go through gap
 
     rotate(-450); // line with mid post bottom flag
 
-    drive(750);
+    drive(750, 110, 0, [=](){}, true);
 
     fly(FLYWHEEL_BOOST_SPEED);
 
@@ -118,12 +118,12 @@ void skills19_e()
     noPidRotate(120);
 
     lift.move(LIFT_UP_SPEED); // shoot mid mid
-    REST(500); // wait long enough for ball to clear
+    REST(1200); // wait long enough for ball to clear
     lift.move(0);
 
     drive(200);
 
-    rotate(-950);
+    rotate(-955);
 
 
     drive(-450); // reverse to mid mid shot spot // lineright
@@ -133,7 +133,7 @@ void skills19_e()
 
     rotate(450); // left line with tilt cap
 
-    drive(-1000);
+    drive(-1050);
 
     rotate(-500);
 
@@ -158,7 +158,7 @@ void skills19_e()
     fly(FLYWHEEL_IDLE - 10);
 
 
-    drive(-950, 90, 0, [=](){}, true);
+    drive(-940, 90, 0, [=](){}, true);
     //drive(-850); // reverse to line with shot spot
 
     intake.move(-70);
@@ -173,7 +173,7 @@ void skills19_e()
 
     noPidRotate(100);
 
-    drive(-650); // reverse to back cap
+    drive(-700); // reverse to back cap
 
     rotate(900); // left to tilt cap
 
