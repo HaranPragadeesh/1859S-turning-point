@@ -39,13 +39,13 @@ void skills19_e()
 
     drive(150, 60);
 
-    rotate(-900); // turn to line with flags
+    rotate(-880); // turn to line with flags
 
     singleOutDouble();
 
     fly(FLYWHEEL_BOOST_SPEED);
 
-    drive(1250); // drive to red tile shoot pos
+    drive(1150); // drive to red tile shoot pos
 
     intake.move(-60);
 
@@ -69,10 +69,10 @@ void skills19_e()
     // //REST(2000);// rest long enough to let flywheel coast slow
 
 
-    drive(100); // forward enough to line with tilt cap
+    drive(200); // forward enough to line with tilt cap
 
 
-    rotate(935); // turn to tilt cap
+    rotate(900); // turn to tilt cap
 
     intake.move(-50);
     lift.move(50);
@@ -82,8 +82,8 @@ void skills19_e()
 
         intake.move(70);
         lift.move(50);
-    });
-    liftCheck();
+    }, true);
+    liftCheck(1500);
     lift.move(0);
 
     // intake.move(70);
@@ -103,7 +103,7 @@ void skills19_e()
 
     rotate(-450); // 45 degree left to clear gap
 
-    drive(900); // forward enough to go through gap
+    drive(800); // forward enough to go through gap
 
     rotate(-450); // line with mid post bottom flag
 
@@ -114,7 +114,7 @@ void skills19_e()
 
     drive(-750); // reverse from mid bottom flag
 
-    rotate(120);
+    noPidRotate(120);
 
     lift.move(LIFT_UP_SPEED); // shoot mid mid
     REST(500); // wait long enough for ball to clear
@@ -122,7 +122,7 @@ void skills19_e()
 
     drive(200);
 
-    rotate(-1100);
+    rotate(-1000);
 
 
     drive(-450); // reverse to mid mid shot spot // lineright
