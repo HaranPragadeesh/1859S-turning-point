@@ -4,25 +4,17 @@
 void bluefar_e_2cap_defense()
 {
     fly(-25);
-    drive(1250, 110, 0, [=](){
+    drive(1250, 110, 700, [=](){
         intake.move(COMBINE_INTAKE_SPEED);
-        lift.move(100);
+        //lift.move(50);
     }, true);
-    liftCheck(700);
-    //combineBack.stop();    // setup balls for double shot
-    //REST(300);
-
-
-
-    ////////////////////////////////////////////////////////////////////////
-
-
+    liftCheck(250);
 
 
         drive(-750, 110, -450, [=](){
             //intake.move(COMBINE_INTAKE_SPEED);
             //lift.move(50);
-            lift.move(127);
+            lift.move(100);
 
         }, true);
 

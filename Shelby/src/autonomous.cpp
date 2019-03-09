@@ -33,7 +33,7 @@ void autonomous()
 
     //redfar_e_2cap();
 
-    bluefar_e_2cap_defense();
+    redfar_e_2cap();
 
 
     switch(selectedAuto){
