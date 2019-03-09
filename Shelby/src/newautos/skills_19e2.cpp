@@ -27,10 +27,10 @@ void skills19_e()
 
     //lift.move(0);
 
-    fly(FLYWHEEL_IDLE); // start flywheel at full speed
+    fly(FLYWHEEL_IDLE + 5); // start flywheel at full speed
 
-    drive(-1425); // reverse to line with flags
-
+    drive(-1425, 110, 0, [=](){
+    }, true);
     waitDrive(REVERSE, 60, 400);
 
     ////////////////////////////////////////////////////////////////////////
@@ -41,6 +41,7 @@ void skills19_e()
 
     rotate(-880); // turn to line with flags
 
+    REST(500);
     singleOutDouble();
 
     fly(FLYWHEEL_BOOST_SPEED);
@@ -122,7 +123,7 @@ void skills19_e()
 
     drive(200);
 
-    rotate(-1000);
+    rotate(-950);
 
 
     drive(-450); // reverse to mid mid shot spot // lineright
@@ -174,7 +175,7 @@ void skills19_e()
     lift.move(0);
     //rotate(80, 5);
 
-    rotate(100);
+    noPidRotate(100);
 
     drive(-650); // reverse to back cap
 
