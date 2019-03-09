@@ -3,9 +3,10 @@
 
 void bluefar_e_2cap_defense()
 {
+    fly(-25);
     drive(1250, 110, 0, [=](){
         intake.move(COMBINE_INTAKE_SPEED);
-        lift.move(127);
+        lift.move(100);
     }, true);
     liftCheck(700);
     //combineBack.stop();    // setup balls for double shot
@@ -34,7 +35,7 @@ void bluefar_e_2cap_defense()
 
     ////////////////////////////////////////////////////////////////////////
 
-    rotate(535);
+    rotate(520);
 
     liftCheck(1000);
     lift.move(-70);
@@ -43,7 +44,7 @@ void bluefar_e_2cap_defense()
 
     REST(500);
 
-    fly(110); // double shot speed
+    fly(113); // double shot speed
     REST(3500);
     shoot(800); // double shoot
     //combineBack.stop();
@@ -51,13 +52,13 @@ void bluefar_e_2cap_defense()
     if(autoShouldPark)
     {
 
-        rotate(-535);
+        rotate(-520);
 
         drive(350);
 
         rotate(900);
 
-        drive(900, 110, 0, [=](){
+        drive(950, 110, 0, [=](){
             intake.move(COMBINE_INTAKE_SPEED);
             lift.move(50);
         }, true);

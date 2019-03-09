@@ -3,9 +3,11 @@
 
 void redfar_e_2cap_defense()
 {
+    fly(-25);
+
     drive(1250, 110, 0, [=](){
         intake.move(COMBINE_INTAKE_SPEED);
-        lift.move(127);
+        lift.move(100);
     }, true);
     liftCheck(700);
     //combineBack.stop();    // setup balls for double shot
