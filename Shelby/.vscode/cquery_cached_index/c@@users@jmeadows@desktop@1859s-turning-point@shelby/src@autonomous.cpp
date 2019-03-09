@@ -31,6 +31,7 @@ void autonomous()
     // rotate(900);
     // rotate(-900);
 
+    redfar_e();
 
     switch(selectedAuto){
         case 1:

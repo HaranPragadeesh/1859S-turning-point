@@ -8,7 +8,7 @@ void blueclose_e()
      fly(FLYWHEEL_BOOST_SPEED);
      drive(1150); // hit bottom flag
 
-     drive(-750, 90); // newReverse from bottom flag
+     drive(-800, 90); // newReverse from bottom flag
 
      noPidRotate(-100);
      shoot(500);
@@ -88,7 +88,7 @@ void blueclose_e()
          setDriveBrakes(BRAKE);
 
          rotate(-400);
-         intake.move(-40);
+         intake.move(-65);
          drive(1500, 110, 0, [=](){}, true); // newReverse to line with flags
 
          drive(-200);

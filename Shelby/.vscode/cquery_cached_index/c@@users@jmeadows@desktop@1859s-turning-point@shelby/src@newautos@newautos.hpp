@@ -12,3 +12,4 @@ extern void skills19();
 
 extern void redclose_e();
 extern void blueclose_e();
+extern void redfar_e();
