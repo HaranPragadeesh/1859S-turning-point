@@ -9,31 +9,35 @@ void testControl()
 	yawGyroT.reset();
 	lift.set_brake_mode(HOLD);
 
+     bool combineStop = false;
+	int lastPressComb;
+	bool firstPressComb = true;
+
 	bool holding = false;
 	int lastPress;
 	bool firstPress = true;
 
      bool hasball = false;
 
-
+     bool slowTurn = false;
 
 
 	while (true)
 	{
           // if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && ( (pros::millis() > lastPress + 1000) || firstPress) )
-          if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
+          if((master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) &&
                master.get_digital(pros::E_CONTROLLER_DIGITAL_L2) &&
                     master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) &&
-                         master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+                         master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))  && ( (pros::millis() > lastPress + 1000) || firstPress))
 		 {
 			 lastPress = pros::millis();
 			 firstPress = false;
 			 holding = !holding;
 
-			 if(holding == true)
-				 setDriveBrakes(HOLD);
-			 else
-				 setDriveBrakes(COAST);
+			 // if(holding == true)
+				//  setDriveBrakes(HOLD);
+			 // else
+				//  setDriveBrakes(COAST);
 
 			 firstPress = false;
 		 }
@@ -42,6 +46,29 @@ void testControl()
 		//sets ints for right and left motor based on dead zone correction function
 		int left = dzCorrect( master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y),JOYSTICK_DEADZONE);
 		int right = dzCorrect(master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y), JOYSTICK_DEADZONE);
+
+          if(( master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X) > 30 ) && (master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X) > 30 )){
+               left = 40;
+               right = -40;
+               slowTurn = true;
+          }
+          else if((master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X) < -30 )&& (master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X) < -30 )){
+               left = -40;
+               right = 40;
+               slowTurn = true;
+          }
+          else{
+               slowTurn = false;
+          }
+
+          if(holding)
+               setDriveBrakes(HOLD);
+          if(slowTurn)
+               setDriveBrakes(BRAKE);
+          if(!slowTurn && !holding)
+               setDriveBrakes(COAST);
+
+
 
 		if(left == 0){
                LEFT_DRIVE_V(0);
@@ -59,16 +86,8 @@ void testControl()
 
 
 
-          if((master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X) > 30 ) && (master.get_analog(E_CONTROLLER_ANALOG_RIGHT_X) > 30 ) )
-               setDriveBrakes(BRAKE);
-               LEFT_DRIVE(25);
-               RIGHT_DRIVE(-25);
-          }
-          if((master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X) < -30 ) && (master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X) < -30 ) )
-               setDriveBrakes(BRAKE);
-               LEFT_DRIVE(-25);
-               RIGHT_DRIVE(25);
-          }
+
+
 
 
 
@@ -89,9 +108,25 @@ void testControl()
 			flyWheel2.move(FLYWHEEL_IDLE);
 		}
 
+
+          if(master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && (pros::millis() > lastPressComb + 1000) || firstPressComb)
+		 {
+			 lastPressComb = pros::millis();
+			 firstPressComb = false;
+			 combineStop = true;
+			 firstPressComb = false;
+		 }
+
           // intake
-          intake.move(COMBINE_INTAKE_SPEED);
-		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
+          if(combineStop)
+          {
+               intake.move(0);
+          }
+          if(!combineStop)
+          {
+               intake.move(COMBINE_INTAKE_SPEED);
+          }
+		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && !combineStop)
 		{
 			intake.move(REVERSE_FLIP_SPEED);
 		}
