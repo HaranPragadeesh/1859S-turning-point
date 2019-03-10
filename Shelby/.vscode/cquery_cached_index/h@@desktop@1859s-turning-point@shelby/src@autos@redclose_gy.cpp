@@ -1,39 +1,36 @@
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 
-// 90 deg turn ~ 560
-
 void redclose_gy()
 {
-    fly(FLYWHEEL_BOOST_SPEED);
-     forward(1250); // hit bottom flag
+     fly(FLYWHEEL_BOOST_SPEED);
+     drive(1150); // hit bottom flag
 
-     reverse(850); // reverse from bottom flag
-
+     drive(-750, 90); // newReverse from bottom flag
 
      lift.move(LIFT_UP_SPEED);
      REST(500); // wait time for shoot
      lift.move(0);
      fly(115);
 
-     reverse(650);
+     drive(-500);
 
-     g_right(900); // turn back towards tilt cap with ball under
+     rotate(910); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
 
      intake.move(COMBINE_INTAKE_SPEED);
-     lift.move(LIFT_UP_SPEED - 30);
+     lift.move(50);
 
-     forward(1200);   // drive to tilt cap
-
+     drive(1100, 90);   // drive to tilt cap
+     REST(200);
      //REST(50);
      lift.move(0);
 
      ////////////////////////////////////////////////////////////////////////
 
-     reverse(1200); // reverse to line with flags
+     drive(-1100); // newReverse to line with flags
 
      //lift.move(LIFT_CLR_SPEED);
 
@@ -44,28 +41,28 @@ void redclose_gy()
      lift.move(0);
      ////////////////////////////////////////////////////////////////////////
 
-     g_left(900); // turn to line with flags
+     rotate(-900); // turn to line with flags
 
-     reverse(300); //650 // *tune* reverse to line with platform to double shot
+     drive(-300); //650 // *tune* newReverse to line with platform to double shot
 
      //fly(0);
      lift.move(LIFT_UP_SPEED);
-     REST(500); // wait time for shoot
+     REST(800); // wait time for shoot
      lift.move(0);
 
-     reverse(500);
+     drive(-375);
 
-     //forward(100);
+     //drive(100);
 
-     g_right(900); // turn to climb plat
+     rotate(910); // turn to climb plat
 
      if(autoShouldPark)
      {
-       forward(1600);
+       drive(1600);
 
-        //gyroClimb(FORWARD, 75, 20, 100);
-        // forward(1700);
-        // reverse(50);
+        //gyroClimb(newForward, 75, 20, 100);
+        // drive(1700);
+        // drive(-50);
          //gyroClimb(127, 30, 50, 0);
 
      }

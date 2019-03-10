@@ -3,7 +3,7 @@
 #include "../v5setup.hpp"
 
 
-void turn(int dir, int target, float factor)
+void turnE(int dir, int target, float factor)
 {
     //setDriveBrakes(BRAKE);
     float kP = .5;// .35;

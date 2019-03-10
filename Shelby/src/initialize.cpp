@@ -28,7 +28,7 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 bool autoShouldPark = true;
 int selectedAuto = 0;
-std::string nameList[8] = {
+std::string nameList[13] = {
     "NOTHING SELECTED", // 0
     "Red Close", // 1
     "Red Far", // 2
@@ -36,7 +36,12 @@ std::string nameList[8] = {
     "Blue Close", // 4
     "Blue Far", // 5
     "Blue Far Defense", // 6
-    "Skills"
+    "Skills",
+    "",
+    "",
+    "",
+    "",
+    "Secret Settings"
  };
 
 void updateAutoText()
@@ -53,6 +58,14 @@ void updateAutoText()
      else if(selectedAuto > 4)
      {
          pros::lcd::clear_line(4);
+     }
+     if(selectedAuto == 12)
+     {
+          secretSettings = true;
+     }
+     else
+     {
+          secretSettings = false;
      }
 }
 
@@ -73,7 +86,7 @@ void on_left_button()
 
 void on_right_button()
 {
-    if(selectedAuto < 7)
+    if(selectedAuto < 14)
     {
         selectedAuto++;
     }

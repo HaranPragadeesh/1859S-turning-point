@@ -18,7 +18,7 @@ void skills12_gy()
 
      reverse(650);
 
-     g_right(900); // turn back towards tilt cap with ball under
+     rotate(900); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
@@ -44,7 +44,7 @@ void skills12_gy()
      lift.move(0);
      ////////////////////////////////////////////////////////////////////////
 
-     g_left(900); // turn to line with flags
+     rotate(-900); // turn to line with flags
 
      reverse(300); //650 // *tune* reverse to line with platform to double shot
 
@@ -57,20 +57,13 @@ void skills12_gy()
 
      //forward(100);
 
-     g_right(900); // turn to climb plat
+     rotate(900); // turn to climb plat
 
      if(autoShouldPark)
      {
        forward(1450);
        REST(500);
        forward(750);
-
-
-        //gyroClimb(FORWARD, 75, 20, 100);
-        // forward(1700);
-        // reverse(50);
-         //gyroClimb(127, 30, 50, 0);
-
      }
 
 }

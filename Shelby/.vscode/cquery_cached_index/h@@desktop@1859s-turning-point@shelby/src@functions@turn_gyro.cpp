@@ -2,19 +2,19 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
+float factor = 1;
 
-void g_turn(int dir, int target, float factor)
+void g_turn(int dir, int target, int maxSpeed)
 {
+    int minPower = 15;
 
-
-
-     yawGyro.reset();
+     yawGyroT.reset();
 
     //setDriveBrakes(BRAKE);
 
-    float kP = .55; // .5
+    float kP = .55; // .55
     float kI = .005; // .005
-    float kD = 1; // 1
+    float kD = 2; // 1
 
     float errorZone = 150;
     float error, errorTot, errorLast;
@@ -28,7 +28,7 @@ void g_turn(int dir, int target, float factor)
     bool ft = true;
     bool ogPass = false;
     float pTime; // pause time
-    int exitDelay = 500; // millis to check exit
+    int exitDelay = 350; // millis to check exit
     int emergancyExit = 5000000; // millis to emergancyExit
     bool settled = false;
     float firstPause;
@@ -44,7 +44,7 @@ void g_turn(int dir, int target, float factor)
 
         // debug();
 
-        error = target - std::abs(yawGyro.get_value());
+        error = target - std::abs(yawGyroT.get_value()) * factor;
 
         if (error < errorZone) {
            errorTot += error;
@@ -64,13 +64,25 @@ void g_turn(int dir, int target, float factor)
         errorLast = error;
 
 
-        power = ((pTerm + iTerm + dTerm) * factor);
+        power = (pTerm + iTerm + dTerm);
 
+        if(power > maxSpeed)
+        {
+          power = maxSpeed;
+        }
+        if(power < minPower && error > 0)
+        {
+            power = minPower;
+        }
+        if(power < minPower && error < 0)
+        {
+            power = -minPower;
+        }
 
         LEFT_DRIVE(power * dir);
         RIGHT_DRIVE(-power * dir);
 
-        if(std::abs(yawGyro.get_value()) > targetMin && ft)
+        if(std::abs(yawGyroT.get_value()) * factor > targetMin && ft)
         {
             pTime = pros::millis();
             firstPause = pros::millis();
@@ -79,7 +91,7 @@ void g_turn(int dir, int target, float factor)
         }
         if(pros::millis() > pTime + exitDelay && ogPass)
         {
-            if((std::abs(yawGyro.get_value()) > targetMin && std::abs(yawGyro.get_value()) < targetMax) or pros::millis() > firstPause + emergancyExit)
+            if((std::abs(yawGyroT.get_value()) * factor > targetMin && std::abs(yawGyroT.get_value()) * factor < targetMax) or pros::millis() > firstPause + emergancyExit)
             {
                 settled = true;
             }
@@ -90,8 +102,8 @@ void g_turn(int dir, int target, float factor)
         }
 
         pros::lcd::set_text(1, " LEFT: " + std::to_string(-power) + "RIGHT: " + std::to_string(power));
-        pros::lcd::set_text(3, std::to_string(yawGyro.get_value()) + " - " + std::to_string(target) + " = " + std::to_string(error));
-        pros::lcd::set_text(2, "GYRO: " + std::to_string(std::abs(yawGyro.get_value())));
+        pros::lcd::set_text(3, std::to_string(yawGyroT.get_value()) + " - " + std::to_string(target) + " = " + std::to_string(error));
+        pros::lcd::set_text(2, "GYRO: " + std::to_string(std::abs(yawGyroT.get_value())));
       //  pros::lcd::set_text(3, "target: " + std::to_string(target));
         pros::lcd::set_text(6, "error: " + std::to_string(error));
        // pros::lcd::set_text(5, "ptime: " + std::to_string(pTime));
@@ -108,16 +120,16 @@ void g_turn(int dir, int target, float factor)
     //rightFront.move(0);
     //rightRear.move(0);
 
-	yawGyro.reset();
+	yawGyroT.reset();
 
 }
 
-void g_left(int target, float factor)
+void g_left(int target, int maxSpeed)
 {
-  g_turn(LEFT, target, factor);
+  g_turn(LEFT, target, maxSpeed);
 }
 
-void g_right(int target, float factor)
+void g_right(int target, int maxSpeed)
 {
-  g_turn(RIGHT, target, factor);
+  g_turn(RIGHT, target, maxSpeed);
 }

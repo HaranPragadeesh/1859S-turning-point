@@ -1,6 +1,7 @@
-#include "main.h"
+#include "../include/main.h"
 #include "v5setup.hpp"
 #include "autos/autos.hpp"
+#include "newautos/newautos.hpp"
 
 // index-
 // 1- red close
@@ -13,42 +14,47 @@
 void autonomous()
 {
 
+    pros::ADIGyro yawGyroT (PORT_GYRO_TOP); /* tune variable for accurate 360 turn */ // for turning
+    pros::ADIGyro yawGyroB (PORT_GYRO_BOT); /* tune variable for accurate 360 turn */ // for turning
 
     rollGyro.reset();
-    yawGyro.reset();
+    yawGyroT.reset();
+    yawGyroB.reset();
 
 
-   // testauto();
 
     switch(selectedAuto){
         case 1:
             // do auto 1 red close
-            redclose_gy();
-        //  redclose();
+            //new_redclose();
+            //redclose_gy();
+            //  redclose();
+            redclose_e();
             break;
         case 2:
             // do auto 2 red far
             //redfar();
-            redfar_gy();
+            //redfar_gy();
+            //redfar_e();
+            redfar_e_2cap();
             break;
         case 3:
             // do auto 3 blue close
             //blueclose();
-            blueclose_gy();
+            //blueclose_gy();
+            redfar_e_2cap_defense();
             break;
         case 4:
-            // do auto 4 blue far
-            //bluefar();
-            bluefar_gy();
+            blueclose_e();
             break;
         case 5:
-            // do auto 5 12 point skills
-            //skills12();
-            skills12_gy();
+            bluefar_e_2cap();
             break;
         case 6:
-            // do 6 auto 19 point skills
-            skills17_gy();
+            bluefar_e_2cap_defense();
+            break;
+        case 7:
+            skills19_e();
             break;
         default:
             //testauto();

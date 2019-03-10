@@ -4,8 +4,8 @@
 
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
-
- pros::ADIGyro yawGyro (PORT_GYRO_YAW); /* tune variable for accurate 360 turn */ // for turning
+ pros::ADIGyro yawGyroB (PORT_GYRO_BOT, .58);
+ pros::ADIGyro yawGyroT (PORT_GYRO_TOP); /* tune variable for accurate 360 turn */ // for turning
  pros::ADIGyro rollGyro (PORT_GYRO_ROLL); // for climbing
 
  pros::ADIButton limitSwitch(PORT_LIMIT_LIFT);
@@ -28,14 +28,20 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 bool autoShouldPark = true;
 int selectedAuto = 0;
-std::string nameList[7] = {
+std::string nameList[13] = {
     "NOTHING SELECTED", // 0
-    "Red Close - 14PT", // 1
-    "Red Far - 8PT", // 2
-    "Blue Close - 14PT", // 3
-    "Blue Far - 8PT", // 4
-    "Skills - 12RAW", // 5
-    "Skills - 15RAW" // 6
+    "Red Close", // 1
+    "Red Far", // 2
+    "Red Far Defense", // 3
+    "Blue Close", // 4
+    "Blue Far", // 5
+    "Blue Far Defense", // 6
+    "Skills",
+    "",
+    "",
+    "",
+    "",
+    "Secret Settings"
  };
 
 void updateAutoText()
@@ -52,6 +58,14 @@ void updateAutoText()
      else if(selectedAuto > 4)
      {
          pros::lcd::clear_line(4);
+     }
+     if(selectedAuto == 12)
+     {
+          secretSettings = true;
+     }
+     else
+     {
+          secretSettings = false;
      }
 }
 
@@ -72,7 +86,7 @@ void on_left_button()
 
 void on_right_button()
 {
-    if(selectedAuto < 6)
+    if(selectedAuto < 14)
     {
         selectedAuto++;
     }
@@ -98,7 +112,8 @@ void initialize() {
 	pros::lcd::register_btn1_cb(on_center_button);
 	pros::lcd::register_btn2_cb(on_right_button);
 
-    pros::ADIGyro yawGyro (PORT_GYRO_YAW);
+    pros::ADIGyro yawGyroT (PORT_GYRO_TOP);
+    pros::ADIGyro yawGyroB (PORT_GYRO_BOT);
     pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
     pros::ADIDigitalIn limitSwitch (PORT_LIMIT_LIFT);
     pros::Vision aimbot (PORT_AIMBOT, pros::E_VISION_ZERO_CENTER);
@@ -116,6 +131,8 @@ void initialize() {
  */
 void disabled() {
     //setDriveBrakes(HOLD);
+    // hi micha
+    // put spaces between your comments you dolt
 }
 
 /**
@@ -129,9 +146,9 @@ void disabled() {
  */
 void competition_initialize() {
 
-     while(std::abs(yawGyro.get_value()) > 5)
+     while(std::abs(yawGyroB.get_value()) > 5)
     {
-         pros::ADIGyro yawGyro (PORT_GYRO_YAW);
+         pros::ADIGyro yawGyro (PORT_GYRO_BOT);
          while(std::abs(yawGyro.get_value()) > 5)
          {
               REST(2);
@@ -139,7 +156,7 @@ void competition_initialize() {
     }
     while(std::abs(rollGyro.get_value()) > 5)
    {
-        pros::ADIGyro rollGyro (PORT_GYRO_YAW);
+        pros::ADIGyro rollGyro (PORT_GYRO_BOT);
         while(std::abs(rollGyro.get_value()) > 5)
         {
             REST(2);

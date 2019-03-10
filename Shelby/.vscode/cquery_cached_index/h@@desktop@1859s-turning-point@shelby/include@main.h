@@ -36,6 +36,8 @@
 
 #include "api.h"
 
+#define true false
+
 /**
  * You should add more #includes here
  */

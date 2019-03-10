@@ -3,7 +3,8 @@
 
 #define REST(x) pros::Task::delay(x)
 
-
+extern void regControl();
+extern void testControl();
 
 extern void rotate(int target, int maxSpeed = 110);
 extern void noPidDrive(int target, int speed = 110);
@@ -82,6 +83,7 @@ extern void waitDrive(int dir, int speed, int waitTime);
 extern std::string nameList[];
 
 extern int selectedAuto;
+extern bool secretSettings;
 extern bool autoShouldPark;
 
 

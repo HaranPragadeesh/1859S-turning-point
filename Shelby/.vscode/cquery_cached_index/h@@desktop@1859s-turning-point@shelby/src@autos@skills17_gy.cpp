@@ -18,7 +18,7 @@ void skills17_gy()
   intake.move(COMBINE_INTAKE_SPEED);
   lift.move(LIFT_UP_SPEED);
 
-  g_right(900);
+  rotate(900);
 
   waitDrive(REVERSE, 40, 700);
 
@@ -38,7 +38,7 @@ void skills17_gy()
   fly(FLYWHEEL_IDLE - 5);
   reverse(1400);
 
-  g_left(930);
+  rotate(-930);
 
   reverse(150, 2);
 
@@ -60,7 +60,7 @@ void skills17_gy()
 
   reverse(1250); // back
 
-  g_right(900);
+  rotate(900);
 
   //waitDrive(REVERSE, 40, 700);
 
@@ -78,7 +78,7 @@ void skills17_gy()
 
   ////////////////////////////////////////////////////////////////////////
 
-  g_left(750);
+  rotate(-750);
 
 
 
@@ -86,15 +86,15 @@ void skills17_gy()
   REST(800);
   lift.move(0);
 
-  g_right(750);
+  rotate(750);
 
   reverse(600);
 
-  g_left(900);
+  rotate(-900);
 
   forward(715);
 
-  g_right(900);
+  rotate(900);
 
   forward(1200);
   REST(500);

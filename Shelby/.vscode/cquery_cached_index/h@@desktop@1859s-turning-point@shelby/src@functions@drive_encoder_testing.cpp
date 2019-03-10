@@ -1,31 +1,37 @@
 #include <iostream>
 #include "main.h"
 #include "../v5setup.hpp"
+//#include <functional>
 
 
-void line_test(int dir, int target, int maxPower, float factor)
+void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::function<void()> callback, bool check)
 {
+    //int minPower = 15;
 
-
-
-
-
-
+    int target = std::abs(targetM);
+    int dir;
+    if(targetM > 0)
+    {
+      dir = 1;
+    }
+    if(targetM < 0){
+      dir = -1;
+    }
     setDriveBrakes(COAST);
 
     // distance pid stuff
-    float kP = .5;//.3; // .25
+    float kP = .7; //.50;//.3; // .25
     float kI = .005;//.0005;
     float kD = 1;//1;
 
-    float errorZone = 100; // target * .1;
+    float errorZone = 150; // target * .1;
     float error, errorTot, errorLast;
     float pTerm, iTerm, dTerm;
     float power;
 
 
     // line pid stuff
-    float kPl = .15;
+    float kPl = .75;
     float errorl;
     float pTerml;
     float masterPower;
@@ -33,8 +39,8 @@ void line_test(int dir, int target, int maxPower, float factor)
 
 
     // target zone
-    float targetMin = target - 15;
-    float targetMax = target + 15;
+    float targetMin = target - 20;
+    float targetMax = target + 20;
 
     // first run stuff
     bool ft = true;
@@ -42,7 +48,7 @@ void line_test(int dir, int target, int maxPower, float factor)
 
     // timer stuff
     float pTime; // pause time
-    int exitDelay = 400;
+    int exitDelay = 350;
     //settle
     bool settled = false;
 
@@ -56,6 +62,24 @@ void line_test(int dir, int target, int maxPower, float factor)
 
     while(!settled)
     {
+        if(check)
+        {
+            if(limitSwitch.get_value() != 1)
+            {
+                lift.move(70);
+            }
+            if(limitSwitch.get_value() == 1)
+            {
+                lift.set_brake_mode(BRAKE);
+                lift.move(0);
+            }
+        }
+
+      if(std::abs(LENCO) > callbackTicks)
+      {
+        callback();
+      }
+
          // find error from distance
         error = target - std::abs(LENCO);
 
@@ -76,16 +100,33 @@ void line_test(int dir, int target, int maxPower, float factor)
         errorLast = error; // set last error after calcs
 
         // set power to pid out mult by dir in order to find direction
-        power = ((pTerm + iTerm + dTerm) * factor) * dir;
+        power = (pTerm + iTerm + dTerm) * dir;
 
         // if power is above the max dont let it be
-        if(power > maxPower)
+        if(dir == 1 && power > maxPower)
         {
-             power = maxPower;
+          power = maxPower;
+
+        }
+        if(dir == -1 && power < -maxPower)
+        {
+          power = -maxPower;
         }
 
+
+        // if(power < minPower && error > 0)
+        // {
+        //   power = minPower;
+        // }
+        // if(power > -minPower && error < 0)
+        // {
+        //   power = -minPower;
+        // }
+
+
+
         // set pid stuff for keeping in line
-        pTerml = errorl * kPl;
+        pTerml = errorl * (kPl * dir);
 
         // set master (left) power to normal power after maxing
         masterPower = power;
@@ -128,27 +169,27 @@ void line_test(int dir, int target, int maxPower, float factor)
         // pros::lcd::set_text(6, "timer:" + std::to_string(pros::millis())); // total time since program start
 
      // master motor debug
-        pros::lcd::set_text(1,
-             "LENCO:" + std::to_string(std::abs(LENCO)) +
-             " PowerL: " + std::to_string(masterPower)); // outputs master encoder
-
-     // slave motor debug
-        pros::lcd::set_text(2,
-             "RENCO:" + std::to_string(std::abs(RENCO)) +
-             " PowerR: " + std::to_string(slavePower)); // outputs slave encoder
-
-
-        pros::lcd::set_text(3, "ERROR:" + std::to_string(std::abs(LENCO) - std::abs(RENCO))); // outputs master - slave
-
-        pros::lcd::set_text(5,
-             "p: " + std::to_string(pTerm) +
-             "i: " + std::to_string(iTerm) +
-             "d: " + std::to_string(dTerm)
-        );
-
-        pros::lcd::set_text(6,
-             "line p: " + std::to_string(pTerml)
-        );
+     //    pros::lcd::set_text(1,
+     //         "LENCO:" + std::to_string(std::abs(LENCO)) +
+     //         " PowerL: " + std::to_string(masterPower)); // outputs master encoder
+     //
+     // // slave motor debug
+     //    pros::lcd::set_text(2,
+     //         "RENCO:" + std::to_string(std::abs(RENCO)) +
+     //         " PowerR: " + std::to_string(slavePower)); // outputs slave encoder
+     //
+     //
+     //    pros::lcd::set_text(3, "ERROR:" + std::to_string(std::abs(LENCO) - std::abs(RENCO))); // outputs master - slave
+     //
+     //    pros::lcd::set_text(5,
+     //         "p: " + std::to_string(pTerm) +
+     //         "i: " + std::to_string(iTerm) +
+     //         "d: " + std::to_string(dTerm)
+     //    );
+     //
+     //    pros::lcd::set_text(6,
+     //         "line p: " + std::to_string(pTerml)
+     //    );
 
 
         //save brain cells
@@ -165,4 +206,13 @@ void line_test(int dir, int target, int maxPower, float factor)
     rightFront.tare_position();
     rightRear.tare_position();
 
+}
+
+void newForward(int target, int maxPower, float factor){
+  //line_test(FORWARD, target, maxPower);
+  line(FORWARD, target, factor);
+}
+void newReverse(int target, int maxPower, float factor){
+  //line_test(REVERSE, target, maxPower);
+  line(REVERSE, target, factor);
 }

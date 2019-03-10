@@ -1,14 +1,42 @@
 #include "main.h"
+#include <functional>
 
 #define REST(x) pros::Task::delay(x)
 
+extern void regControl();
+extern void testControl();
+
+extern void rotate(int target, int maxSpeed = 110);
+extern void noPidDrive(int target, int speed = 110);
+extern void noPidRotate(int targetE, int speed = 110);
+
+
+extern void liftCheck(int exitTime = 1000);
+extern void singleOutDouble();
 extern void fly(int voltage);
 
 extern void debug();
 
 extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay = 1);
 
-extern void line_test(int dir, int target, int maxPower, float factor = 0);
+
+void swing(int side, int target, int speed = 127);
+
+//extern void line_test(int dir, int target, int maxPower);
+extern void drive(/*int dir,*/ int targetM, int maxPower = 110, int callbackTicks = 0, std::function<void()> callback = [](){}, bool check = false);
+//extern void newForward(int dir, int target, int maxPower, int callbackTicks, std::function<void(int)> callback = [](int){});
+
+void newForward(int target,  float factor = 0);
+void newReverse(int target,  float factor = 0);
+
+//extern void newForward(int target, int maxPower = 110);
+//extern void newReverse(int target, int maxPower = 110);
+
+// extern void line(int dir, int target, float factor);
+// extern void forward(int target, float factor = 1);
+// extern void reverse(int target, float factor = 1);
+
+extern void taskTest(void* param);
 
 
 //experimental
@@ -20,9 +48,9 @@ extern void reverseExt(int target, float factor = 1);
 extern int botAngle;
 
 //gyro turn
-extern void g_turn(int dir, int target, float factor);
-extern void g_left(int target, float factor = 1);
-extern void g_right(int target, float factor = 1);
+extern void g_turn(int dir, int target, int maxSpeed);
+extern void g_left(int target, int maxSpeed = 110);
+extern void g_right(int target, int maxSpeed = 110);
 
 extern void g_turn_t(int dir, int target, float factor);
 extern void g_left_t(int target, float factor = 1);
@@ -35,10 +63,15 @@ extern void line(int dir, int target, float factor);
 extern void forward(int target, float factor = 1);
 extern void reverse(int target, float factor = 1);
 
+//double gyro turn
+void turn_g2(int target, int maxSpeed = 110);
+
+
 // encoder turn
 extern void turn(int dir, int target, float factor);
 extern void left(int target, float factor = 1);
 extern void right(int target, float factor = 1);
+
 
 
 extern void setDriveBrakes(pros::motor_brake_mode_e_t mode);
@@ -48,7 +81,9 @@ extern void waitDrive(int dir, int speed, int waitTime);
 
 //global variables
 extern std::string nameList[];
+
 extern int selectedAuto;
+extern bool secretSettings;
 extern bool autoShouldPark;
 
 
@@ -57,7 +92,8 @@ extern pros::Controller master;
 
 
 //gyros
-extern pros::ADIGyro yawGyro;
+extern pros::ADIGyro yawGyroT;
+extern pros::ADIGyro yawGyroB;
 extern pros::ADIGyro rollGyro;
 extern pros::ADIDigitalIn limitSwitch;
 
@@ -144,6 +180,11 @@ extern pros::Motor lift;
 #define PORT_AIMBOT 17
 
 /* setup gyros  |- 1 through 8 -| */
-#define PORT_GYRO_YAW 1 // A // turn
+#define PORT_GYRO_TOP 4 // D // turn
+#define PORT_GYRO_BOT 3 // C
+
 #define PORT_GYRO_ROLL 8 // H // climb
-#define PORT_LIMIT_LIFT 2
+#define PORT_LIMIT_LIFT 2 // B
+
+
+void shoot(int time, int liftSpeed = LIFT_UP_SPEED);
