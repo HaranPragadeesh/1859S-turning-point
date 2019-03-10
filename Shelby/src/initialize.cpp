@@ -28,6 +28,7 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 bool autoShouldPark = true;
 int selectedAuto = 0;
+bool secretSettings = false;
 std::string nameList[13] = {
     "NOTHING SELECTED", // 0
     "Red Close", // 1
