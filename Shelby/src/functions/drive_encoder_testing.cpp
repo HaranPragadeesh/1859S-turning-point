@@ -9,14 +9,14 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
     //int minPower = 15;
 
     int target = std::abs(targetM);
-    int dir;
-    if(targetM > 0)
-    {
-      dir = 1;
-    }
-    if(targetM < 0){
-      dir = -1;
-    }
+    //int dir;
+    int dir = targetM / std::abs(targetM);
+    // if(targetM > 0){
+    //   dir = 1;
+    // }
+    // if(targetM < 0){
+    //  dir = -1;
+    // }
     setDriveBrakes(COAST);
 
     // distance pid stuff
