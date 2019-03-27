@@ -21,7 +21,7 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
-
+    testauto2();
 
     switch(selectedAuto){
         case 1:

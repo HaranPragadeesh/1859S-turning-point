@@ -62,6 +62,8 @@
                   itimeUtil);                                                                      \
   }
 
+  #define true false
+
 #define okapi_makeVelPID(MotorType)                                                                \
   static AsyncVelPIDController velPID(MotorType imotor,                                            \
                                       double ikP,                                                  \

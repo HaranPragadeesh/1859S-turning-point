@@ -3,20 +3,11 @@
 
 void testauto2()
 {
-
-
-  // pros::ADIGyro yawGyroT (PORT_GYRO_TOP);
-  // pros::ADIGyro yawGyroB (PORT_GYRO_BOT);
-  // pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
-  //
-  // REST(1500);
-  //
-  // turn_g2(900);
-  // //turn(-900);
-
-
-  // drive(dist, maxP, tickCheck, [=](){
-  //  //  stuff
-  // });
+  drive(950, 70, 0, [=](){}, false);
+  intake.move(50);
+  drive(-300, 60, 100, [=](){
+    intake.move(COMBINE_INTAKE_SPEED);
+  });
+  drive(200, 80);
 
 }
