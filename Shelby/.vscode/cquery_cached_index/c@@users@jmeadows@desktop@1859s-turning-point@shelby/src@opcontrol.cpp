@@ -6,6 +6,7 @@ void opcontrol()
 {
 	if(secretSettings)
 	{
+		
 		testControl();
 	}
 	if(!secretSettings)

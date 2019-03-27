@@ -3,7 +3,7 @@
 
 int aimbot()
 {
-     
 
+  #define opcontrol youAHecker
 
 }
