@@ -21,7 +21,7 @@ void rotate(int targetE, int maxSpeed)
     rightFront.tare_position();
     rightRear.tare_position();
 
-    float kP = .65; // .55
+    float kP = .70; // .55
     float kI = .005; // .005
     float kD = 1; // 1
 

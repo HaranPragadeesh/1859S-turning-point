@@ -21,8 +21,7 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
-    testauto2();
-
+    skillsv2();
     switch(selectedAuto){
         case 1:
             // do auto 1 red close
