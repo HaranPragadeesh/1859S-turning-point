@@ -10,9 +10,12 @@ void redclose_e()
 
      drive(-750, 90); // newReverse from bottom flag
 
+     noPidRotate(100);
      lift.move(LIFT_UP_SPEED);
      REST(500); // wait time for shoot
      lift.move(0);
+     noPidRotate(-100);
+
      fly(115);
 
      intake.move(100);
@@ -56,7 +59,9 @@ void redclose_e()
      drive(-300, 110, 0, [=](){}, true); // newReverse to line with flags
 
      //fly(0);
+     noPidRotate(75);
      shoot(800);
+     noPidRotate(-75);
 
      if(autoShouldPark)
      {

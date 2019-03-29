@@ -31,7 +31,7 @@ void redfar_e_2cap()
 
         REST(200);
 
-        fly(115); // double shot speed
+        fly(120); // double shot speed
 
 
 
@@ -44,9 +44,14 @@ void redfar_e_2cap()
 
 
 
-
     REST(1000);
-    shoot(800); // double shoot
+    //shoot(800); // double shoot
+
+    shoot(250, 80);
+    fly(80);
+    REST(1000);
+    shoot(300, 127);
+
     //combineBack.stop();
 
     drive(-600);
