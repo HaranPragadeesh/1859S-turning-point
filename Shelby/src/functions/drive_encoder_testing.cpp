@@ -31,7 +31,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
 
     // line pid stuff
-    float kPl = .75;
+    float kPl = 3; // .75
     float errorl;
     float pTerml;
     float masterPower;
@@ -58,7 +58,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
     rightFront.tare_position();
     rightRear.tare_position();
 
-
+    bool once = false;
 
     while(!settled)
     {
@@ -75,7 +75,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
             }
         }
 
-      if(std::abs(LENCO) > callbackTicks)
+      if(std::abs(LENCO) > callbackTicks && !once)
       {
         callback();
       }

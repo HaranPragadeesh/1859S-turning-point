@@ -6,6 +6,8 @@
 
 void noPidRotate(int targetE, int speed)
 {
+  setDriveBrakes(BRAKE);
+
     int dir = targetE / std::abs(targetE);
     float rotateFactor = 2.40;
 

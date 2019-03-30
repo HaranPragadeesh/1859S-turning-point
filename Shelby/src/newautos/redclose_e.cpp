@@ -20,7 +20,7 @@ void redclose_e()
 
      intake.move(100);
 
-     drive(-500);
+     drive(-500, 90);
 
      rotate(900); // turn back towards tilt cap with ball under
 
@@ -59,9 +59,7 @@ void redclose_e()
      drive(-300, 110, 0, [=](){}, true); // newReverse to line with flags
 
      //fly(0);
-     noPidRotate(75);
      shoot(800);
-     noPidRotate(-75);
 
      if(autoShouldPark)
      {
@@ -97,5 +95,11 @@ void redclose_e()
          shoot(1500);
 
      }
+
+
+
+     fly(0);
+     intake.move(0);
+     lift.move(0);
 
 }
