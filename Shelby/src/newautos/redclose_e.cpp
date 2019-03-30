@@ -8,7 +8,7 @@ void redclose_e()
      fly(FLYWHEEL_BOOST_SPEED);
      drive(1150); // hit bottom flag
 
-     drive(-750, 90); // newReverse from bottom flag
+     drive(-800, 90); // newReverse from bottom flag
 
      noPidRotate(100);
      lift.move(LIFT_UP_SPEED);
@@ -22,7 +22,7 @@ void redclose_e()
 
      drive(-500, 90);
 
-     rotate(900); // turn back towards tilt cap with ball under
+     rotate(870); // turn back towards tilt cap with ball under
 
 
      //fly(-35); // spin flywheel backwards in order to not get stuck
@@ -53,13 +53,19 @@ void redclose_e()
      lift.move(0);
      ////////////////////////////////////////////////////////////////////////
 
-     rotate(-890); // turn to line with flags
+     rotate(-865); // turn to line with flags
 
      //drive(-300); //650 // *tune* newReverse to line with platform to double shot
-     drive(-300, 110, 0, [=](){}, true); // newReverse to line with flags
+     drive(-300, 110, 150, [=](){
+       lift.move(LIFT_UP_SPEED);
+     }, true); // newReverse to line with flags
+     REST(400);
+     lift.move(0);
 
      //fly(0);
-     shoot(800);
+     //shoot(800);
+
+     fly(80);
 
      if(autoShouldPark)
      {
@@ -86,13 +92,13 @@ void redclose_e()
 
          setDriveBrakes(BRAKE);
 
-         rotate(400);
+         rotate(325);
          intake.move(-40);
-         drive(1500, 110, 0, [=](){}, true); // newReverse to line with flags
+         drive(1500, 127, 0, [=](){}, true); // newReverse to line with flags
 
          drive(-200);
-         noPidRotate(100);
-         shoot(1500);
+         noPidRotate(200);
+         shoot(800);
 
      }
 

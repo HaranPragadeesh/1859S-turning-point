@@ -3,11 +3,12 @@
 #include "../v5setup.hpp"
 
 
-void rotate(int targetE, int maxSpeed)
+void rotate(int targetE, int maxSpeed, int minSpeed)
 {
-    float rotateFactor = 2.40;
+    float rotateFactor = 2.5;
+    //float rotateFactor = 2.40;  // old one for _e autos
 
-
+  //  int minPower = minSpeed;
 
     setDriveBrakes(BRAKE);
     int target = targetE / rotateFactor;
@@ -55,8 +56,12 @@ void rotate(int targetE, int maxSpeed)
     //while(true)
     while(!settledL || !settledR)
     {
+      
         errorL = std::abs(target) - std::abs(LENCO);
         errorR = std::abs(target) - std::abs(RENCO);
+
+        int curDirL = errorL / std::abs(errorL);
+        int curDirR = errorR / std::abs(errorR);
 
         pTermL = errorL * kP;
         pTermR = errorR * kP;
@@ -70,8 +75,8 @@ void rotate(int targetE, int maxSpeed)
         errorLastL = errorL;
         errorLastR = errorR;
 
-        powerL = (pTermL + iTermL + dTermL);
-        powerR = -(pTermR + iTermR + dTermR);
+        powerL = (minSpeed * curDirL) + (pTermL + iTermL + dTermL);
+        powerR = (minSpeed * curDirR) + -(pTermR + iTermR + dTermR);
 
         if(powerL > maxSpeed)
           powerL = maxSpeed;

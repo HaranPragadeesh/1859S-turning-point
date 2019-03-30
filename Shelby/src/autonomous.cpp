@@ -21,6 +21,11 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
+
+    rotate(900);
+    rotate(-900);
+    REST(99999);
+
     //skillsv2();
     switch(selectedAuto){
         case 1:
