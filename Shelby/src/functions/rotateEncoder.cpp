@@ -3,7 +3,7 @@
 #include "../v5setup.hpp"
 
 
-void rotate(int targetE, int maxSpeed)
+void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> callback)
 {
     int minSpeed = 20;
     float rotateFactor = 2.6; // 2.5
@@ -57,6 +57,11 @@ void rotate(int targetE, int maxSpeed)
     //while(true)
     while(!settledL || !settledR)
     {
+      if(std::abs(LENCO) > std::abs(callbackTicks) /* && !once */)
+      {
+        callback();
+      }
+
         errorL = std::abs(target) - std::abs(LENCO);
         int curDirL = errorL / std::abs(errorL);
         pTermL = errorL * kP;

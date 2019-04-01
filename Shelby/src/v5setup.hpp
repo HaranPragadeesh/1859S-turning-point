@@ -8,7 +8,8 @@ extern void regControl();
 extern void testControl();
 
 
-extern void rotate(int target, int maxSpeed = 110);
+void rotate(int targetE, int maxSpeed = 110, int callbackTicks = 0, std::function<void()> callback = [](){});
+//extern void rotate(int target, int maxSpeed = 110);
 extern void noPidDrive(int target, int speed = 110);
 extern void noPidRotate(int targetE, int speed = 110);
 
@@ -22,7 +23,7 @@ extern void debug();
 extern void gyroClimb(int dir, int speed, int ang, int delay, int calibrateDelay = 1);
 
 
-void swing(int side, int target, int speed = 127);
+extern void swing(int side, int target, int speed = 127);
 
 //extern void line_test(int dir, int target, int maxPower);
 extern void drive(int targetM, int maxPower = 110, int callbackTicks = 0, std::function<void()> callback = [](){}, bool check = true);

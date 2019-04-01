@@ -3,40 +3,53 @@
 #include <iostream>
 void nats_rc()
 {
-  int curLift;
+    intake.move(COMBINE_INTAKE_SPEED);
 
-  drive(1250, 110, 0, [=](){
-      intake.move(COMBINE_INTAKE_SPEED);
-      lift.move(127);
+  drive(1250, 110, 900, [=](){
+    intake.move(COMBINE_INTAKE_SPEED);
+    lift.move(127);
   }, false);
 
-  curLift = lift.get_position();
+  // REST(200);
+  // lift.move(-80);
+  // REST(400);
+  // lift.move(0);
 
-  drive(-1300, 110, -900, [=](){
 
-    lift.move(-55);
-    //lift.move_absolute(curLift - 100, 127);
-    if(std::abs(LENCO) > 1000)
+  drive(-1300, 110, 500, [=]()
+  {
+    lift.move(-50);
+    if(std::abs(LENCO) > 600);
+    if(limitSwitch.get_value() == 1)
     {
+      lift.move(-50);
+    }
+    else{
       lift.move(0);
     }
-    if(std::abs(LENCO) > 1050)
+
+
+    if(std::abs(LENCO) > 1000)
     {
       fly(127);
+
     }
     //REST(200);
     //fly(127);
-  });
+  }, false);
 
   rotate(-900);
 
   lift.move(0);
-  drive(-400);
-  //shoot(200);
+  drive(-400, 110, 0, [=](){}, false);
+  //shoot(260);
   singleOutDouble();
 
+  fly(80);
+  //shoot(100, -100);
 
-  drive(1000, 110, 680, [=](){
+
+  drive(1000, 110, 600, [=](){
     lift.move(127);
   }, false);
   REST(100);
@@ -45,13 +58,20 @@ void nats_rc()
   rotate(-145);
   drive(700);
 
-  drive(-400);
+  if(autoShouldPark)
+  {
+    drive(-400);
 
-  rotate(1400);
+    rotate(1300);
 
-  intake.move(-50);
+    intake.move(-80);
 
-  drive(800);
+    drive(970, 120);
 
+    rotate(-1100);
 
+    drive(-1400, 127, 700, [=](){
+      lift.move(127);
+    });
+  }
 }
