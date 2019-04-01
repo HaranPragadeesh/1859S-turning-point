@@ -48,7 +48,7 @@ void nats_rc()
 
   lift.move(0);
   drive(-400, 110, 0, [=](){}, false);
-  shoot(260);
+  shoot(150);
   //singleOutDouble();
 
   fly(80);
