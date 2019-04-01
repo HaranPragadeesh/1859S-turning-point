@@ -2,9 +2,8 @@
 #include "../v5setup.hpp"
 #include <iostream>
 
-int curTime = 0;
 
-void nats_rc()
+void nats_bc()
 {
 
     intake.move(COMBINE_INTAKE_SPEED);
@@ -20,7 +19,7 @@ void nats_rc()
   // lift.move(0);
 
   curTime = 0;
-  drive(-1300, 110, 500, [=]()
+  drive(-1200, 110, 500, [=]()
   {
       if(curTime == 0){
         curTime = pros::millis();
@@ -43,7 +42,7 @@ void nats_rc()
     //fly(127);
   }, false);
 
-  rotate(-910);
+  rotate(910);
 
   lift.move(0);
   drive(-300, 110, 0, [=](){}, false);
@@ -67,21 +66,21 @@ void nats_rc()
   lift.move(0);
   fly(90);
 
-  rotate(-145);
+  rotate(145);
   drive(700);
 
 
   if(autoShouldPark)
   {
-    drive(-400, 110);
+    drive(-500, 110);
 
-    rotate(1300);
+    rotate(-1300);
 
     intake.move(-90);
 
     drive(970, 120, 0);
 
-    rotate(-1100, 110, 700, [=](){
+    rotate(1100, 110, 700, [=](){
       lift.move(127);
     });
 
@@ -90,13 +89,13 @@ void nats_rc()
   else{
 
     drive(-700);
-    rotate(1050);
+    rotate(-1050);
     intake.move(-80);
     drive(800, 120);
     drive(-200);
-    rotate(-450);
+    rotate(450);
     shoot(200);
     drive(700);
-    swing(RIGHT, 400, 127);
+    swing(LEFT, 400, 127);
   }
 }

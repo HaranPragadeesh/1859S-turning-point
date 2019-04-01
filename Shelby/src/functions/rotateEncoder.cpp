@@ -57,10 +57,7 @@ void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> 
     //while(true)
     while(!settledL || !settledR)
     {
-      if(std::abs(LENCO) > std::abs(callbackTicks) /* && !once */)
-      {
-        callback();
-      }
+
 
         errorL = std::abs(target) - std::abs(LENCO);
         int curDirL = errorL / std::abs(errorL);
@@ -84,6 +81,12 @@ void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> 
 
       RIGHT_DRIVE(powerR * dir);
       LEFT_DRIVE(powerL * dir);
+
+
+      if(std::abs(LENCO) > std::abs(callbackTicks) /* && !once */)
+      {
+        callback();
+      }
     //  pros::lcd::set_text(3, "%f", LENCO);
     //  pros::lcd::set_text(4, "%f", RENCO);
 

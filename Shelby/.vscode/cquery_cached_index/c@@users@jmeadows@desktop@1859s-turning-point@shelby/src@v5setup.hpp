@@ -4,6 +4,8 @@
 
 #define REST(x) pros::Task::delay(x)
 
+extern int curTime;
+
 extern void regControl();
 extern void testControl();
 

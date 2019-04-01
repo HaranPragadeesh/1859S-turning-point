@@ -23,7 +23,7 @@ void autonomous()
     yawGyroB.reset();
 
 
-   nats_rc();
+   nats_bc();
 
     //skillsv2();
     switch(selectedAuto){
