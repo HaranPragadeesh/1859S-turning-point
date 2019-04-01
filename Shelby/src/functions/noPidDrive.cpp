@@ -19,4 +19,5 @@ void noPidDrive(int target, int speed)
     }
     LEFT_DRIVE(0);
     RIGHT_DRIVE(0);
+    return;
 }

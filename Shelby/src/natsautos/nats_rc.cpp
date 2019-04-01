@@ -4,9 +4,9 @@
 
 int curTime = 0;
 
-
 void nats_rc()
 {
+    autoShouldPark = false;
 
     intake.move(COMBINE_INTAKE_SPEED);
 
@@ -50,6 +50,10 @@ void nats_rc()
   drive(-300, 110, 0, [=](){}, false);
   shoot(200);
   shoot(100, -100);
+  
+
+  intake.move(COMBINE_INTAKE_SPEED);
+
   //singleOutDouble();
 
 //  fly(80);
@@ -71,7 +75,7 @@ void nats_rc()
 
     rotate(1300);
 
-    intake.move(-100);
+    intake.move(-90);
 
     drive(970, 120);
 
@@ -80,5 +84,18 @@ void nats_rc()
     drive(-1400, 127, 700, [=](){
       lift.move(127);
     }, false);
+  }
+  else{
+
+    drive(-700);
+    rotate(1050);
+    intake.move(-80);
+    drive(800, 120);
+    drive(-200);
+    rotate(-450);
+    drive(700, 110, 0, [](){
+      lift.move(127);
+    });
+    swing(RIGHT, 400, 127);
   }
 }
