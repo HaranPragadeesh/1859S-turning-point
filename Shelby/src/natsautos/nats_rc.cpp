@@ -1,8 +1,13 @@
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 #include <iostream>
+
+int curTime = 0;
+
+
 void nats_rc()
 {
+
     intake.move(COMBINE_INTAKE_SPEED);
 
   drive(1250, 110, 900, [=](){
@@ -15,19 +20,20 @@ void nats_rc()
   // REST(400);
   // lift.move(0);
 
-
+  curTime = 0;
   drive(-1300, 110, 500, [=]()
   {
-    lift.move(-50);
-    if(std::abs(LENCO) > 600);
-    if(limitSwitch.get_value() == 1)
-    {
-      lift.move(-50);
-    }
-    else{
-      lift.move(0);
-    }
-
+      if(curTime == 0){
+        curTime = pros::millis();
+      }
+      if(pros::millis() < curTime + 400)
+      {
+        lift.move(-100);
+      }
+      else
+      {
+        lift.move(0);
+      }
 
     if(std::abs(LENCO) > 1000)
     {
@@ -42,8 +48,8 @@ void nats_rc()
 
   lift.move(0);
   drive(-400, 110, 0, [=](){}, false);
-  //shoot(260);
-  singleOutDouble();
+  shoot(260);
+  //singleOutDouble();
 
   fly(80);
   //shoot(100, -100);
