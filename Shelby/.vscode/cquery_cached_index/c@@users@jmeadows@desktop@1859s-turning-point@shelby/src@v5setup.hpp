@@ -8,8 +8,7 @@ extern void regControl();
 extern void testControl();
 
 
-extern void rotate(int targetE, int maxSpeed = 110, int minSpeed = 20);
-//extern void rotate(int target, int maxSpeed = 110);
+extern void rotate(int target, int maxSpeed = 110);
 extern void noPidDrive(int target, int speed = 110);
 extern void noPidRotate(int targetE, int speed = 110);
 

@@ -75,7 +75,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
             }
         }
 
-      if(std::abs(LENCO) > callbackTicks && !once)
+      if(std::abs(LENCO) > callbackTicks /* && !once */)
       {
         callback();
       }

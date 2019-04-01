@@ -2,6 +2,7 @@
 #include "v5setup.hpp"
 #include "autos/autos.hpp"
 #include "newautos/newautos.hpp"
+#include "natsautos/natsautos.hpp"
 
 // index-
 // 1- red close
@@ -22,9 +23,7 @@ void autonomous()
     yawGyroB.reset();
 
 
-    rotate(900);
-    rotate(-900);
-    REST(99999);
+   nats_rc();
 
     //skillsv2();
     switch(selectedAuto){

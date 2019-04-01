@@ -3,9 +3,10 @@
 #include "../v5setup.hpp"
 
 
-void rotate(int targetE, int maxSpeed, int minSpeed)
+void rotate(int targetE, int maxSpeed)
 {
-    float rotateFactor = 2.5;
+    int minSpeed = 20;
+    float rotateFactor = 2.6; // 2.5
     //float rotateFactor = 2.40;  // old one for _e autos
 
   //  int minPower = minSpeed;
@@ -15,16 +16,16 @@ void rotate(int targetE, int maxSpeed, int minSpeed)
 
     int dir = target / std::abs(target);
 
-    int minPower = 15;
+    int minPower = 25;
 
     leftFront.tare_position();
     leftRear.tare_position();
     rightFront.tare_position();
     rightRear.tare_position();
 
-    float kP = .70; // .55
-    float kI = .005; // .005
-    float kD = 1; // 1
+    float kP = .4; // .7
+    float kI = 1; // .005
+    float kD = 0; // 1
 
     float errorZone = 150;
     float errorL, errorTotL, errorLastL;
@@ -38,8 +39,8 @@ void rotate(int targetE, int maxSpeed, int minSpeed)
 
 
    // target = target * dir;
-    float targetMin = std::abs(target) - 22;
-    float targetMax = std::abs(target) + 22;
+    float targetMin = std::abs(target) - 15;
+    float targetMax = std::abs(target) + 15;
     bool ftL = true;
     bool ftR = true;
     bool ogPassL = false;
@@ -56,105 +57,103 @@ void rotate(int targetE, int maxSpeed, int minSpeed)
     //while(true)
     while(!settledL || !settledR)
     {
-      
         errorL = std::abs(target) - std::abs(LENCO);
-        errorR = std::abs(target) - std::abs(RENCO);
-
         int curDirL = errorL / std::abs(errorL);
-        int curDirR = errorR / std::abs(errorR);
-
         pTermL = errorL * kP;
-        pTermR = errorR * kP;
-
         iTermL = kI * errorTotL;
-        iTermR = kI * errorTotR;
-
         dTermL = kD * (errorL - errorLastL);
-        dTermR = kD * (errorR - errorLastR);
-
         errorLastL = errorL;
-        errorLastR = errorR;
-
         powerL = (minSpeed * curDirL) + (pTermL + iTermL + dTermL);
-        powerR = (minSpeed * curDirR) + -(pTermR + iTermR + dTermR);
-
         if(powerL > maxSpeed)
           powerL = maxSpeed;
 
+        errorR = std::abs(target) - std::abs(RENCO);
+        int curDirR = errorR / std::abs(errorR);
+        pTermR = errorR * kP;
+        iTermR = kI * errorTotR;
+        dTermR = kD * (errorR - errorLastR);
+        errorLastR = errorR;
+        powerR = -((minSpeed * curDirR) + (pTermR + iTermR + dTermR));
         if(powerR > maxSpeed)
           powerR = maxSpeed;
 
+      RIGHT_DRIVE(powerR * dir);
+      LEFT_DRIVE(powerL * dir);
+    //  pros::lcd::set_text(3, "%f", LENCO);
+    //  pros::lcd::set_text(4, "%f", RENCO);
 
-        pros::lcd::set_text(3, std::to_string(errorL));
-        pros::lcd::set_text(4, std::to_string(errorR));
+      if(std::abs(LENCO) > targetMin && ftL)
+      {
+          pTimeL = pros::millis();
+          firstPauseL = pros::millis();
+          ftL = false;
+          ogPassL = true;
+        //  pros::lcd::set_text(2, "ogPassL");
+      }
 
+      //if(settledL == false)
+      //{
+          if(pros::millis() > pTimeL + exitDelay && ogPassL)
+          {
+              if((std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax) or pros::millis() > firstPauseL + emergancyExit)
+              {
+                  settledL = true;
+                //  pros::lcd::set_text(5, "settledL");
 
-        LEFT_DRIVE(powerL * dir);
-        RIGHT_DRIVE(powerR * dir);
-
-        if(std::abs(LENCO) > targetMin && ftL)
-        {
-            pTimeL = pros::millis();
-            firstPauseL = pros::millis();
-            ftL = false;
-            ogPassL = true;
-            pros::lcd::set_text(2, "ogPassL");
-        }
-        if(settledL == false)
-        {
-            if(pros::millis() > pTimeL + exitDelay && ogPassL)
-            {
-                if((std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax) or pros::millis() > firstPauseL + emergancyExit)
-                {
-                    settledL = true;
-                    pros::lcd::set_text(5, "settledL");
-
-                }
-                else
-                {
-                    pTimeL = pros::millis();
-                    pros::lcd::set_text(5, "not settledL");
-
-
-                }
-            }
-        }
+              }
+              else
+              {
+                settledL = false;
+                  pTimeL = pros::millis();
+                //  pros::lcd::set_text(5, "not settledL");
 
 
-        if(std::abs(RENCO) > targetMin && ftR)
-        {
-            pTimeR = pros::millis();
-            firstPauseR = pros::millis();
-            ftR = false;
-            ogPassR = true;
-            pros::lcd::set_text(3, "ogPassR");
-        }
-        if(settledR == false)
-        {
-            if(pros::millis() > pTimeR + exitDelay && ogPassR)
-            {
-                if((std::abs(RENCO) > targetMin && std::abs(RENCO) < targetMax) or pros::millis() > firstPauseR + emergancyExit)
-                {
-                    settledR = true;
-                    pros::lcd::set_text(6, "settledR");
+              }
+          }
+      //}
 
-                }
-                else
-                {
-                    pTimeR = pros::millis();
-                    pros::lcd::set_text(6, "not settledR");
+      if(std::abs(RENCO) > targetMin && ftR)
+      {
+          pTimeR = pros::millis();
+          firstPauseR = pros::millis();
+          ftR = false;
+          ogPassR = true;
+          //pros::lcd::set_text(3, "ogPassR");
+      }
+    //  if(settledR == false)
+    //  {
+          if(pros::millis() > pTimeR + exitDelay && ogPassR)
+          {
+              if((std::abs(RENCO) > targetMin && std::abs(RENCO) < targetMax) or pros::millis() > firstPauseR + emergancyExit)
+              {
+                  settledR = true;
+                //  pros::lcd::set_text(6, "settledR");
 
-                }
-            }
-        }
+              }
+              else
+              {
+                settledR = false;
+                  pTimeR = pros::millis();
+                //  pros::lcd::set_text(6, "not settledR");
 
+              }
+          }
+  //    }
 
+      std::cout << "left" << errorL << std::endl;
+      std::cout << "right" << errorR << std::endl << std::endl;
+
+      if(settledL)
+      {
+        std::cout << "left Settled" << std::endl;
+      }
+      if(settledR){
+        std::cout << "rit settled" << std::endl;
+      }
         pros::Task::delay(20);
     }
 
     RIGHT_DRIVE(0);
     LEFT_DRIVE(0);
-
-
-
+    return;
 }
