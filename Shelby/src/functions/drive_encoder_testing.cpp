@@ -17,7 +17,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
     // if(targetM < 0){
     //  dir = -1;
     // }
-    setDriveBrakes(COAST);
+    //setDriveBrakes(COAST);
 
     // distance pid stuff
     float kP = .7; //.50;//.3; // .25

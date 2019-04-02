@@ -23,7 +23,9 @@ void autonomous()
     yawGyroB.reset();
 
 
-   nats_bc();
+    nats_bb();
+
+   //nats_bc();
 
     //skillsv2();
     switch(selectedAuto){
@@ -41,6 +43,7 @@ void autonomous()
             //redfar_gy();
             //redfar_e();
             //redfar_e_2cap();
+            nats_rb();
             break;
         case 3:
             // do auto 3 blue close
@@ -53,6 +56,7 @@ void autonomous()
           //  blueclose_e();
             break;
         case 5:
+          nats_bb();
           //  bluefar_e_2cap();
             break;
         case 6:

@@ -3,10 +3,13 @@
 #include <iostream>
 
 int curTime = 0;
+int clockMf;
 
 void nats_rc()
 {
 
+  setDriveBrakes(BRAKE);
+  clockMf = pros::millis();
     intake.move(COMBINE_INTAKE_SPEED);
 
   drive(1250, 110, 900, [=](){
@@ -75,11 +78,12 @@ void nats_rc()
   {
     drive(-400, 110);
 
+    intake.move(-80);
+
     rotate(1300);
 
-    intake.move(-90);
 
-    drive(970, 120, 0);
+    drive(1000, 120, 0);
 
     rotate(-1100, 110, 700, [=](){
       lift.move(127);
@@ -90,8 +94,8 @@ void nats_rc()
   else{
 
     drive(-700);
-    rotate(1050);
     intake.move(-80);
+    rotate(1050);
     drive(800, 120);
     drive(-200);
     rotate(-450);
@@ -99,4 +103,6 @@ void nats_rc()
     drive(700);
     swing(RIGHT, 400, 127);
   }
+
+  pros::lcd::set_text(7,std::to_string(pros::millis() - clockMf));
 }
