@@ -83,7 +83,7 @@ void nats_rc()
     rotate(1300);
 
 
-    drive(980, 110, 0);
+    drive(950, 110, 0);
 
     rotate(-1200, 110, 700, [=](){
       lift.move(127);

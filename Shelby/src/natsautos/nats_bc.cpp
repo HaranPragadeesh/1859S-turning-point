@@ -5,7 +5,7 @@
 
 void nats_bc()
 {
-
+  fly(-20);
     intake.move(COMBINE_INTAKE_SPEED);
 
   drive(1250, 110, 900, [=](){
@@ -19,7 +19,7 @@ void nats_bc()
   // lift.move(0);
 
   curTime = 0;
-  drive(-1200, 110, 500, [=]()
+  drive(-1200, 110, 300, [=]()
   {
       if(curTime == 0){
         curTime = pros::millis();
@@ -33,7 +33,7 @@ void nats_bc()
         lift.move(0);
       }
 
-    if(std::abs(LENCO) > 1000)
+    if(std::abs(LENCO) > 800)
     {
       fly(127);
 
@@ -42,7 +42,7 @@ void nats_bc()
     //fly(127);
   }, false);
 
-  rotate(910);
+  rotate(930);
 
   lift.move(0);
   drive(-300, 110, 0, [=](){}, false);
@@ -76,7 +76,7 @@ void nats_bc()
 
     rotate(-1300);
 
-    intake.move(-90);
+    intake.move(-80);
 
     drive(955, 120, 0);
 
@@ -89,13 +89,12 @@ void nats_bc()
   else{
 
     drive(-700);
-    rotate(-1050);
     intake.move(-80);
-    drive(800, 120);
+    rotate(-1050);
+    drive(900);
     drive(-200);
-    rotate(450);
-    shoot(200);
-    drive(700);
-    swing(LEFT, 400, 127);
+    rotate(545);
+    shoot(250);
+    drive(1000, 127);
   }
 }
