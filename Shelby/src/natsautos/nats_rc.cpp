@@ -46,7 +46,7 @@ void nats_rc()
     //fly(127);
   }, false);
 
-  rotate(-920);
+  rotate(-935);
 
   lift.move(0);
   drive(-300, 110, 0, [=](){}, false);
@@ -83,7 +83,7 @@ void nats_rc()
     rotate(1300);
 
 
-    drive(950, 110, 0);
+    drive(980, 110, 0);
 
     rotate(-1200, 110, 700, [=](){
       lift.move(127);
@@ -98,10 +98,9 @@ void nats_rc()
     rotate(1050);
     drive(800, 120);
     drive(-200);
-    rotate(-480);
-    shoot(200);
-    drive(700);
-    swing(RIGHT, 400, 127);
+    rotate(-575);
+    shoot(250);
+    drive(1000, 127);
   }
 
   pros::lcd::set_text(7,std::to_string(pros::millis() - clockMf));

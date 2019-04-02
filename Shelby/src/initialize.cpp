@@ -131,9 +131,9 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-    setDriveBrakes(HOLD);
-    LEFT_DRIVE_V(0);
-    RIGHT_DRIVE_V(0);
+  //  setDriveBrakes(HOLD);
+//    LEFT_DRIVE_V(0);
+  //  RIGHT_DRIVE_V(0);
   //  setDriveBrakes(COAST);
     // hi micha
     // put spaces between your comments you dolt
