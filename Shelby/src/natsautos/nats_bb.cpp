@@ -3,13 +3,18 @@
 
 void nats_bb()
 {
+
+ autoShouldPark = false;
+
+  fly(-10);
+
   intake.move(COMBINE_INTAKE_SPEED);
 
   drive(1100, 110, 900, [=](){
     intake.move(COMBINE_INTAKE_SPEED);
     lift.move(127);
   }, false);
-  REST(500);
+  REST(250);
 
   // REST(200);
   // lift.move(-80);
@@ -33,7 +38,7 @@ void nats_bb()
 
     if(std::abs(LENCO) > 700)
     {
-      fly(110);
+      fly(112);
 
     }
     //REST(200);
@@ -45,7 +50,7 @@ void nats_bb()
 
     ////////////////////////////////////////////////////////////////////////
 
-    rotate(710); // 750 shoots right
+    rotate(710);
 
 
 
@@ -53,16 +58,40 @@ void nats_bb()
     //REST(1000);
 
     REST(1000);
-    shoot(850); // double shoot
+    shoot(750); // double shoot
+    fly(115);
     //combineBack.stop();
 
+    drive(-550);
+    rotate(-820);
+    intake.move(0);
+    drive(800, 90);
+
+  //  REST(50); // 120
+
+    intake.move(65);
+    //REST(100);
+    drive(-120, 80, 40, [=](){
+  //  intake.move(COMBINE_INTAKE_SPEED);
+    });
+  //  REST(200);
+    intake.move(100);
+    drive(80, 70);
+
+    drive(-100, 127);
+    rotate(730);
+    shoot(300);
+    rotate(285);
+    drive(1000, 127);
+
+/* // move to back
     drive(-640);
     rotate(-800);
 
     intake.move(-60);
     drive(1000, 127);
 
-
+*/
     if(autoShouldPark)
     {
 

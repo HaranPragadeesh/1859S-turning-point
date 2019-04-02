@@ -25,7 +25,7 @@ void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> 
 
     float kP = .4; // .7
     float kI = 1; // .005
-    float kD = 0; // 1
+    float kD = .1; // 1
 
     float errorZone = 150;
     float errorL, errorTotL, errorLastL;

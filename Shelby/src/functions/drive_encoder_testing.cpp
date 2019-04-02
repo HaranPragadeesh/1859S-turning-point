@@ -20,9 +20,9 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
     //setDriveBrakes(COAST);
 
     // distance pid stuff
-    float kP = .7; //.50;//.3; // .25
+    float kP = .5; //.50;//.3; // .25
     float kI = .005;//.0005;
-    float kD = 1;//1;
+    float kD = .1;//1;
 
     float errorZone = 150; // target * .1;
     float error, errorTot, errorLast;
@@ -194,6 +194,11 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
         //save brain cells
         pros::Task::delay(20);
+    }
+
+    if(check)
+    {
+      lift.move(0);
     }
 
     // set drive vel to 0 for brake mode to work if wanted
