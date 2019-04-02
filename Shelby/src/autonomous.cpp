@@ -1,7 +1,7 @@
 #include "../include/main.h"
 #include "v5setup.hpp"
-#include "autos/autos.hpp"
-#include "newautos/newautos.hpp"
+//#include "autos/autos.hpp"
+//#include "newautos/newautos.hpp"
 #include "natsautos/natsautos.hpp"
 
 // index-
@@ -32,32 +32,34 @@ void autonomous()
             //new_redclose();
             //redclose_gy();
             //  redclose();
-            redclose_e();
+            //redclose_e();
+            nats_rc();
             break;
         case 2:
             // do auto 2 red far
             //redfar();
             //redfar_gy();
             //redfar_e();
-            redfar_e_2cap();
+            //redfar_e_2cap();
             break;
         case 3:
             // do auto 3 blue close
             //blueclose();
             //blueclose_gy();
-            redfar_e_2cap_defense();
+            //redfar_e_2cap_defense();
             break;
         case 4:
-            blueclose_e();
+            nats_bc();
+          //  blueclose_e();
             break;
         case 5:
-            bluefar_e_2cap();
+          //  bluefar_e_2cap();
             break;
         case 6:
-            bluefar_e_2cap_defense();
+          //  bluefar_e_2cap_defense();
             break;
         case 7:
-            skills19_e();
+          //  skills19_e();
             break;
         default:
             //testauto();

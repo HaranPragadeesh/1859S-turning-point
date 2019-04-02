@@ -78,9 +78,9 @@ void nats_bc()
 
     intake.move(-90);
 
-    drive(970, 120, 0);
+    drive(955, 120, 0);
 
-    rotate(1100, 110, 700, [=](){
+    rotate(1200, 110, 700, [=](){
       lift.move(127);
     });
 
