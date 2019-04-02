@@ -13,6 +13,4 @@ void opcontrol()
 	{
 		regControl();
 	}
-
-
 }

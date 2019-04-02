@@ -3,7 +3,6 @@
 #include "../v5setup.hpp"
 //#include <functional>
 
-
 void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::function<void()> callback, bool check)
 {
     //int minPower = 15;

@@ -15,11 +15,7 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
-  //  nats_bb();
-
-   //nats_bc();
-  //  nats_bc();
-    //skillsv2();
+    
     switch(selectedAuto){
         case 1:
             // do auto 1 red close

@@ -1,5 +1,6 @@
 #include "../../include/main.h"
 #include "../v5setup.hpp"
+#include <iostream>
 
 void nats_bb()
 {
