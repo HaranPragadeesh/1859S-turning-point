@@ -31,7 +31,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
 
     // line pid stuff
-    float kPl = 1.8; // .75
+    float kPl = 0;//1.8; // .75
     float errorl;
     float pTerml;
     float masterPower;

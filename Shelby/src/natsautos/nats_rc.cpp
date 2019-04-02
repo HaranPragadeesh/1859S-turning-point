@@ -7,8 +7,8 @@ int clockMf;
 
 void nats_rc()
 {
-
-  setDriveBrakes(BRAKE);
+  fly(-10);
+//  setDriveBrakes(BRAKE);
   clockMf = pros::millis();
     intake.move(COMBINE_INTAKE_SPEED);
 
@@ -23,7 +23,7 @@ void nats_rc()
   // lift.move(0);
 
   curTime = 0;
-  drive(-1300, 110, 500, [=]()
+  drive(-1300, 110, 400, [=]()
   {
       if(curTime == 0){
         curTime = pros::millis();
@@ -37,7 +37,7 @@ void nats_rc()
         lift.move(0);
       }
 
-    if(std::abs(LENCO) > 1000)
+    if(std::abs(LENCO) > 800)
     {
       fly(127);
 
@@ -46,7 +46,7 @@ void nats_rc()
     //fly(127);
   }, false);
 
-  rotate(-910);
+  rotate(-920);
 
   lift.move(0);
   drive(-300, 110, 0, [=](){}, false);
@@ -83,9 +83,9 @@ void nats_rc()
     rotate(1300);
 
 
-    drive(1000, 120, 0);
+    drive(950, 110, 0);
 
-    rotate(-1100, 110, 700, [=](){
+    rotate(-1200, 110, 700, [=](){
       lift.move(127);
     });
 
@@ -98,7 +98,7 @@ void nats_rc()
     rotate(1050);
     drive(800, 120);
     drive(-200);
-    rotate(-450);
+    rotate(-480);
     shoot(200);
     drive(700);
     swing(RIGHT, 400, 127);

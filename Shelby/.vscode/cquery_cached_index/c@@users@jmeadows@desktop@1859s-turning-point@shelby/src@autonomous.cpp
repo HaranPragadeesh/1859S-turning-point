@@ -4,13 +4,6 @@
 //#include "newautos/newautos.hpp"
 #include "natsautos/natsautos.hpp"
 
-// index-
-// 1- red close
-// 2- red far
-// 3- blue close
-// 4- blue far
-// 5- skills 12
-// 6- skills 19
 
 void autonomous()
 {

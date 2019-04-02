@@ -1,7 +1,7 @@
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 
-void nats_bb()
+void nats_bb_s()
 {
   fly(-10);
 
@@ -33,7 +33,7 @@ void nats_bb()
         lift.move(0);
       }
 
-    if(std::abs(LENCO) > 600)
+    if(std::abs(LENCO) > 700)
     {
       fly(112);
 
@@ -54,9 +54,9 @@ void nats_bb()
 
     //REST(1000);
 
-    REST(900);
+    REST(1000);
     shoot(750); // double shoot
-    fly(108);
+    fly(12);
     //combineBack.stop();
 
     drive(-550);
@@ -68,20 +68,17 @@ void nats_bb()
 
     intake.move(65);
     //REST(100);
-
-    drive(-120, 80, 65, [=](){
+    drive(-120, 80, 40, [=](){
   //  intake.move(COMBINE_INTAKE_SPEED);
-  intake.move(100);
-
     });
   //  REST(200);
-    REST(150);
+    intake.move(100);
     drive(80, 70);
 
     drive(-100, 127);
     rotate(730);
-  //  shoot(300);
-    lift.move(127);
+    shoot(300);
+
 
 /* // move to back
     drive(-640);
@@ -93,16 +90,15 @@ void nats_bb()
 */
     if(autoShouldPark)
     {
-    //  lift.move(0);
-      REST(300);
-      lift.move(0);
       rotate(285);
-      drive(1550, 127);
+      drive(1000, 127);
     }
     else{
-      REST(300);
-      //drive(300, 50, 0, [](){}, false);
 
 
     }
+
+    LEFT_DRIVE_V(0);
+    RIGHT_DRIVE_V(0);
+    fly(0);
 }
