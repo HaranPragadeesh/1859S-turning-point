@@ -2,6 +2,11 @@
 #include "../v5setup.hpp"
 #include <iostream>
 
+
+
+
+
+
 void nats_bb()
 {
   fly(-10);
@@ -84,14 +89,6 @@ void nats_bb()
   //  shoot(300);
     lift.move(127);
 
-/* // move to back
-    drive(-640);
-    rotate(-800);
-
-    intake.move(-60);
-    drive(1000, 127);
-
-*/
     if(autoShouldPark)
     {
     //  lift.move(0);
