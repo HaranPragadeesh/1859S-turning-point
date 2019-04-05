@@ -36,7 +36,7 @@ void nats_rb(){
 
     if(std::abs(LENCO) > 600)
     {
-      fly(113);
+      fly(114);
 
     }
     //REST(200);
@@ -57,7 +57,7 @@ void nats_rb(){
 
     REST(750);
     shoot(750); // double shoot
-    fly(108);
+    fly(111);
     //combineBack.stop();
 
     drive(-385);
@@ -80,7 +80,7 @@ void nats_rb(){
     drive(80, 70);
 
     drive(-100, 127);
-    rotate(-800);
+    rotate(-815);
   //  shoot(300);
     lift.move(127);
 
@@ -99,7 +99,7 @@ void nats_rb(){
       lift.move(0);
       rotate(-320);
       setDriveBrakes(HOLD);
-      drive(1600, 127);
+      drive(1520, 127);
     }
     else{
       REST(300);

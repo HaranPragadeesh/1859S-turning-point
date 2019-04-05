@@ -100,7 +100,7 @@ void nats_bb(){
       lift.move(0);
       rotate(320);
       setDriveBrakes(HOLD);
-      drive(1600, 127);
+      drive(1520, 127);
     }
     else{
       REST(300);

@@ -1,8 +1,11 @@
 #include "main.h"
 #include "v5setup.hpp"
 
+bool firstGo = true;
+
 void regControl()
 {
+  fly(0);
      setDriveBrakes(COAST);
 	yawGyroT.reset();
 	lift.set_brake_mode(HOLD);
@@ -58,7 +61,21 @@ void regControl()
 		}
 
 
+    if(firstGo)
+    {
+      if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) ||
+        master.get_digital(pros::E_CONTROLLER_DIGITAL_L2) ||
+        master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+        {
+          firstGo = false;
+        }
+    }
+
 		// ----------------------------------------------------------------------FLYWHEEL-------------
+    if(!firstGo)
+    {
+
+
 		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)
 				&& !master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
@@ -85,7 +102,7 @@ void regControl()
 			flyWheel1.move(FLYWHEEL_IDLE);
 			flyWheel2.move(FLYWHEEL_IDLE);
 		}
-
+  }
 
 		// ---------------------------------------------------------------------COMBINE----------------
 		if(!master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)
@@ -94,6 +111,7 @@ void regControl()
 		{
 				intake.move(0);
 		}
+
 
 
 		// -------------------------------------------------------------------LIFT---------------------
