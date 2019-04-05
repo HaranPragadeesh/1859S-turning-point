@@ -23,7 +23,7 @@ void nats_rc()
   // lift.move(0);
 
   curTime = 0;
-  drive(-1300, 110, 400, [=]()
+  drive(-1265, 110, 400, [=]()
   {
       if(curTime == 0){
         curTime = pros::millis();
@@ -70,7 +70,7 @@ void nats_rc()
   lift.move(0);
   fly(90);
 
-  rotate(-145);
+  rotate(-150);
   drive(700);
 
 
@@ -80,12 +80,12 @@ void nats_rc()
 
     intake.move(-80);
 
-    rotate(1300);
+    rotate(1315);
 
 
     drive(950, 110, 0);
 
-    rotate(-1200, 110, 700, [=](){
+    rotate(-1050, 110, 700, [=](){
       lift.move(127);
     });
 
@@ -95,7 +95,7 @@ void nats_rc()
 
     drive(-700);
     intake.move(-80);
-    rotate(1050);
+    rotate(1065);
     drive(800, 120);
     drive(-200);
     rotate(-575);

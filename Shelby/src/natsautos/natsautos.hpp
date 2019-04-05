@@ -8,3 +8,5 @@ extern void nats_bb();
 
 extern void nats_bb_s();
 extern void nats_rb_s();
+
+extern void nats_s();

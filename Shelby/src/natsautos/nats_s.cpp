@@ -3,8 +3,7 @@
 #include <iostream>
 
 
-
-void nats_bb(){
+void nats_s(){
   fly(-10);
 
   intake.move(COMBINE_INTAKE_SPEED);
@@ -37,7 +36,7 @@ void nats_bb(){
 
     if(std::abs(LENCO) > 600)
     {
-      fly(114);
+      fly(113);
 
     }
     //REST(200);
@@ -49,7 +48,7 @@ void nats_bb(){
 
     ////////////////////////////////////////////////////////////////////////
 
-    rotate(718);
+    rotate(-730);
 
 
 
@@ -58,13 +57,13 @@ void nats_bb(){
 
     REST(750);
     shoot(750); // double shoot
-    fly(112);
+    fly(108);
     //combineBack.stop();
 
-    drive(-395);
-    rotate(-915);
+    drive(-385);
+    rotate(915);
     intake.move(0);
-    drive(755, 80); // go to back cap
+    drive(772, 80); // go to back cap
 
   //  REST(50); // 120
 
@@ -81,7 +80,7 @@ void nats_bb(){
     drive(80, 70);
 
     drive(-100, 127);
-    rotate(850);
+    rotate(-800);
   //  shoot(300);
     lift.move(127);
 
@@ -96,9 +95,9 @@ void nats_bb(){
     if(autoShouldPark)
     {
     //  lift.move(0);
-      REST(600);
+      REST(1500);
       lift.move(0);
-      rotate(320);
+      rotate(-320);
       setDriveBrakes(HOLD);
       drive(1600, 127);
     }

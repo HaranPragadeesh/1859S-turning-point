@@ -48,7 +48,7 @@ void nats_rb(){
 
     ////////////////////////////////////////////////////////////////////////
 
-    rotate(-710);
+    rotate(-730);
 
 
 
@@ -57,13 +57,13 @@ void nats_rb(){
 
     REST(750);
     shoot(750); // double shoot
-    fly(109);
+    fly(108);
     //combineBack.stop();
 
     drive(-385);
-    rotate(900);
+    rotate(915);
     intake.move(0);
-    drive(790, 80); // go to back cap
+    drive(772, 80); // go to back cap
 
   //  REST(50); // 120
 
