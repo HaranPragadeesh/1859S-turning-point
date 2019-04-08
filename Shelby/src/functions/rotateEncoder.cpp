@@ -3,13 +3,27 @@
 #include "../v5setup.hpp"
 
 
+/*
+ * function used for doing a point turn, includes
+ * target distance (in wheel rotation degrees), maximum
+ * speed set, and a callback function ( used for shooting
+ * while moving and loading and such )
+*/
+
+/*
+ * LENCO is a definition for getting left encoder clicks
+ * RENCO is a definition for getting right encoder clicks
+*/
+
+// setDriveBrakes(x); is a function used for setting brake mode of the 4 drive motors and BRAKE is a definition of the brakemode brake
+
 void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> callback)
 {
     int minSpeed = 20;
     float rotateFactor = 2.6; // 2.5
-    //float rotateFactor = 2.40;  // old one for _e autos
+    // float rotateFactor = 2.40;  // old one for _e autos
 
-  //  int minPower = minSpeed;
+    // int minPower = minSpeed;
 
     setDriveBrakes(BRAKE);
     int target = targetE / rotateFactor;
@@ -48,7 +62,7 @@ void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> 
     float pTimeL; // pause time
     float pTimeR;
     int exitDelay = 350; // millis to check exit
-    int emergancyExit = 5000000; // millis to emergancyExit
+    //int emergancyExit = 5000000; // millis to emergancyExit
     bool settledL = false;
     bool settledR = false;
     float firstPauseL;
@@ -83,12 +97,10 @@ void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> 
       LEFT_DRIVE(powerL * dir);
 
 
-      if(std::abs(LENCO) > std::abs(callbackTicks) /* && !once */)
+      if(std::abs(LENCO) > std::abs(callbackTicks))
       {
         callback();
       }
-    //  pros::lcd::set_text(3, "%f", LENCO);
-    //  pros::lcd::set_text(4, "%f", RENCO);
 
       if(std::abs(LENCO) > targetMin && ftL)
       {
@@ -96,29 +108,20 @@ void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> 
           firstPauseL = pros::millis();
           ftL = false;
           ogPassL = true;
-        //  pr++-os::lcd::set_text(2, "ogPassL");
       }
 
-      //if(settledL == false)
-      //{
           if(pros::millis() > pTimeL + exitDelay && ogPassL)
           {
-              if((std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax) or pros::millis() > firstPauseL + emergancyExit)
+              if((std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax) /* || pros::millis() > firstPauseL + emergancyExit */)
               {
                   settledL = true;
-                //  pros::lcd::set_text(5, "settledL");
-
               }
               else
               {
                 settledL = false;
-                  pTimeL = pros::millis();
-                //  pros::lcd::set_text(5, "not settledL");
-
-
+                pTimeL = pros::millis();
               }
           }
-      //}
 
       if(std::abs(RENCO) > targetMin && ftR)
       {
@@ -126,37 +129,21 @@ void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> 
           firstPauseR = pros::millis();
           ftR = false;
           ogPassR = true;
-          //pros::lcd::set_text(3, "ogPassR");
       }
-    //  if(settledR == false)
-    //  {
           if(pros::millis() > pTimeR + exitDelay && ogPassR)
           {
-              if((std::abs(RENCO) > targetMin && std::abs(RENCO) < targetMax) or pros::millis() > firstPauseR + emergancyExit)
+              if((std::abs(RENCO) > targetMin && std::abs(RENCO) < targetMax) /*|| pros::millis() > firstPauseR + emergancyExit*/)
               {
                   settledR = true;
-                //  pros::lcd::set_text(6, "settledR");
-
               }
               else
               {
                 settledR = false;
                   pTimeR = pros::millis();
-                //  pros::lcd::set_text(6, "not settledR");
               }
           }
-  //    }
 
-      std::cout << "left" << errorL << std::endl;
-      std::cout << "right" << errorR << std::endl << std::endl;
-
-      if(settledL)
-      {
-        std::cout << "left Settled" << std::endl;
-      }
-      if(settledR){
-        std::cout << "rit settled" << std::endl;
-      }
+        // save brain cells
         pros::Task::delay(20);
     }
 

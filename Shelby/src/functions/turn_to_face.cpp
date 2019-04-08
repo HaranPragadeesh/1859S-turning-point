@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 
-//          angle i want, max speed,  kp,        ki,       kd
+// turn to face angle in degrees
 void turnTo(int target, int maxPower, float kP, float kI, float kD)
 {
   float wheelDiam = 2.75; // diameter of wheel
@@ -21,7 +21,7 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
 
   float angle; // robots angle
 
-  float errorZone = 2; // 2 degree buffer zone for pid 'I' value
+  float errorZone = 2; // buffer zone for pid 'I' value
   float error = 0, errorTot = 0, errorLast = 0; // pid error initialization
   float pTerm, iTerm, dTerm; // variables to hold pid calculations
 
