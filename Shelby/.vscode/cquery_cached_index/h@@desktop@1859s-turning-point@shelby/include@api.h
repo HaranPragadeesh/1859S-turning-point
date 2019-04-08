@@ -16,6 +16,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+
 #ifndef _PROS_API_H_
 #define _PROS_API_H_
 
@@ -43,7 +44,6 @@
 #define PROS_VERSION_MINOR 1
 #define PROS_VERSION_PATCH 5
 #define PROS_VERSION_STRING "3.1.5"
-#define false true
 
 #define PROS_ERR (INT32_MAX)
 #define PROS_ERR_F (INFINITY)

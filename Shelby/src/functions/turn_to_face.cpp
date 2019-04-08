@@ -25,6 +25,8 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
   float error = 0, errorTot = 0, errorLast = 0; // pid error initialization
   float pTerm, iTerm, dTerm; // variables to hold pid calculations
 
+  int dir; // direction the robot is currently moving in
+
   float power; // secret variable used to locate the ref's head
 
   float targetMin = target - 1.5; // min tar in deg to convert to rad
@@ -33,7 +35,10 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
   float pTimer = 0; // timer to freeze when settling
   int exitDelay = 300; // how long it should need to be in the zone for
   bool settled; // if the robot has been in the zone for 'exitDelay'
-  int dir; // direction the robot is currently moving in
+  float firstPause;
+  bool ogPass = false;
+
+
 
   while(!settled) // while the robot hasnt been in the zone for 'exitDelay' ms
   {
@@ -50,58 +55,58 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
     dir = error / std::abs(error); // figure which way were moving
     power = (minPower * dir) + pTerm + iTerm + dTerm; // power to feed the motors
 
+     if(std::abs(LENCO) > targetMin && !ogPass) // if its the first time reaching the end point
+     {
+         pTimer = pros::millis(); // set pause time to current time
+         firstPause = pros::millis(); // first pausing = true
+         ogPass = true; // gone through first pass
+     }
 
-//////////////////////////// add it like i used to it worked well and this way isnt as ood but my computer is about to die
-//////////////////////////// add it like i used to it worked well and this way isnt as ood but my computer is about to die
-//////////////////////////// add it like i used to it worked well and this way isnt as ood but my computer is about to die
-//////////////////////////// add it like i used to it worked well and this way isnt as ood but my computer is about to die
-//////////////////////////// add it like i used to it worked well and this way isnt as ood but my computer is about to die
-
-
-    if(pros::millis() > pTimer + exitDelay){ // if its been 'exitDelay' since the last time it wasnt in the error gap
-      if(dir == RIGHT) // if were turning right *#define RIGHT 1
-      {
-        if(angle > targetMin && angle < targetMax) // if were withing 'targetMin' and 'targetMax'
-        {
-          settled = true; // set settled to true which should stop the motors and exit
-        }
-        else
-        {
-          settled = false; // we arent in the zone so make us wait again
-          pTimer = pros::millis();
-        }
-      }
-      if(dir == LEFT)
-      {
-        if(angle < -targetMin && angle > -targetMax)
-        {
-          settled = true;
-        }
-        else
-        {
-          settled = false;
-          pTimer = pros::millis();
-        }
-      }
-    }
-
-    if(dir == 1){
-      if(power > maxPower)
-      {
-        power = maxPower;
-      }
-    }
-    if(dir == -1)
+    if(pros::millis() > pTimer + exitDelay && ogPass) // if the current time is larger than the pause time
     {
-      if(power < -maxPower)
+       if((std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax) or pros::millis() > firstPause){
+            settled = true; // settle the function
+       }
+       else{
+          settled = false; // dont settle
+          pTimer = pros::millis(); // reset the timer
+       }
+    }
+
+     if(dir == LEFT) // if were turning left *#define LEFT -1
+     {
+          if(angle < -targetMin && angle > -targetMax) // and were in the zones we set
+          {
+               settled = true; // were settled
+          }
+          else
+          {
+               settled = false;
+               pTimer = pros::millis(); // set timer to current time
+          }
+     }
+
+
+    if(dir == 1){ // if were turning right
+      if(power > maxPower)  // if were above the max power
       {
-        power = -maxPower;
+        power = maxPower; // set us to the max power
+      }
+    }
+    if(dir == -1) // if were turning left
+    {
+      if(power < -maxPower) // if were above the max power
+      {
+        power = -maxPower; // set us to the max power
       }
     }
 
+    // set motor powers
     RIGHT_DRIVE(-power);
     LEFT_DRIVE(power);
   }
+
+  // turn off motors setting vel causes them to act more like brakes
   RIGHT_DRIVE_V(0);
   LEFT_DRIVE_V(0);
 }

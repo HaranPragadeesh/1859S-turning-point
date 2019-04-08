@@ -3,26 +3,25 @@
 #include "../v5setup.hpp"
 //#include <functional>
 
-
 void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::function<void()> callback, bool check)
 {
     //int minPower = 15;
 
     int target = std::abs(targetM);
-    int dir;
-    if(targetM > 0)
-    {
-      dir = 1;
-    }
-    if(targetM < 0){
-      dir = -1;
-    }
-    setDriveBrakes(COAST);
+    //int dir;
+    int dir = targetM / std::abs(targetM);
+    // if(targetM > 0){
+    //   dir = 1;
+    // }
+    // if(targetM < 0){
+    //  dir = -1;
+    // }
+    //setDriveBrakes(COAST);
 
     // distance pid stuff
-    float kP = .7; //.50;//.3; // .25
+    float kP = .5; //.50;//.3; // .25
     float kI = .005;//.0005;
-    float kD = 1;//1;
+    float kD = .1;//1;
 
     float errorZone = 150; // target * .1;
     float error, errorTot, errorLast;
@@ -31,7 +30,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
 
     // line pid stuff
-    float kPl = .75;
+    float kPl = 0;//1.8; // .75
     float errorl;
     float pTerml;
     float masterPower;
@@ -58,7 +57,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
     rightFront.tare_position();
     rightRear.tare_position();
 
-
+    bool once = false;
 
     while(!settled)
     {
@@ -66,7 +65,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
         {
             if(limitSwitch.get_value() != 1)
             {
-                lift.move(70);
+                lift.move(80);
             }
             if(limitSwitch.get_value() == 1)
             {
@@ -75,7 +74,7 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
             }
         }
 
-      if(std::abs(LENCO) > callbackTicks)
+      if(std::abs(LENCO) > std::abs(callbackTicks) /* && !once */)
       {
         callback();
       }
@@ -194,6 +193,11 @@ void drive( /*int dir,*/ int targetM, int maxPower, int callbackTicks, std::func
 
         //save brain cells
         pros::Task::delay(20);
+    }
+
+    if(check)
+    {
+      lift.move(0);
     }
 
     // set drive vel to 0 for brake mode to work if wanted

@@ -3,7 +3,5 @@
 
 int aimbot()
 {
-     
-
 
 }
