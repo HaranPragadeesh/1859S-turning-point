@@ -16,6 +16,9 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
  pros::Motor rightFront (PORT_DRIVE_RIGHT_FRONT, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
  pros::Motor rightRear (PORT_DRIVE_RIGHT_REAR, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
 
+ pros::ADIEncoder leftRawEncoder (PORT_LENCO_T, PORT_LENCO_B, false);
+ pros::ADIEncoder rightRawEncoder (PORT_RENCO_T, PORT_RENCO_B, false);
+
 
 // flywheel motors
  pros::Motor flyWheel1(PORT_FLYWHEEL1, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
@@ -33,10 +36,10 @@ std::string nameList[13] = {
     "NOTHING SELECTED", // 0
     "Red Close", // 1
     "Red Far", // 2
-    "Red Far Defense", // 3
+    "Red Far (exo)", // 3
     "Blue Close", // 4
     "Blue Far", // 5
-    "Blue Far Defense", // 6
+    "Blue Far (exo)", // 6
     "Skills",
     "",
     "",

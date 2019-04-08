@@ -1,6 +1,10 @@
-#include "main.h"
+#include "../include/main.h"
 #include <functional>
 #include <iostream>
+
+#define PI 3.14159265358979323846
+#define TODEG(rad) (rad * (180 / PI))
+#define TORAD(deg) (deg * (PI / 180))
 
 #define REST(x) pros::Task::delay(x)
 
@@ -116,7 +120,8 @@ extern pros::Motor flyWheel2;
 extern pros::Motor intake;
 extern pros::Motor lift;
 
-
+extern pros::ADIEncoder leftRawEncoder;
+extern pros::ADIEncoder rightRawEncoder;
 
 //drive move
 #define RIGHT_DRIVE(speed) rightRear.move(speed); rightFront.move(speed)
@@ -164,7 +169,11 @@ extern pros::Motor lift;
 
 /* misc macros */
 
-
+// adi encoders
+#define PORT_LENCO_T 5
+#define PORT_LENCO_B 6
+#define PORT_RENCO_T 7
+#define PORT_RENCO_B 8
 //drive ports
 #define PORT_DRIVE_LEFT_FRONT 11
 #define PORT_DRIVE_LEFT_REAR 1

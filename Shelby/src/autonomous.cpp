@@ -15,7 +15,7 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
-    
+
     switch(selectedAuto){
         case 1:
             // do auto 1 red close
@@ -38,6 +38,7 @@ void autonomous()
             //blueclose();
             //blueclose_gy();
             //redfar_e_2cap_defense();
+            nats_rb_s();
             break;
         case 4:
             nats_bc();
@@ -49,6 +50,7 @@ void autonomous()
             break;
         case 6:
           //  bluefar_e_2cap_defense();
+          nats_bb_s();
             break;
         case 7:
           //  skills19_e();

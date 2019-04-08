@@ -1,5 +1,5 @@
 #include <iostream>
-#include "main.h"
+#include "../../include/main.h"
 #include "../v5setup.hpp"
 
 
@@ -96,7 +96,7 @@ void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> 
           firstPauseL = pros::millis();
           ftL = false;
           ogPassL = true;
-        //  pros::lcd::set_text(2, "ogPassL");
+        //  pr++-os::lcd::set_text(2, "ogPassL");
       }
 
       //if(settledL == false)
@@ -143,7 +143,6 @@ void rotate(int targetE, int maxSpeed, int callbackTicks, std::function<void()> 
                 settledR = false;
                   pTimeR = pros::millis();
                 //  pros::lcd::set_text(6, "not settledR");
-
               }
           }
   //    }

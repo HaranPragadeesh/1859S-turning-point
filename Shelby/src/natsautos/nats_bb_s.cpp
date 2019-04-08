@@ -35,7 +35,7 @@ void nats_bb_s()
 
     if(std::abs(LENCO) > 700)
     {
-      fly(112);
+      fly(95);
 
     }
     //REST(200);
