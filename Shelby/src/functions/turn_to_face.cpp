@@ -18,7 +18,6 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 
   float allowedError = 3; // allowed error in degrees
 
-
   float wheelDiam = 3.25; // how thicc the wheel is
   float wheelCirc = wheelDiam * PI; // wheels waist size
 
@@ -82,8 +81,6 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
     }
 
     error = -error; // flip error for consistency * this might not be the best place to do this come back if having an issue
-
-
 
     // calculate pid values
     pTerm = kP * error; // most effective pid value * turn this one up for big boy speed games but less accuracy *
