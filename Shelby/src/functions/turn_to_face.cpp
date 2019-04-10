@@ -6,9 +6,6 @@
 // turn to face angle in degrees
 void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 {
-     // i pass through the pid values so that i can tune them individually if needed but
-     // having this here makes it much faster to tweak them for testing defaults!
-
 
   //values generall tweaked
   float kP = pidP;
@@ -84,7 +81,7 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
          error = antiError;
     }
 
-    error = -error; // flip error for consistency
+    error = -error; // flip error for consistency * this might not be the best place to do this come back if having an issue
 
 
 
