@@ -1,17 +1,21 @@
+// in the beginning god created turn_to_face.cpp .....
+
+
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 #include <iostream>
 #include <cstdlib>
 
+
 // turn to face angle in degrees
 void turnTo(int target, int maxPower, float kP, float kI, float kD)
 {
-  float wheelDiam = 2.75; // diameter of wheel
-  float wheelCirc = wheelDiam * PI; // circumference of wheel
+  float wheelDiam = 2.75; // how thicc the wheel is
+  float wheelCirc = wheelDiam * PI; // wheels waist size
 
-  int encoderRes = 360; // should be 360 for a quad encoder
+  int encoderRes = 360; // encoders IQ
 
-  float cpi = encoderRes / wheelCirc; // amount of encoder ticks per inch
+  float cpi = encoderRes / wheelCirc; // clickios per IMPERIAL UNIT
 
   int minPower; // minimum power the motors can spin at to prevent slow creep to end
   float encoderDist;
@@ -19,7 +23,7 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
   float leftD; // left encoder but to be converted into inches
   float rightD; // right encoder but to be converted into inches
 
-  float angle; // robots angle
+  float angle; // shelby's current DIRECTION
 
   float errorZone = 2; // buffer zone for pid 'I' value
   float error = 0, errorTot = 0, errorLast = 0; // pid error initialization
@@ -29,27 +33,36 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
 
   float power; // secret variable used to locate the ref's head
 
-  float targetMin = target - 1.5; // min tar in deg to convert to rad
-  float targetMax = target + 1.5; // max tar in deg to convert to rad
+  float allowedError = 3; // allowed error in degrees
+  float targetMin = target - (allowedError / 2); // min tar in deg to convert to rad
+  float targetMax = target + (allowedError / 2); // max tar in deg to convert to rad
 
   float pTimer = 0; // timer to freeze when settling
-  int exitDelay = 300; // how long it should need to be in the zone for
+  int exitDelay = 300; // how long my boi gon sit before being like aight im chill
   bool settled; // if the robot has been in the zone for 'exitDelay'
   float firstPause;
   bool ogPass = false;
 
-
+  // https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
   while(!settled) // while the robot hasnt been in the zone for 'exitDelay' ms
   {
     leftD = leftRawEncoder.get_value() / cpi; // converting raw left encoder into inches
     rightD = rightRawEncoder.get_value() / cpi; // converting raw right encoder into inches
     angle = (leftD - rightD) / encoderDist; // finds the angle (IN RADIANS)
+    angle = TORAD(angle); // turn my angle into degrees
+
+    // because screw negative degrees
+    if(angle < 0)
+    {
+         angle = angle + 360;
+    }
+
 
     error = target - angle; // how far off the robot currently is from the target (IN RADIANS)
-    pTerm = kP * error; // most effective pid value
+    pTerm = kP * error; // most effective pid value * turn this one up for big boy speed games but less accuracy *
     iTerm = kI * errorTot; // only effective while in 'targetZone'
-    dTerm = kD * (error - errorLast); // honestly i have no clue what this one does but ill read up on it again later because it still works well
+    dTerm = kD * (error - errorLast); // honestly i have no clue what this one does but ill read up on it again later because it still works well ¯\_(ツ)_/¯
 
 
     dir = error / std::abs(error); // figure which way were moving
@@ -59,10 +72,10 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
      {
          pTimer = pros::millis(); // set pause time to current time
          firstPause = pros::millis(); // first pausing = true
-         ogPass = true; // gone through first pass
+         ogPass = true; // gone through first pass * if this is true youre a true G
      }
 
-    if(pros::millis() > pTimer + exitDelay && ogPass) // if the current time is larger than the pause time
+    if(pros::millis() > pTimer + exitDelay && ogPass) // if the current time is larger than the pause time * prolly some redundant stuff but works super good so we good chief
     {
        if((std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax) or pros::millis() > firstPause){
             settled = true; // settle the function
@@ -104,6 +117,9 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
     // set motor powers
     RIGHT_DRIVE(-power);
     LEFT_DRIVE(power);
+
+    // save brain cells
+    pros::Task::delay(20);
   }
 
   // turn off motors setting vel causes them to act more like brakes
