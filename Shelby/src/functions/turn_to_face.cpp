@@ -1,16 +1,28 @@
-// in the beginning god created turn_to_face.cpp .....
-
-
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 #include <iostream>
 #include <cstdlib>
 
-
 // turn to face angle in degrees
-void turnTo(int target, int maxPower, float kP, float kI, float kD)
+void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 {
-  float wheelDiam = 2.75; // how thicc the wheel is
+     // i pass through the pid values so that i can tune them individually if needed but
+     // having this here makes it much faster to tweak them for testing defaults!
+
+
+  //values generall tweaked
+  float kP = pidP;
+  float kI = pidI;
+  float kD = pidD;
+
+  int exitDelay = 300; // how long my boi gon sit before being like aight im chill
+
+  float errorZone = 15; // buffer zone for pid 'I' value
+
+  float allowedError = 3; // allowed error in degrees
+
+
+  float wheelDiam = 3.25; // how thicc the wheel is
   float wheelCirc = wheelDiam * PI; // wheels waist size
 
   int encoderRes = 360; // encoders IQ
@@ -25,20 +37,18 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
 
   float angle; // shelby's current DIRECTION
 
-  float errorZone = 2; // buffer zone for pid 'I' value
   float error = 0, errorTot = 0, errorLast = 0; // pid error initialization
+  float antiError;
   float pTerm, iTerm, dTerm; // variables to hold pid calculations
 
   int dir; // direction the robot is currently moving in
 
   float power; // secret variable used to locate the ref's head
 
-  float allowedError = 3; // allowed error in degrees
   float targetMin = target - (allowedError / 2); // min tar in deg to convert to rad
   float targetMax = target + (allowedError / 2); // max tar in deg to convert to rad
 
   float pTimer = 0; // timer to freeze when settling
-  int exitDelay = 300; // how long my boi gon sit before being like aight im chill
   bool settled; // if the robot has been in the zone for 'exitDelay'
   float firstPause;
   bool ogPass = false;
@@ -50,19 +60,45 @@ void turnTo(int target, int maxPower, float kP, float kI, float kD)
     leftD = leftRawEncoder.get_value() / cpi; // converting raw left encoder into inches
     rightD = rightRawEncoder.get_value() / cpi; // converting raw right encoder into inches
     angle = (leftD - rightD) / encoderDist; // finds the angle (IN RADIANS)
-    angle = TORAD(angle); // turn my angle into degrees
+    angle = TODEG(angle); // turn my angle into degrees
 
     // because screw negative degrees
-    if(angle < 0)
-    {
+    if(angle < 0) {
          angle = angle + 360;
     }
 
-
     error = target - angle; // how far off the robot currently is from the target (IN RADIANS)
+
+    if(error > 0)
+    {
+         antiError = error - 360;
+    }
+    if(error < 0)
+    {
+         antiError = error + 360;
+    }
+
+    // make sure we take the shortest angle movement!
+    if(std::abs(antiError) < std::abs(error))
+    {
+         error = antiError;
+    }
+
+    error = -error; // flip error for consistency
+
+
+
+    // calculate pid values
     pTerm = kP * error; // most effective pid value * turn this one up for big boy speed games but less accuracy *
     iTerm = kI * errorTot; // only effective while in 'targetZone'
     dTerm = kD * (error - errorLast); // honestly i have no clue what this one does but ill read up on it again later because it still works well ¯\_(ツ)_/¯
+
+
+    if (std::abs(error) < errorZone) {
+       errorTot += error;
+    } else {
+       errorTot = 0;
+    }
 
 
     dir = error / std::abs(error); // figure which way were moving
