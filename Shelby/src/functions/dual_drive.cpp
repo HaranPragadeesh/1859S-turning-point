@@ -50,5 +50,9 @@ void dualDrive(int targetA, int maxSpeedA, int delay, int targetB, int maxSpeedB
       power = -maxSpeedA;
     }
     
+    if(std::abs(encoAvg) > std::abs(targetMin)
+    {
+    }
+    
   }
 }
