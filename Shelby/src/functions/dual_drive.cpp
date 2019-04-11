@@ -17,10 +17,38 @@ void dualDrive(int targetA, int maxSpeedA, int delay, int targetB, int maxSpeedB
   float targetMin;
   float targetMax;
   float power;
+  float minPower;
+  float dir
   float pTerm, iTerm, dTerm;
   bool firstSettle;
   bool secondSettle;
-  
   int oldL = LENCO;
   int oldR = RENCO;
+  int encoAvg = ((LENCO - oldL) + (RENCO - oldR) / 2);
+  
+  dir = targetA / std::abs(targetA);
+  targetMin = targetA - (dir * (allowedError / 2));
+  targetMax = targetA + (dir * (allowedError / 2));
+  
+  while(!firstSettle)
+  {
+    encoAvg = ((LENCO - oldL) + (RENCO - oldR) / 2);
+    error = targetA - encoAvg;
+   
+    pTerm = error * kP;
+    iTerm =   kI * errorTot;
+    dTerm = kD * (error - errorLast);
+    errorLast = error;
+   
+    power = (dir * minPower) + pTerm + iTerm + dTerm;
+    if(dir == 1 && power > maxSpeedA)
+    {
+      power = maxSpeedA;
+    }
+    if(dir == -1 && power < maxSpeedA)
+    {
+      power = -maxSpeedA;
+    }
+    
+  }
 }
