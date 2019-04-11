@@ -57,6 +57,7 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
     rightD = rightRawEncoder.get_value() / cpi; // converting raw right encoder into inches
     angle = (leftD - rightD) / encoderDist; // finds the angle (IN RADIANS)
     angle = TODEG(angle); // turn my angle into degrees
+    angle = angle % 360;
 
     // because screw negative degrees
     if(angle < 0) {
