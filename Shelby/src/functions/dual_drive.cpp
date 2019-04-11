@@ -2,6 +2,8 @@
 #include "v5setup.hpp"
 #include <iostream>
 
+#define ENCO ((LENCO - oldL) + (RENCO - oldR) / 2)
+
 void dualDrive(int targetA, int maxSpeedA, int delay, int targetB, int maxSpeedB)
 {
   float kP;
@@ -18,4 +20,7 @@ void dualDrive(int targetA, int maxSpeedA, int delay, int targetB, int maxSpeedB
   float pTerm, iTerm, dTerm;
   bool firstSettle;
   bool secondSettle;
+  
+  int oldL = LENCO;
+  int oldR = RENCO;
 }
