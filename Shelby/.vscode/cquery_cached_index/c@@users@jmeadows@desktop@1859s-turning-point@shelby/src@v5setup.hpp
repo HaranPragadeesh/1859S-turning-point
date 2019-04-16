@@ -13,6 +13,7 @@ extern int curTime;
 extern void regControl();
 extern void testControl();
 
+void dualDrive(float targetA, float targetB = 0, int delay = 0, int maxSpeedA = 127, int maxSpeedB = 127, int cb1Ticks = 0, std::function<void()> callback1 = [](){}, int cb2Ticks = 0, std::function<void()> callback2 = [](){});
 
 void rotate(int targetE, int maxSpeed = 110, int callbackTicks = 0, std::function<void()> callback = [](){});
 //extern void rotate(int target, int maxSpeed = 110);
@@ -105,6 +106,10 @@ extern pros::ADIGyro yawGyroT;
 extern pros::ADIGyro yawGyroB;
 extern pros::ADIGyro rollGyro;
 extern pros::ADIDigitalIn limitSwitch;
+extern pros::ADIDigitalIn limitSwitchB;
+
+extern pros::Motor led;
+#define PORT_LED 16
 
 //drive motors
 extern pros::Motor leftFront;
@@ -123,6 +128,8 @@ extern pros::Motor lift;
 extern pros::ADIEncoder leftRawEncoder;
 extern pros::ADIEncoder rightRawEncoder;
 
+extern pros::ADIAnalogIn lineFollower;
+
 //drive move
 #define RIGHT_DRIVE(speed) rightRear.move(speed); rightFront.move(speed)
 #define LEFT_DRIVE(speed) leftRear.move(speed); leftFront.move(speed)
@@ -139,9 +146,9 @@ extern pros::ADIEncoder rightRawEncoder;
 #define GYRO_CLIMB_SPEED 127
 
 //preset fly wheel speeds
-#define FLYWHEEL_TOP_FLAG 105
+#define FLYWHEEL_TOP_FLAG 102
 #define FLYWHEEL_BOOST_SPEED 127
-#define FLYWHEEL_IDLE 90 // idling speed
+#define FLYWHEEL_IDLE 87 // idling speed
 
 //intake speeds
 #define COMBINE_INTAKE_SPEED  80
@@ -185,6 +192,7 @@ extern pros::ADIEncoder rightRawEncoder;
 #define PORT_FLYWHEEL1 15
 #define PORT_FLYWHEEL2 4
 
+#define PORT_LINEFOLLOW 1
 
 /* setup intake */
 #define PORT_INTAKE 10
@@ -199,6 +207,9 @@ extern pros::ADIEncoder rightRawEncoder;
 
 #define PORT_GYRO_ROLL 8 // H // climb
 #define PORT_LIMIT_LIFT 2 // B
+#define PORT_LIMIT_LIFT_B 5
 
 
-void shoot(int time, int liftSpeed = LIFT_UP_SPEED);
+extern void shoot(int time, int liftSpeed = LIFT_UP_SPEED);
+extern void doubleShoot(int time, int liftSpeed = 127);
+extern void singleShoot(int time, int liftSpeed = 127);
