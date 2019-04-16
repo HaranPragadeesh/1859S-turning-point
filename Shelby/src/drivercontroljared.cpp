@@ -23,9 +23,14 @@ void regControl()
 
 	while (true)
 	{
-    std::cout << "line:" << lineFollower.get_value() << std::endl;
+    pros::lcd::set_text(4, std::to_string(leftRawEncoder.get_value()));
+    std::cout << "left: " << leftRawEncoder.get_value() << std::endl << std::endl;
+    std::cout << "right: " << leftRawEncoder.get_value() << std::endl << std::endl;
 
-    led.move_voltage(5000);
+     //std::cout << "line:" << lineFollower.get_value() << std::endl;
+
+
+
 		 if(master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT) && ( (pros::millis() > lastPress + 1000) || firstPress) )
 		 {
 			 lastPress = pros::millis();

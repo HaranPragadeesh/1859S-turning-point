@@ -13,7 +13,7 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
  pros::ADIAnalogIn lineFollower(PORT_LINEFOLLOW);
 
- pros::Motor led(PORT_LED);
+ pros::Motor led(PORT_LED, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_DEGREES);
 
 // drive motors
  pros::Motor leftFront (PORT_DRIVE_LEFT_FRONT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
@@ -21,9 +21,8 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
  pros::Motor rightFront (PORT_DRIVE_RIGHT_FRONT, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
  pros::Motor rightRear (PORT_DRIVE_RIGHT_REAR, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
 
- pros::ADIEncoder leftRawEncoder (PORT_LENCO_T, PORT_LENCO_B, false);
- pros::ADIEncoder rightRawEncoder (PORT_RENCO_T, PORT_RENCO_B, false);
-
+ pros::ADIEncoder leftRawEncoder (PORT_LEFT_TOP, PORT_LEFT_BOT, true);
+ pros::ADIEncoder rightRawEncoder (PORT_RIGHT_TOP, PORT_RIGHT_BOT, false);
 
 // flywheel motors
  pros::Motor flyWheel1(PORT_FLYWHEEL1, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse

@@ -7,7 +7,8 @@
 void autonomous()
 {
   int now;
-
+  pros::ADIEncoder leftRawEncoder (PORT_LEFT_TOP, PORT_LEFT_BOT, true);
+  pros::ADIEncoder rightRawEncoder (PORT_RIGHT_TOP, PORT_RIGHT_BOT, false);
     pros::ADIGyro yawGyroT (PORT_GYRO_TOP); /* tune variable for accurate 360 turn */ // for turning
     pros::ADIGyro yawGyroB (PORT_GYRO_BOT); /* tune variable for accurate 360 turn */ // for turning
 
@@ -15,6 +16,8 @@ void autonomous()
     yawGyroT.reset();
     yawGyroB.reset();
 
+    leftRawEncoder.reset();
+    rightRawEncoder.reset();
     fly(127);
     dualDrive(40, 2);
     REST(200);
@@ -55,7 +58,7 @@ void autonomous()
 
     drive(500, 127, 300, [](){
       lift.move(127);
-    })
+    });
     /*
     dualDrive(15, 30, 0, 100, 127, 0, [](){
 

@@ -1,6 +1,6 @@
 #include "../include/main.h"
 #include <functional>
-#include <iostream>
+//#include <iostream>
 
 #define PI 3.14159265358979323846
 #define TODEG(rad) (rad * (180 / PI))
@@ -127,6 +127,10 @@ extern pros::Motor lift;
 
 extern pros::ADIEncoder leftRawEncoder;
 extern pros::ADIEncoder rightRawEncoder;
+#define PORT_LEFT_TOP 7
+#define PORT_LEFT_BOT 8
+#define PORT_RIGHT_TOP 6
+#define PORT_RIGHT_BOT 5
 
 extern pros::ADIAnalogIn lineFollower;
 
@@ -176,11 +180,7 @@ extern pros::ADIAnalogIn lineFollower;
 
 /* misc macros */
 
-// adi encoders
-#define PORT_LENCO_T 5
-#define PORT_LENCO_B 6
-#define PORT_RENCO_T 7
-#define PORT_RENCO_B 8
+
 //drive ports
 #define PORT_DRIVE_LEFT_FRONT 11
 #define PORT_DRIVE_LEFT_REAR 1
