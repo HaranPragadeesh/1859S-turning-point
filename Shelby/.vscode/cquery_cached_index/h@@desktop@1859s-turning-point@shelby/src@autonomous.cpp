@@ -4,16 +4,27 @@
 //#include "newautos/newautos.hpp"
 #include "natsautos/natsautos.hpp"
 
-
 void autonomous()
 {
-
+     pros::ADIEncoder leftRawEncoder (PORT_LEFT_TOP, PORT_LEFT_BOT, true);
+   pros::ADIEncoder rightRawEncoder (PORT_RIGHT_TOP, PORT_RIGHT_BOT, false);
     pros::ADIGyro yawGyroT (PORT_GYRO_TOP); /* tune variable for accurate 360 turn */ // for turning
     pros::ADIGyro yawGyroB (PORT_GYRO_BOT); /* tune variable for accurate 360 turn */ // for turning
 
     rollGyro.reset();
     yawGyroT.reset();
     yawGyroB.reset();
+
+    leftRawEncoder.reset();
+    rightRawEncoder.reset();
+
+
+    turnTo(90);
+    REST(200);
+    turnTo(-90);
+    REST(200);
+    turnTo(0);
+
 
 
     switch(selectedAuto){

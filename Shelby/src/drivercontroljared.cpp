@@ -1,5 +1,6 @@
 #include "../include/main.h"
 #include "v5setup.hpp"
+#include "math.h"
 bool firstGo = true;
 
 void regControl()
@@ -20,14 +21,42 @@ void regControl()
   bool preload = true;
   int preLastPress = 0;
   bool preFirstPress = false;
+  float wheelDiam = 3.25; // how thicc the wheel is
+  float wheelCirc = wheelDiam * PI; // wheels waist size
 
+  float leftD;
+  float rightD;
+
+  int encoderRes = 360; // encoders IQ
+  float angle = 0;
+  float encoderDist = 4.2;
+  float cpi = encoderRes / wheelCirc; // clickios per IMPERIAL UNIT
 	while (true)
 	{
+
+
     pros::lcd::set_text(4, std::to_string(leftRawEncoder.get_value()));
+    pros::lcd::set_text(5, std::to_string(rightRawEncoder.get_value()));
+    pros::lcd::set_text(6, std::to_string(angle));
+
+    leftD = leftRawEncoder.get_value() / cpi;
+    rightD = rightRawEncoder.get_value() / cpi;
+
+    angle = (leftD - rightD) / encoderDist; // finds the angle (IN RADIANS)
+    angle = TODEG(angle); // turn my angle into degrees
+
+    if(angle < 0) {
+         angle = angle + 360;
+    }
+   // angle = angle % 360;
+   angle = fmod(angle, 360);
+
     std::cout << "left: " << leftRawEncoder.get_value() << std::endl << std::endl;
     std::cout << "right: " << leftRawEncoder.get_value() << std::endl << std::endl;
 
+
      //std::cout << "line:" << lineFollower.get_value() << std::endl;
+
 
 
 
@@ -225,7 +254,14 @@ void regControl()
       intake.move(127);
     }
 
-
+    if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
+         LEFT_DRIVE(70);
+         RIGHT_DRIVE(-70);
+    }
+    else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_X)){
+         LEFT_DRIVE(-70);
+         RIGHT_DRIVE(70);
+    }
 	// save brain cells
  	pros::delay(20);
 	}

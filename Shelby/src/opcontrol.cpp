@@ -8,7 +8,6 @@ void opcontrol()
   pros::ADIEncoder rightRawEncoder (PORT_RIGHT_TOP, PORT_RIGHT_BOT, false);
 	if(secretSettings)
 	{
-
 		testControl();
 	}
 	if(!secretSettings)

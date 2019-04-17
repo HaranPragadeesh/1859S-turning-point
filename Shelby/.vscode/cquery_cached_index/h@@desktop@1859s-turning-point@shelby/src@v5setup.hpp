@@ -1,6 +1,6 @@
 #include "../include/main.h"
 #include <functional>
-#include <iostream>
+//#include <iostream>
 
 #define PI 3.14159265358979323846
 #define TODEG(rad) (rad * (180 / PI))
@@ -13,6 +13,9 @@ extern int curTime;
 extern void regControl();
 extern void testControl();
 
+extern void turnTo(int target, int maxPower = 127, float pidP = -1, float pidI = -1, float pidD = -1);
+
+extern void dualDrive(float targetA, float targetB = 0, int delay = 0, int maxSpeedA = 127, int maxSpeedB = 127, int cb1Ticks = 0, std::function<void()> callback1 = [](){}, int cb2Ticks = 0, std::function<void()> callback2 = [](){});
 
 void rotate(int targetE, int maxSpeed = 110, int callbackTicks = 0, std::function<void()> callback = [](){});
 //extern void rotate(int target, int maxSpeed = 110);
@@ -105,6 +108,10 @@ extern pros::ADIGyro yawGyroT;
 extern pros::ADIGyro yawGyroB;
 extern pros::ADIGyro rollGyro;
 extern pros::ADIDigitalIn limitSwitch;
+extern pros::ADIDigitalIn limitSwitchB;
+
+extern pros::Motor led;
+#define PORT_LED 16
 
 //drive motors
 extern pros::Motor leftFront;
@@ -122,6 +129,12 @@ extern pros::Motor lift;
 
 extern pros::ADIEncoder leftRawEncoder;
 extern pros::ADIEncoder rightRawEncoder;
+#define PORT_LEFT_TOP 7
+#define PORT_LEFT_BOT 8
+#define PORT_RIGHT_TOP 6
+#define PORT_RIGHT_BOT 5
+
+extern pros::ADIAnalogIn lineFollower;
 
 //drive move
 #define RIGHT_DRIVE(speed) rightRear.move(speed); rightFront.move(speed)
@@ -139,9 +152,9 @@ extern pros::ADIEncoder rightRawEncoder;
 #define GYRO_CLIMB_SPEED 127
 
 //preset fly wheel speeds
-#define FLYWHEEL_TOP_FLAG 105
+#define FLYWHEEL_TOP_FLAG 102
 #define FLYWHEEL_BOOST_SPEED 127
-#define FLYWHEEL_IDLE 90 // idling speed
+#define FLYWHEEL_IDLE 87 // idling speed
 
 //intake speeds
 #define COMBINE_INTAKE_SPEED  80
@@ -169,11 +182,7 @@ extern pros::ADIEncoder rightRawEncoder;
 
 /* misc macros */
 
-// adi encoders
-#define PORT_LENCO_T 5
-#define PORT_LENCO_B 6
-#define PORT_RENCO_T 7
-#define PORT_RENCO_B 8
+
 //drive ports
 #define PORT_DRIVE_LEFT_FRONT 11
 #define PORT_DRIVE_LEFT_REAR 1
@@ -185,6 +194,7 @@ extern pros::ADIEncoder rightRawEncoder;
 #define PORT_FLYWHEEL1 15
 #define PORT_FLYWHEEL2 4
 
+#define PORT_LINEFOLLOW 1
 
 /* setup intake */
 #define PORT_INTAKE 10
@@ -199,6 +209,9 @@ extern pros::ADIEncoder rightRawEncoder;
 
 #define PORT_GYRO_ROLL 8 // H // climb
 #define PORT_LIMIT_LIFT 2 // B
+#define PORT_LIMIT_LIFT_B 5
 
 
-void shoot(int time, int liftSpeed = LIFT_UP_SPEED);
+extern void shoot(int time, int liftSpeed = LIFT_UP_SPEED);
+extern void doubleShoot(int time, int liftSpeed = 127);
+extern void singleShoot(int time, int liftSpeed = 127);

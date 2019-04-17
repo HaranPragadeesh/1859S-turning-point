@@ -9,6 +9,11 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
  pros::ADIGyro rollGyro (PORT_GYRO_ROLL); // for climbing
 
  pros::ADIButton limitSwitch(PORT_LIMIT_LIFT);
+ pros::ADIButton limitSwitchB(PORT_LIMIT_LIFT_B);
+
+ pros::ADIAnalogIn lineFollower(PORT_LINEFOLLOW);
+
+ pros::Motor led(PORT_LED, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_DEGREES);
 
 // drive motors
  pros::Motor leftFront (PORT_DRIVE_LEFT_FRONT, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES);
@@ -16,9 +21,8 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
  pros::Motor rightFront (PORT_DRIVE_RIGHT_FRONT, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
  pros::Motor rightRear (PORT_DRIVE_RIGHT_REAR, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
 
- pros::ADIEncoder leftRawEncoder (PORT_LENCO_T, PORT_LENCO_B, false);
- pros::ADIEncoder rightRawEncoder (PORT_RENCO_T, PORT_RENCO_B, false);
-
+ pros::ADIEncoder leftRawEncoder (PORT_LEFT_TOP, PORT_LEFT_BOT, true);
+ pros::ADIEncoder rightRawEncoder (PORT_RIGHT_TOP, PORT_RIGHT_BOT, false);
 
 // flywheel motors
  pros::Motor flyWheel1(PORT_FLYWHEEL1, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // reverse
@@ -116,11 +120,12 @@ void initialize() {
 	pros::lcd::register_btn1_cb(on_center_button);
 	pros::lcd::register_btn2_cb(on_right_button);
 
-    pros::ADIGyro yawGyroT (PORT_GYRO_TOP);
-    pros::ADIGyro yawGyroB (PORT_GYRO_BOT);
-    pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
-    pros::ADIDigitalIn limitSwitch (PORT_LIMIT_LIFT);
-    pros::Vision aimbot (PORT_AIMBOT, pros::E_VISION_ZERO_CENTER);
+  pros::ADIGyro yawGyroT (PORT_GYRO_TOP);
+  pros::ADIGyro yawGyroB (PORT_GYRO_BOT);
+  pros::ADIGyro rollGyro (PORT_GYRO_ROLL);
+  pros::ADIDigitalIn limitSwitch (PORT_LIMIT_LIFT);
+  pros::ADIDigitalIn limitSwitchB (PORT_LIMIT_LIFT_B);
+  pros::Vision aimbot (PORT_AIMBOT, pros::E_VISION_ZERO_CENTER);
 
 
 
@@ -134,6 +139,8 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
+     leftRawEncoder.reset();
+    rightRawEncoder.reset();
   //  setDriveBrakes(HOLD);
 //    LEFT_DRIVE_V(0);
   //  RIGHT_DRIVE_V(0);
