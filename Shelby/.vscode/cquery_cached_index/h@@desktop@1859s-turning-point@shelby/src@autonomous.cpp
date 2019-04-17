@@ -19,16 +19,33 @@ void autonomous()
     rightRawEncoder.reset();
 
 
-    dualDrive(12, -2, 100);
+    dualDrive(12, -1, 100);
     REST(200);
     turnTo(-95);
-    dualDrive(12, 0, 100, 80, 80);
+    REST(100);
+    dualDrive(12, 3, 100, 80, 80);
     REST(200);
-    turnTo(0);
+    turnTo(-35);
+
+    drive(530, 70);
+
+    intake.move(60); // tilt cap over
+    //REST(100);
+
+    drive(-120, 80, 65, [=](){
+    //  intake.move(COMBINE_INTAKE_SPEED);
+    intake.move(100);
+
+    });
+    //  REST(200);
+    REST(100);
+    drive(80, 70);
+
+    drive(-100, 127);
     intake.move(-80);
-    drive(500, 70);
+    drive(450, 60);
     turnTo(-90);
-    drive(-600);
+    drive(-400);
 
 
 

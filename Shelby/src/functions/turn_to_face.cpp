@@ -20,11 +20,11 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
   if(pidD > -1)
      float kD = pidD;
 
-  int exitDelay = 300; // how long my boi gon sit before being like aight im chill
+  int exitDelay = 350; // how long my boi gon sit before being like aight im chill
 
   float errorZone = 15; // buffer zone for pid 'I' value
 
-  float allowedError = 2; // allowed error in degrees
+  float allowedError = 2.5; // allowed error in degrees
 
   float wheelDiam = 3.25; // how thicc the wheel is
   float wheelCirc = wheelDiam * PI; // wheels waist size
@@ -134,7 +134,7 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
        }
     }
     */
-    if(error < (allowedError / 2) && !ogPass)
+    if(std::abs(error) < (allowedError / 2) && !ogPass)
     {
          pTimer = pros::millis();
          ogPass = true;
