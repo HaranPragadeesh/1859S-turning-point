@@ -6,10 +6,11 @@
 // turn to face angle in degrees
 void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 {
+     setDriveBrakes(BRAKE);
      std::cout << "enter" << std::endl;
   float kP = 3;
-  float kI = .2;
-  float kD = 0;
+  float kI = .005;
+  float kD = 5;
 
   //values generall tweaked
   if(pidP > -1)
@@ -19,11 +20,11 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
   if(pidD > -1)
      float kD = pidD;
 
-  int exitDelay = 350; // how long my boi gon sit before being like aight im chill
+  int exitDelay = 300; // how long my boi gon sit before being like aight im chill
 
-  float errorZone = 20; // buffer zone for pid 'I' value
+  float errorZone = 15; // buffer zone for pid 'I' value
 
-  float allowedError = 2.5; // allowed error in degrees
+  float allowedError = 2; // allowed error in degrees
 
   float wheelDiam = 3.25; // how thicc the wheel is
   float wheelCirc = wheelDiam * PI; // wheels waist size
@@ -56,8 +57,9 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
   float firstPause;
   bool ogPass = false;
 
-  // https://www.youtube.com/watch?v=dQw4w9WgXcQ
-  //while(true)
+  float newAngle;
+
+  // https://www.youtube.com/watch?v=dQw4w9WgXcQ // <- very important link for anyone reading this code!!
   while(!settled) // while the robot hasnt been in the zone for 'exitDelay' ms
   {
      std::cout << "angle: " << angle << std::endl;
@@ -71,29 +73,29 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
     angle = TODEG((leftD - rightD) / encoderDist); // finds the angle (IN RADIANS)
     //angle = TODEG(angle); // turn my angle into degrees
     //angle = angle % 360;
-   // angle = fmod(angle, 360);
+    newAngle = fmod(angle, 360);
 
 
     // because screw negative degrees
-    // if(angle < 0) {
-    //      angle = angle + 360;
-    // }
-    error = target - angle; // how far off the robot currently is from the target (IN RADIANS)
+     if(angle < 0) {
+          angle = angle + 360;
+     }
+    error = target - newAngle; // how far off the robot currently is from the target (IN RADIANS)
 
-    // if(error > 0)
-    // {
-    //      antiError = error - 360;
-    // }
-    // if(error < 0)
-    // {
-    //      antiError = error + 360;
-    // }
-    //
-    // // make sure we take the shortest angle movement!
-    // if(std::abs(antiError) < std::abs(error))
-    // {
-    //      error = antiError;
-    // }
+    if(error > 0)
+    {
+         antiError = error - 360;
+    }
+    if(error < 0)
+    {
+         antiError = error + 360;
+    }
+
+    // make sure we take the shortest angle movement!
+    if(std::abs(antiError) < std::abs(error))
+    {
+         error = antiError;
+    }
 
     //error = -error; // flip error for consistency * this might not be the best place to do this come back if having an issue
 
@@ -112,6 +114,7 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 
     dir = error / std::abs(error); // figure which way were moving
     power = (minPower * dir) + pTerm + iTerm + dTerm; // power to feed the motors
+    errorLast = error;
 
      /*if(std::abs(angle) > std::abs(targetMin) && !ogPass) // if its the first time reaching the end point
      {

@@ -1,17 +1,20 @@
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 
-#define ENCO ((((leftRear.get_position() / cpi) - oldL) + ((rightRear.get_position() / cpi) - oldR)) / 2)
+//#define ENCO ((((leftRear.get_position() / cpi) - oldL) + ((rightRear.get_position() / cpi) - oldR)) / 2)
+#define ENCO ((((leftRawEncoder.get_value() / cpi) - oldL) + ((rightRawEncoder.get_value() / cpi) - oldR)) / 2)
+
+
 
 void dualDrive(float targetA, float targetB, int delay, int maxSpeedA, int maxSpeedB, int cb1Ticks, std::function<void()> callback1, int cb2Ticks, std::function<void()> callback2)
 {
   setDriveBrakes(BRAKE);
-  float wheelDiam = 4;
+  float wheelDiam = 3.25;
   float wheelCirc = wheelDiam * PI;
   int encoderRes = 360;
   float cpi = encoderRes / wheelCirc;
 
-  float kP = 15; // greatly effects speed
+  float kP = 7; // greatly effects speed
   float kI = 0; // fixes crawl but will osciallte more if high
   float kD = 0; // stutters the higher you go but used to smooth out
 
@@ -26,8 +29,11 @@ void dualDrive(float targetA, float targetB, int delay, int maxSpeedA, int maxSp
   float minPower = 0;
   float dir; // current direction of the robot
   bool firstSettle = false, secondSettle = false; // used to check if its the first movement, the second, or should return
-  int oldL = LENCO / cpi; // gets the value of the left encoder when the function starts
-  int oldR = RENCO / cpi; // gets the value of the right encoder when the function starts
+  int oldL = std::abs(leftRawEncoder.get_value());//LENCO / cpi; // gets the value of the left encoder when the function starts
+  int oldR = std::abs(rightRawEncoder.get_value());//RENCO / cpi; // gets the value of the right encoder when the function starts
+
+
+
   int encoAvg = ENCO; // (((LENCO - oldL) + (RENCO - oldR)) / 2)'
   bool ft = true; // 'aka firstTime' starts the time on first pass of targetMin
   float pTime; // 'aka pauseTime' is the paused time used for the timer for oscillation

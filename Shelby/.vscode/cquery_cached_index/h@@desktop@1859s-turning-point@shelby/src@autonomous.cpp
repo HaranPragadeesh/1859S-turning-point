@@ -19,11 +19,17 @@ void autonomous()
     rightRawEncoder.reset();
 
 
-    turnTo(90);
+    dualDrive(12, -2, 100);
     REST(200);
-    turnTo(-90);
+    turnTo(-95);
+    dualDrive(12, 0, 100, 80, 80);
     REST(200);
     turnTo(0);
+    intake.move(-80);
+    drive(500, 70);
+    turnTo(-90);
+    drive(-600);
+
 
 
 
