@@ -139,6 +139,8 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
+     leftRawEncoder.reset();
+    rightRawEncoder.reset();
   //  setDriveBrakes(HOLD);
 //    LEFT_DRIVE_V(0);
   //  RIGHT_DRIVE_V(0);

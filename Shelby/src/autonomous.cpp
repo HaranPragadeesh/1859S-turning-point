@@ -18,16 +18,37 @@ void autonomous()
     leftRawEncoder.reset();
     rightRawEncoder.reset();
 
+/*
+    turnTo(-90);
+    turnTo(0);
+    turnTo(90);
+    turnTo(0);
+    turnTo(180);
+    turnTo(0);
+*/
 
-    dualDrive(12, -1, 100);
+
+    fly(127);
+    dualDrive(40, 2, 100);
     REST(200);
-    turnTo(-95);
+    turnTo(-90);
+    REST(200);
+    lift.move(127);
+    intake.move(127);
     REST(100);
-    dualDrive(12, 3, 100, 80, 80);
+    //flyWheel1.move_velocity(300);
+    //flyWheel2.move_velocity(300);
+    REST(300);
+    lift.move(0);
+    lift.move(0);
+    turnTo(-100);
+    dualDrive(48, 13, 100);
     REST(200);
     turnTo(-35);
+    shoot(150);
+    intake.move(0);
 
-    drive(530, 70);
+    drive(410, 70);
 
     intake.move(60); // tilt cap over
     //REST(100);
@@ -46,7 +67,6 @@ void autonomous()
     drive(450, 60);
     turnTo(-90);
     drive(-400);
-
 
 
 

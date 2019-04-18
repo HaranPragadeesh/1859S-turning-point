@@ -6,9 +6,8 @@
 
 void autonomous()
 {
-  int now;
-  pros::ADIEncoder leftRawEncoder (PORT_LEFT_TOP, PORT_LEFT_BOT, true);
-  pros::ADIEncoder rightRawEncoder (PORT_RIGHT_TOP, PORT_RIGHT_BOT, false);
+     pros::ADIEncoder leftRawEncoder (PORT_LEFT_TOP, PORT_LEFT_BOT, true);
+   pros::ADIEncoder rightRawEncoder (PORT_RIGHT_TOP, PORT_RIGHT_BOT, false);
     pros::ADIGyro yawGyroT (PORT_GYRO_TOP); /* tune variable for accurate 360 turn */ // for turning
     pros::ADIGyro yawGyroB (PORT_GYRO_BOT); /* tune variable for accurate 360 turn */ // for turning
 
@@ -18,58 +17,56 @@ void autonomous()
 
     leftRawEncoder.reset();
     rightRawEncoder.reset();
+
+/*
+    turnTo(-90);
+    turnTo(0);
+    turnTo(90);
+    turnTo(0);
+    turnTo(180);
+    turnTo(0);
+*/
+
+
     fly(127);
-    dualDrive(40, 2);
+    dualDrive(40, 2, 100);
     REST(200);
-    rotate(-930);
-    singleShoot(150);
-    rotate(-100);
+    turnTo(-90);
+    REST(200);
+    lift.move(127);
+    intake.move(127);
+    REST(100);
+    //flyWheel1.move_velocity(300);
+    //flyWheel2.move_velocity(300);
+    REST(300);
+    lift.move(0);
+    lift.move(0);
+    turnTo(-100);
+    dualDrive(48, 13, 100);
+    REST(200);
+    turnTo(-35);
+    shoot(150);
+    intake.move(0);
 
-  //  now = pros::millis();
-    dualDrive(45, 14, 0, 127, 127, 10, [=](){
-      lift.move(127);
-      intake.move(127);
-    });
-
-    singleShoot(150);
-    rotate(630);// rotate to cap
-
-    intake.set_brake_mode(COAST);
-    drive(405, 60);
+    drive(410, 70);
 
     intake.move(60); // tilt cap over
     //REST(100);
 
     drive(-120, 80, 65, [=](){
-  //  intake.move(COMBINE_INTAKE_SPEED);
+    //  intake.move(COMBINE_INTAKE_SPEED);
     intake.move(100);
 
     });
-  //  REST(200);
+    //  REST(200);
     REST(100);
     drive(80, 70);
 
     drive(-100, 127);
-    singleShoot(150);
-    fly(90);
-    REST(200);
-    //intake.move(-50);
-    intake.move(-90);
-
-    drive(500, 127, 300, [](){
-      lift.move(127);
-    });
-    /*
-    dualDrive(15, 30, 0, 100, 127, 0, [](){
-
-      intake.move(-90);
-    }, 20, [](){
-      lift.move(127);
-    });*/
-
-    rotate(-550);
-    drive(-1800, 127);
-
+    intake.move(-80);
+    drive(450, 60);
+    turnTo(-90);
+    drive(-400);
 
 
 

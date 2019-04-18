@@ -6,11 +6,11 @@
 // turn to face angle in degrees
 void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 {
-     setDriveBrakes(BRAKE);
-     std::cout << "enter" << std::endl;
-  float kP = 3;
-  float kI = .005;
-  float kD = 5;
+  setDriveBrakes(BRAKE);
+  std::cout << "enter" << std::endl;
+  float kP = 4;
+  float kI = .1;//.005;
+  float kD = 15;
 
   //values generall tweaked
   if(pidP > -1)
@@ -22,7 +22,7 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 
   int exitDelay = 350; // how long my boi gon sit before being like aight im chill
 
-  float errorZone = 15; // buffer zone for pid 'I' value
+  float errorZone = 5; // buffer zone for pid 'I' value
 
   float allowedError = 2.5; // allowed error in degrees
 
@@ -33,7 +33,7 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 
   float cpi = encoderRes / wheelCirc; // clickios per IMPERIAL UNIT
 
-  int minPower = 15; // minimum power the motors can spin at to prevent slow creep to end
+  int minPower = 20; // minimum power the motors can spin at to prevent slow creep to end
   float encoderDist = 4.2;
 
   float leftD = leftRawEncoder.get_value() / cpi; // converting raw left encoder into inches
@@ -59,6 +59,9 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 
   float newAngle;
 
+  bool hasTop;
+  bool hasBot;
+
   // https://www.youtube.com/watch?v=dQw4w9WgXcQ // <- very important link for anyone reading this code!!
   while(!settled) // while the robot hasnt been in the zone for 'exitDelay' ms
   {
@@ -67,6 +70,43 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
      std::cout << "power: " << power << std::endl << std::endl;
      pros::lcd::set_text(3, std::to_string(angle));
      pros::lcd::set_text(4, std::to_string(error));
+
+     if(limitSwitch.get_value() == 1)
+     {
+       hasTop = true;
+     }
+     else{
+       hasTop = false;
+     }
+     if(lineFollower.get_value() > 1000 && lineFollower.get_value() < 2800)
+     {
+       hasBot = true;
+     }
+     else{
+       hasBot = false;
+     }
+     if(!hasTop) // if the top limitswitch isnt toggle turn the lift on
+     {
+          lift.move(60); // move top intake
+          intake.move(127); // move combine and bottom roller
+     }
+     if(hasTop) // if we have the top ball
+     {
+          lift.set_brake_mode(HOLD); // set top to break
+          lift.move_velocity(0); // stop the top
+     }
+     if(hasTop && !hasBot) // if we have top but not bottom
+     {
+          lift.move_velocity(0); // make sure the top is stopped
+          intake.move(127); // move the bottom intake
+     }
+     if(hasTop && hasBot) // if we have both balls
+     {
+          lift.set_brake_mode(HOLD);
+          intake.set_brake_mode(HOLD);
+          intake.move_velocity(0); // make sure intake is off
+          lift.move_velocity(0); // make sure lift is off
+     }
 
     leftD = leftRawEncoder.get_value() / cpi; // converting raw left encoder into inches
     rightD = rightRawEncoder.get_value() / cpi; // converting raw right encoder into inches

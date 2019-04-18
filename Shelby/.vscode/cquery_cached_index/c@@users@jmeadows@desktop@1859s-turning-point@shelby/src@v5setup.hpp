@@ -13,7 +13,9 @@ extern int curTime;
 extern void regControl();
 extern void testControl();
 
-void dualDrive(float targetA, float targetB = 0, int delay = 0, int maxSpeedA = 127, int maxSpeedB = 127, int cb1Ticks = 0, std::function<void()> callback1 = [](){}, int cb2Ticks = 0, std::function<void()> callback2 = [](){});
+extern void turnTo(int target, int maxPower = 127, float pidP = -1, float pidI = -1, float pidD = -1);
+
+extern void dualDrive(float targetA, float targetB = 0, int delay = 0, int maxSpeedA = 127, int maxSpeedB = 127, int cb1Ticks = 0, std::function<void()> callback1 = [](){}, int cb2Ticks = 0, std::function<void()> callback2 = [](){});
 
 void rotate(int targetE, int maxSpeed = 110, int callbackTicks = 0, std::function<void()> callback = [](){});
 //extern void rotate(int target, int maxSpeed = 110);
