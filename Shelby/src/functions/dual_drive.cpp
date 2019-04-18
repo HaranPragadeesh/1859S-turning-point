@@ -1,7 +1,8 @@
 #include "../../include/main.h"
 #include "../v5setup.hpp"
 
-#define ENCO ((((leftRear.get_position() / cpi) - oldL) + ((rightRear.get_position() / cpi) - oldR)) / 2)
+//#define ENCO ((((leftRear.get_position() / cpi) - oldL) + ((rightRear.get_position() / cpi) - oldR)) / 2)
+#define ENCO ((((leftRawEncoder.get_value() / cpi) - oldL) + ((rightRawEncoder.get_value() / cpi) - oldR)) / 2
 
 void dualDrive(float targetA, float targetB, int delay, int maxSpeedA, int maxSpeedB, int cb1Ticks, std::function<void()> callback1, int cb2Ticks, std::function<void()> callback2)
 {
@@ -26,8 +27,11 @@ void dualDrive(float targetA, float targetB, int delay, int maxSpeedA, int maxSp
   float minPower = 0;
   float dir; // current direction of the robot
   bool firstSettle = false, secondSettle = false; // used to check if its the first movement, the second, or should return
-  int oldL = LENCO / cpi; // gets the value of the left encoder when the function starts
-  int oldR = RENCO / cpi; // gets the value of the right encoder when the function starts
+  //int oldL = LENCO / cpi; // gets the value of the left encoder when the function starts
+  //int oldR = RENCO / cpi; // gets the value of the right encoder when the function starts
+  int oldL = leftRawEncoder.get_value() / cpi; // gets the value of the left encoder when the function starts
+  int oldR = rightRawEncoder.get_value() / cpi; // gets the value of the right encoder when the function starts
+
   int encoAvg = ENCO; // (((LENCO - oldL) + (RENCO - oldR)) / 2)'
   bool ft = true; // 'aka firstTime' starts the time on first pass of targetMin
   float pTime; // 'aka pauseTime' is the paused time used for the timer for oscillation
