@@ -2,12 +2,16 @@
 #include "main.h"
 #include "../v5setup.hpp"
 
-#define ENCO ((((leftRawEncoder.get_value() / cpi) - oldL) + ((rightRawEncoder.get_value() / cpi) - oldR)) / 2
+#define ENCO ((((leftRawEncoder.get_value() / cpi) - oldL) + ((rightRawEncoder.get_value() / cpi) - oldR)) / 2)
 
 
 void line(int targetM, int maxPower, int callbackTicks, std::function<void()> callback)
 {
     //int minPower = 15;
+    float wheelDiam = 3.25;
+    float wheelCirc = wheelDiam * PI;
+    int encoderRes = 360;
+    float cpi = encoderRes / wheelCirc;
 
     int target = std::abs(targetM);
     //int dir;
@@ -23,9 +27,9 @@ void line(int targetM, int maxPower, int callbackTicks, std::function<void()> ca
     float pTerm, iTerm, dTerm;
     float power;
 
-    int oldL;
-    int oldR;
-    int encoAvg = oldL
+    int oldL = leftRawEncoder.get_value() / cpi;
+    int oldR = rightRawEncoder.get_value() / cpi;
+    int encoAvg = ENCO;
 
 
     // line pid stuff
@@ -54,26 +58,14 @@ void line(int targetM, int maxPower, int callbackTicks, std::function<void()> ca
 
     while(!settled)
     {
-        if(check)
-        {
-            if(limitSwitch.get_value() != 1)
-            {
-                lift.move(80);
-            }
-            if(limitSwitch.get_value() == 1)
-            {
-                lift.set_brake_mode(BRAKE);
-                lift.move(0);
-            }
-        }
 
-      if(std::abs(LENCO) > std::abs(callbackTicks) /* && !once */)
+      if(ENCO > std::abs(callbackTicks) /* && !once */)
       {
         callback();
       }
 
          // find error from distance
-        error = target - std::abs(LENCO);
+        error = target - std::abs(encoAvg);
 
         // find error in encoders
         errorl = std::abs(LENCO) - std::abs(RENCO);
@@ -133,7 +125,7 @@ void line(int targetM, int maxPower, int callbackTicks, std::function<void()> ca
 
         // if its the first time its passed the target min the set the
         // first check timer disable the first try and pass OG
-        if(std::abs(LENCO) > targetMin && ft)
+        if(std::abs(encoAvg) > targetMin && ft)
         {
             pTime = pros::millis();
             ft = false;
@@ -143,7 +135,7 @@ void line(int targetM, int maxPower, int callbackTicks, std::function<void()> ca
         // if its in the zone then 'settle' otherwise reset timer
         if(pros::millis() > pTime + exitDelay && ogPass)
         {
-            if(std::abs(LENCO) > targetMin && std::abs(LENCO) < targetMax)
+            if(std::abs(encoAvg) > targetMin && std::abs(encoAvg) < targetMax)
             {
                 settled = true;
             }
@@ -188,10 +180,7 @@ void line(int targetM, int maxPower, int callbackTicks, std::function<void()> ca
         pros::Task::delay(20);
     }
 
-    if(check)
-    {
-      lift.move(0);
-    }
+
 
     // set drive vel to 0 for brake mode to work if wanted
     LEFT_DRIVE_V(0);
@@ -203,13 +192,4 @@ void line(int targetM, int maxPower, int callbackTicks, std::function<void()> ca
     rightFront.tare_position();
     rightRear.tare_position();
 
-}
-
-void newForward(int target, int maxPower, float factor){
-  //line_test(FORWARD, target, maxPower);
-  line(FORWARD, target, factor);
-}
-void newReverse(int target, int maxPower, float factor){
-  //line_test(REVERSE, target, maxPower);
-  line(REVERSE, target, factor);
 }

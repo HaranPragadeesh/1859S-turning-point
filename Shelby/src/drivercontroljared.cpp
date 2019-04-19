@@ -254,14 +254,7 @@ void regControl()
       intake.move(127);
     }
 
-    if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
-         LEFT_DRIVE(70);
-         RIGHT_DRIVE(-70);
-    }
-    else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_X)){
-         LEFT_DRIVE(-70);
-         RIGHT_DRIVE(70);
-    }
+    
 	// save brain cells
  	pros::delay(20);
 	}

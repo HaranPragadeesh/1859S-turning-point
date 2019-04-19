@@ -9,8 +9,8 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
   setDriveBrakes(BRAKE);
   std::cout << "enter" << std::endl;
   float kP = 4;
-  float kI = .1;//.005;
-  float kD = 15;
+  float kI = 0;//.005;//.005;
+  float kD = 18;
 
   //values generall tweaked
   if(pidP > -1)
@@ -24,7 +24,7 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 
   float errorZone = 5; // buffer zone for pid 'I' value
 
-  float allowedError = 2.5; // allowed error in degrees
+  float allowedError = 2; // allowed error in degrees
 
   float wheelDiam = 3.25; // how thicc the wheel is
   float wheelCirc = wheelDiam * PI; // wheels waist size
@@ -33,7 +33,7 @@ void turnTo(int target, int maxPower, float pidP, float pidI, float pidD)
 
   float cpi = encoderRes / wheelCirc; // clickios per IMPERIAL UNIT
 
-  int minPower = 20; // minimum power the motors can spin at to prevent slow creep to end
+  int minPower = 15; // minimum power the motors can spin at to prevent slow creep to end
   float encoderDist = 4.2;
 
   float leftD = leftRawEncoder.get_value() / cpi; // converting raw left encoder into inches

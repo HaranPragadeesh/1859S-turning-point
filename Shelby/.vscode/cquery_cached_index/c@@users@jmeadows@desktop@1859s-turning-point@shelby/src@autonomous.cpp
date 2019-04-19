@@ -6,14 +6,14 @@
 
 void autonomous()
 {
-     pros::ADIEncoder leftRawEncoder (PORT_LEFT_TOP, PORT_LEFT_BOT, true);
-   pros::ADIEncoder rightRawEncoder (PORT_RIGHT_TOP, PORT_RIGHT_BOT, false);
-    pros::ADIGyro yawGyroT (PORT_GYRO_TOP); /* tune variable for accurate 360 turn */ // for turning
-    pros::ADIGyro yawGyroB (PORT_GYRO_BOT); /* tune variable for accurate 360 turn */ // for turning
+    pros::ADIEncoder leftRawEncoder (PORT_LEFT_TOP, PORT_LEFT_BOT, true);
+    pros::ADIEncoder rightRawEncoder (PORT_RIGHT_TOP, PORT_RIGHT_BOT, false);
+  //  pros::ADIGyro yawGyroT (PORT_GYRO_TOP); /* tune variable for accurate 360 turn */ // for turning
+  //  pros::ADIGyro yawGyroB (PORT_GYRO_BOT); /* tune variable for accurate 360 turn */ // for turning
 
-    rollGyro.reset();
-    yawGyroT.reset();
-    yawGyroB.reset();
+  //  rollGyro.reset();
+  //  yawGyroT.reset();
+  //  yawGyroB.reset();
 
     leftRawEncoder.reset();
     rightRawEncoder.reset();
@@ -29,26 +29,29 @@ void autonomous()
 
 
     fly(127);
-    dualDrive(40, 2, 100);
+    dualDrive(39, 3, 100, 110);
     REST(200);
     turnTo(-90);
-    REST(200);
-    lift.move(127);
-    intake.move(127);
-    REST(100);
-    //flyWheel1.move_velocity(300);
-    //flyWheel2.move_velocity(300);
-    REST(300);
-    lift.move(0);
-    lift.move(0);
-    turnTo(-100);
-    dualDrive(48, 13, 100);
-    REST(200);
-    turnTo(-35);
-    shoot(150);
-    intake.move(0);
+    dualDrive(-2, 15, 100, 127, 127, -1, [=](){
+      lift.move(127);
+      intake.move(0);
+      fly(0);
+    });
+    singleShoot(150);
 
-    drive(410, 70);
+    turnTo(-100);
+
+
+    drive(900, 127);
+    REST(50);
+    drive(-1100);
+
+    turnTo(-45);
+    shoot(150);
+    intake.set_brake_mode(COAST);
+    intake.move_velocity(0);
+
+    drive(420, 70);
 
     intake.move(60); // tilt cap over
     //REST(100);
@@ -61,12 +64,10 @@ void autonomous()
     //  REST(200);
     REST(100);
     drive(80, 70);
-
-    drive(-100, 127);
+    singleShoot(150);
     intake.move(-80);
-    drive(450, 60);
-    turnTo(-90);
-    drive(-400);
+    drive(500, 60);
+
 
 
 

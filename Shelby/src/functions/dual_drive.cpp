@@ -2,19 +2,19 @@
 #include "../v5setup.hpp"
 
 //#define ENCO ((((leftRear.get_position() / cpi) - oldL) + ((rightRear.get_position() / cpi) - oldR)) / 2)
-#define ENCO ((((leftRawEncoder.get_value() / cpi) - oldL) + ((rightRawEncoder.get_value() / cpi) - oldR)) / 2
+#define ENCO ((((leftRawEncoder.get_value() / cpi) - oldL) + ((rightRawEncoder.get_value() / cpi) - oldR)) / 2)
 
 void dualDrive(float targetA, float targetB, int delay, int maxSpeedA, int maxSpeedB, int cb1Ticks, std::function<void()> callback1, int cb2Ticks, std::function<void()> callback2)
 {
   setDriveBrakes(BRAKE);
-  float wheelDiam = 4;
+  float wheelDiam = 3.25;
   float wheelCirc = wheelDiam * PI;
   int encoderRes = 360;
   float cpi = encoderRes / wheelCirc;
 
   float kP = 10; // greatly effects speed
   float kI = 0; // fixes crawl but will osciallte more if high
-  float kD = 0; // stutters the higher you go but used to smooth out
+  float kD = 10; // stutters the higher you go but used to smooth out
 
   float error, errorTot, errorLast; // error inits
 
@@ -117,11 +117,15 @@ void dualDrive(float targetA, float targetB, int delay, int maxSpeedA, int maxSp
      {
       power = -maxSpeedA;
      }
-     if(error < (allowedError / 2))
+     
+     if(std::abs(error) < (allowedError / 2))
      {
          power = 0;
          firstSettle = true;
      }
+
+
+
      if(delay < 0)
      {
           power = maxSpeedA;

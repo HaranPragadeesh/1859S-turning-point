@@ -13,6 +13,8 @@ extern int curTime;
 extern void regControl();
 extern void testControl();
 
+extern void line(int targetM, int maxPower = 127, int callbackTicks = 0, std::function<void()> callback= [=](){});
+
 extern void turnTo(int target, int maxPower = 127, float pidP = -1, float pidI = -1, float pidD = -1);
 
 extern void dualDrive(float targetA, float targetB = 0, int delay = 0, int maxSpeedA = 127, int maxSpeedB = 127, int cb1Ticks = 0, std::function<void()> callback1 = [](){}, int cb2Ticks = 0, std::function<void()> callback2 = [](){});
