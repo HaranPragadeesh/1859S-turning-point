@@ -13,7 +13,7 @@ extern int curTime;
 extern void regControl();
 extern void testControl();
 
-extern void line(int targetM, int maxPower = 127, int callbackTicks = 0, std::function<void()> callback= [=](){});
+extern void line(int targetM, int maxPower = 127, int callbackTicks = 0, std::function<void()> callback = [](){});
 
 extern void turnTo(int target, int maxPower = 127, float pidP = -1, float pidI = -1, float pidD = -1);
 

@@ -32,7 +32,7 @@ void autonomous()
     dualDrive(39, 3, 100, 110);
     REST(200);
     turnTo(-90);
-    dualDrive(-2, 15, 100, 127, 127, -1, [=](){
+    dualDrive(-2, 15, 100, 115, 115, -1, [=](){
       lift.move(127);
       intake.move(0);
       fly(0);
@@ -44,30 +44,19 @@ void autonomous()
 
     drive(900, 127);
     REST(50);
-    drive(-1100);
+    drive(-1000);
 
-    turnTo(-45);
-    shoot(150);
-    intake.set_brake_mode(COAST);
-    intake.move_velocity(0);
+    turnTo(-50);
 
-    drive(420, 70);
-
-    intake.move(60); // tilt cap over
-    //REST(100);
-
-    drive(-120, 80, 65, [=](){
-    //  intake.move(COMBINE_INTAKE_SPEED);
-    intake.move(100);
+    dualDrive(20, 45, 0, 80, 127, 0, [](){
+      intake.move(-80);
+    }, 0, [](){
+      intake.move(-80);
 
     });
-    //  REST(200);
-    REST(100);
-    drive(80, 70);
-    singleShoot(150);
-    intake.move(-80);
-    drive(500, 60);
-
+    drive(-200);
+    turnTo(90);
+    drive(1400);
 
 
 
