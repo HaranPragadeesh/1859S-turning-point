@@ -7,6 +7,7 @@ float spaghettiCounter;
 
 void regControl()
 {
+  ateSpaghetti = true;
   spaghettiCounter = pros::millis();
   fly(0);
   setDriveBrakes(COAST);
