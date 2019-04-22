@@ -142,6 +142,8 @@ void disabled() {
      wantsSpaghetti = true;
      leftRawEncoder.reset();
     rightRawEncoder.reset();
+	     pros::lcd::set_text(4, "SPECIAL ED MODE");
+
   //  setDriveBrakes(HOLD);
 //    LEFT_DRIVE_V(0);
   //  RIGHT_DRIVE_V(0);
@@ -160,6 +162,7 @@ void disabled() {
  * starts.
  */
 void competition_initialize() {
+     wantsSpaghetti = true;
 
      while(std::abs(yawGyroB.get_value()) > 5)
     {
