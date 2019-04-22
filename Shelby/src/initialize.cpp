@@ -140,6 +140,11 @@ void initialize() {
  */
 void disabled() {
      wantsSpaghetti = true;
+	if(ateSpaghetti)
+	{
+		LEFT_DRIVE(-127);
+		RIGHT_DRIVE(-127);
+	}
      leftRawEncoder.reset();
     rightRawEncoder.reset();
 	     pros::lcd::set_text(4, "SPECIAL ED MODE");
