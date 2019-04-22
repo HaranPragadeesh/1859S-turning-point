@@ -3,8 +3,11 @@
 #include "math.h"
 bool firstGo = true;
 
+float spaghettiCounter;
+
 void regControl()
 {
+  spaghettiCounter = pros::millis();
   fly(0);
   setDriveBrakes(COAST);
 	yawGyroT.reset();
@@ -254,7 +257,11 @@ void regControl()
       intake.move(127);
     }
 
-    
+    if(spaghettiCounter > 30000)
+    {
+       // knees week arms are heavy
+       SPAGHETTI 
+    }
 	// save brain cells
  	pros::delay(20);
 	}
