@@ -2,6 +2,8 @@
 #include <functional>
 //#include <iostream>
 
+#define SPAGHETTI LEFT_DRIVE(127); RIGHT_DRIVE(-127);
+
 #define PI 3.14159265358979323846
 #define TODEG(rad) (rad * (180 / PI))
 #define TORAD(deg) (deg * (PI / 180))
