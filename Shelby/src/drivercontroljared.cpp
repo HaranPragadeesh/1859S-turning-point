@@ -257,7 +257,7 @@ void regControl()
       intake.move(127);
     }
 
-    if(spaghettiCounter > 30000)
+    if(wantsSpaghetti && spaghettiCounter > 30000)
     {
        // knees week arms are heavy
        SPAGHETTI 
