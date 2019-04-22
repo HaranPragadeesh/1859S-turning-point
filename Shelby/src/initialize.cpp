@@ -139,6 +139,7 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
+     wantsSpaghetti = true;
      leftRawEncoder.reset();
     rightRawEncoder.reset();
   //  setDriveBrakes(HOLD);
