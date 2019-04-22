@@ -2,7 +2,6 @@
 #include <functional>
 //#include <iostream>
 
-#define SPAGHETTI LEFT_DRIVE(127); RIGHT_DRIVE(-127); master.rumble(".-.-.-.-.-"); master.set_text(E_CONTROLLER_MASTER, 0, 0, "this should be fun"); 
 
 #define PI 3.14159265358979323846
 #define TODEG(rad) (rad * (180 / PI))
@@ -185,6 +184,7 @@ extern pros::ADIAnalogIn lineFollower;
 #define RENCO rightRear.get_position()
 
 /* misc macros */
+#define SPAGHETTI LEFT_DRIVE(127); RIGHT_DRIVE(-127); master.rumble(".-.-.-.-.-"); master.set_text(E_CONTROLLER_MASTER, 0, 0, "this should be fun"); fly(0); intake.move(0); lift.move(0);
 
 
 //drive ports
