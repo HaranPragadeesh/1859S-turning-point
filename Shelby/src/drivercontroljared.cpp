@@ -258,11 +258,11 @@ void regControl()
       intake.move(127);
     }
 
-    if(wantsSpaghetti && pros::millis - spaghettiCounter > 30000)
-    {
+   // if(wantsSpaghetti && pros::millis - spaghettiCounter > 30000)
+   // {
        // knees week arms are heavy
-       SPAGHETTI 
-    }
+   //    SPAGHETTI 
+   // }
 	// save brain cells
  	pros::delay(20);
 	}
